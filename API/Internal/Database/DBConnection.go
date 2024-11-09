@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
+	"log"
 	"time"
 )
 
@@ -22,5 +23,7 @@ func DBConnection(addr string) (*sql.DB, error) {
 	if err = db.PingContext(ctx); err != nil {
 		return nil, err
 	}
+
+	log.Print("DB Connected \n")
 	return db, nil
 }
