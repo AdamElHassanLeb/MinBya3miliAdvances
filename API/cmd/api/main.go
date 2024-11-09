@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/AdamElHassanLeb/279MidtermAdamElHassan/APP/Internal/Database"
+	"github.com/AdamElHassanLeb/279MidtermAdamElHassan/APP/Internal/Services"
 	"github.com/AdamElHassanLeb/279MidtermAdamElHassan/APP/Internal/env"
 	"log"
 )
@@ -22,11 +23,11 @@ func main() {
 
 	defer db.Close()
 
-	//store := Services.NewStorage(db)
+	Service := Services.ServiceDB(db)
 
 	app := &application{
-		config: config,
-		//store:  store,
+		config:  config,
+		Service: Service,
 	}
 
 	mux := app.mount()

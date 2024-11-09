@@ -13,11 +13,11 @@ type Service struct {
 	}
 }
 
-func getDB(db *sql.DB) Service {
+func ServiceDB(db *sql.DB) Service {
 	return Service{
-		Users:       &UserDB{db: db},
-		Listings:    &ListingDB{db: db},
-		Images:      &ImageDB{db: db},
-		Transaction: &TransactionDB{db: db},
+		Users:       &UserService{db: db},
+		Listings:    &ListingService{db: db},
+		Images:      &ImageService{db: db},
+		Transaction: &TransactionService{db: db},
 	}
 }

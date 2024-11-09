@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/AdamElHassanLeb/279MidtermAdamElHassan/APP/Internal/Services"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"log"
@@ -9,8 +10,8 @@ import (
 )
 
 type application struct {
-	config config
-	//store  Services.Storage
+	config  config
+	Service Services.Service
 }
 
 type config struct {
@@ -34,8 +35,7 @@ func (app *application) mount() http.Handler {
 	r.Use(middleware.Timeout(60 * time.Second))
 
 	r.Route("/v1", func(r chi.Router) {
-		//r.Get("/health", HealthCheckHandler)
-		//r.Post("/user", app.InsertUser)
+
 	})
 
 	return r
