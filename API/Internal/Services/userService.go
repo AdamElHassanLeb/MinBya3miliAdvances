@@ -287,7 +287,8 @@ func (s *UserService) Update(ctx context.Context, user *User) error {
 var jwtKey = []byte(Env.GetString("JWT_KEY", "")) // Replace with your secret key
 
 type Claims struct {
-	PhoneNumber string `json:"phone_number"`
+	UserID      int    `json:"user_id"`      // Add user_id to claims
+	PhoneNumber string `json:"phone_number"` // Keep phone number for authentication
 	jwt.RegisteredClaims
 }
 
@@ -314,8 +315,9 @@ func (s *UserService) Auth(ctx context.Context, phoneNumber, password string) (s
 		return "", errors.New("incorrect password")
 	}
 
-	// Create JWT Claims (with expiration)
+	// Create JWT Claims with UserID
 	claims := &Claims{
+		UserID:      dbUser.UserID, // Populate UserID here
 		PhoneNumber: phoneNumber,
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(24 * time.Hour)), // Token expiration (24 hours)
@@ -334,4 +336,17 @@ func (s *UserService) Auth(ctx context.Context, phoneNumber, password string) (s
 
 	// Return the JWT token
 	return tokenString, nil
+}
+
+func (s *UserService) GetByPhoneNumber(ctx context.Context, phoneNumber string) (User, error) {
+	query := `SELECT user_id, first_name, last_name, phone_number, date_of_birth, profession, location, city, country, password FROM users WHERE phone_number = ?`
+	var dbUser DBUser
+	err := s.db.QueryRowContext(ctx, query, phoneNumber).Scan(
+		&dbUser.UserID, &dbUser.FirstName, &dbUser.LastName, &dbUser.PhoneNumber,
+		&dbUser.DateOfBirth, &dbUser.Profession, &dbUser.Location, &dbUser.City, &dbUser.Country, &dbUser.Password,
+	)
+	if err != nil {
+		return User{}, err
+	}
+	return mapDBUserToUser(dbUser), nil
 }

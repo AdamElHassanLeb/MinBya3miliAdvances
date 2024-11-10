@@ -5,21 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86ed5ec0-1b64-4da5-913b-01262db22ba1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/API/Internal/Auth/hash.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/API/Internal/Middleware/jwt.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/.env" beforeDir="false" afterPath="$PROJECT_DIR$/API/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Internal/Auth/auth.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Auth/auth.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Internal/Services/listingService.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Services/listingService.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Internal/Middleware/jwt.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Middleware/jwt.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/Internal/Services/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Services/service.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/Internal/Services/userService.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Services/userService.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Internal/Utils/coordToCity.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Utils/coordToCity.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Internal/env/env.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Env/env.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/cmd/api/api.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/cmd/api/api.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/cmd/api/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/cmd/api/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/cmd/api/userController.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/cmd/api/userController.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/API/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/API/go.sum" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

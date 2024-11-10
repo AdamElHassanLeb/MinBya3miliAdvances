@@ -113,11 +113,25 @@ func (app *application) CreateUser(w http.ResponseWriter, r *http.Request) {
 
 // DeleteUser handles the HTTP request to delete a user by ID.
 func (app *application) DeleteUser(w http.ResponseWriter, r *http.Request) {
+
+	// Retrieve the user_id from the request context
+	tokenUserID, ok := r.Context().Value("token_user_id").(int)
+
+	if !ok {
+		http.Error(w, "User ID not found in token", http.StatusUnauthorized)
+		return
+	}
+
 	// Extract the user ID from the URL parameters
 	userIDStr := chi.URLParam(r, "id")
 	userID, err := strconv.Atoi(userIDStr)
 	if err != nil {
 		http.Error(w, "Invalid user ID", http.StatusBadRequest)
+		return
+	}
+
+	if tokenUserID != userID {
+		http.Error(w, "Unauthorized", http.StatusUnauthorized)
 		return
 	}
 
@@ -141,19 +155,33 @@ func (app *application) DeleteUser(w http.ResponseWriter, r *http.Request) {
 func (app *application) UpdateUser(w http.ResponseWriter, r *http.Request) {
 	var user Services.User
 
-	// Parse the request body into the User struct
-	if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
-		http.Error(w, "Invalid input", http.StatusBadRequest)
-		return
-	}
+	// Retrieve the user_id from the request context
+	tokenUserID, ok := r.Context().Value("token_user_id").(int)
 
-	// Extract user ID from the URL and set it to the User struct
+	// Extract the user ID from the URL parameters
 	userIDStr := chi.URLParam(r, "id")
 	userID, err := strconv.Atoi(userIDStr)
 	if err != nil {
 		http.Error(w, "Invalid user ID", http.StatusBadRequest)
 		return
 	}
+
+	if tokenUserID != userID {
+		http.Error(w, "Unauthorized", http.StatusUnauthorized)
+		return
+	}
+
+	if !ok {
+		http.Error(w, "User ID not found in token", http.StatusUnauthorized)
+		return
+	}
+
+	// Parse the request body into the User struct
+	if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
+		http.Error(w, "Invalid input", http.StatusBadRequest)
+		return
+	}
+
 	user.UserID = userID
 
 	// Call the service to update the user

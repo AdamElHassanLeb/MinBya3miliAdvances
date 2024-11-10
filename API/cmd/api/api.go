@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/AdamElHassanLeb/279MidtermAdamElHassan/API/Internal/Middleware"
 	"github.com/AdamElHassanLeb/279MidtermAdamElHassan/API/Internal/Services"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
@@ -40,8 +41,8 @@ func (app *application) mount() http.Handler {
 			userRouter.Get("/userId/{id}", app.GetUserById)
 			userRouter.Get("/userName/{name}", app.GetUserByName)
 			userRouter.Post("/create", app.CreateUser)
-			userRouter.Delete("/delete/{id}", app.DeleteUser)
-			userRouter.Put("/update/{id}", app.UpdateUser)
+			userRouter.With(Middleware.AuthMiddleware).Delete("/delete/{id}", app.DeleteUser)
+			userRouter.With(Middleware.AuthMiddleware).Put("/update/{id}", app.UpdateUser)
 			userRouter.Get("/auth", app.authUser)
 		})
 

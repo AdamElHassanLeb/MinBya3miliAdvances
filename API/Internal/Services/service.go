@@ -14,6 +14,7 @@ type Service struct {
 		Update(context.Context, *User) error
 		Delete(context.Context, int) (bool, error)
 		Auth(context.Context, string, string) (string, error)
+		GetByPhoneNumber(context.Context, string) (User, error)
 	}
 	Listings interface {
 	}
