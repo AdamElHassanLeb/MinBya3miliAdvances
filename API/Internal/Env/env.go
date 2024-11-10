@@ -1,4 +1,4 @@
-package env
+package Env
 
 import (
 	"github.com/joho/godotenv"
@@ -8,9 +8,9 @@ import (
 )
 
 func init() {
-	// Load .env only once during package initialization
+	// Load .Env only once during package initialization
 	if err := godotenv.Load(".env"); err != nil {
-		log.Printf("Warning: Error loading .env file: %s", err)
+		log.Printf("Warning: Error loading .Env file: %s", err)
 	}
 }
 

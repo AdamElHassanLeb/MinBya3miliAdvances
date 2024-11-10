@@ -1,18 +1,18 @@
 package main
 
 import (
-	"github.com/AdamElHassanLeb/279MidtermAdamElHassan/APP/Internal/Database"
-	"github.com/AdamElHassanLeb/279MidtermAdamElHassan/APP/Internal/Services"
-	"github.com/AdamElHassanLeb/279MidtermAdamElHassan/APP/Internal/env"
+	"github.com/AdamElHassanLeb/279MidtermAdamElHassan/API/Internal/Database"
+	"github.com/AdamElHassanLeb/279MidtermAdamElHassan/API/Internal/Env"
+	"github.com/AdamElHassanLeb/279MidtermAdamElHassan/API/Internal/Services"
 	"log"
 )
 
 func main() {
 
 	config := config{
-		address: env.GetString("ADDR", ":"),
+		address: Env.GetString("ADDR", ":"),
 		db: dbConfig{
-			addr: env.GetString("DB_ADDR", "")},
+			addr: Env.GetString("DB_ADDR", "")},
 	}
 
 	db, err := Database.DBConnection(config.db.addr)

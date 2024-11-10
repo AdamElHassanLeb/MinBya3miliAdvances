@@ -1,9 +1,19 @@
 package Services
 
-import "database/sql"
+import (
+	"context"
+	"database/sql"
+)
 
 type Service struct {
 	Users interface {
+		GetAll(context.Context) ([]User, error)
+		GetById(ctx context.Context, id int) (User, error)
+		GetByName(ctx context.Context, name string) ([]User, error)
+		Create(context.Context, *User) error
+		Update(context.Context, *User) error
+		Delete(context.Context, int) (bool, error)
+		Auth(context.Context, string, string) (string, error)
 	}
 	Listings interface {
 	}

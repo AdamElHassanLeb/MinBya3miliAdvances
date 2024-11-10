@@ -5,14 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86ed5ec0-1b64-4da5-913b-01262db22ba1" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/API/Internal/Auth/hash.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/API/Internal/Middleware/jwt.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Internal/Services/imageService.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Services/imageService.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/.env" beforeDir="false" afterPath="$PROJECT_DIR$/API/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Internal/Auth/auth.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Auth/auth.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/Internal/Services/listingService.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Services/listingService.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/Internal/Services/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Services/service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Internal/Services/transactionService.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Services/transactionService.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/Internal/Services/userService.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Services/userService.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Internal/Utils/coordToCity.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Utils/coordToCity.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Internal/env/env.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Env/env.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/cmd/api/api.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/cmd/api/api.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/cmd/api/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/cmd/api/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/cmd/api/userController.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/cmd/api/userController.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/API/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/API/go.sum" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +38,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$USER_HOME$/go/pkg/mod/github.com/paulmach/go.geo@v0.0.0-20180829195134-22b514266d33/point.go" root0="SKIP_INSPECTION" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -42,6 +52,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "DefaultGoTemplateProperty": "Go File",
+    "Go Build.go build github.com/AdamElHassanLeb/279MidtermAdamElHassan/API/cmd/api.executor": "Run",
     "Go Build.go build github.com/AdamElHassanLeb/279MidtermAdamElHassan/APP/cmd/api.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.go.formatter.settings.were.checked": "true",
@@ -58,11 +69,21 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/API/cmd/api" />
       <recent name="$PROJECT_DIR$/API" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Go Build.go build github.com/AdamElHassanLeb/279MidtermAdamElHassan/API/cmd/api">
+    <configuration name="go build github.com/AdamElHassanLeb/279MidtermAdamElHassan/API/cmd/api" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="279MidtermAdamElHassan" />
+      <working_directory value="$PROJECT_DIR$/API" />
+      <kind value="PACKAGE" />
+      <package value="github.com/AdamElHassanLeb/279MidtermAdamElHassan/API/cmd/api" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/API/cmd/api/main.go" />
+      <method v="2" />
+    </configuration>
     <configuration name="go build github.com/AdamElHassanLeb/279MidtermAdamElHassan/APP/cmd/api" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="279MidtermAdamElHassan" />
       <working_directory value="$PROJECT_DIR$/API" />
@@ -74,6 +95,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.go build github.com/AdamElHassanLeb/279MidtermAdamElHassan/API/cmd/api" />
         <item itemvalue="Go Build.go build github.com/AdamElHassanLeb/279MidtermAdamElHassan/APP/cmd/api" />
       </list>
     </recent_temporary>

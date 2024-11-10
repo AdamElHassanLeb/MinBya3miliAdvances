@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/AdamElHassanLeb/279MidtermAdamElHassan/APP/Internal/Services"
+	"github.com/AdamElHassanLeb/279MidtermAdamElHassan/API/Internal/Services"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"log"
@@ -34,7 +34,16 @@ func (app *application) mount() http.Handler {
 
 	r.Use(middleware.Timeout(60 * time.Second))
 
-	r.Route("/v1", func(r chi.Router) {
+	r.Route("/v1", func(mainRouter chi.Router) {
+		mainRouter.Route("/user", func(userRouter chi.Router) {
+			userRouter.Get("/users", app.GetAllUsers)
+			userRouter.Get("/userId/{id}", app.GetUserById)
+			userRouter.Get("/userName/{name}", app.GetUserByName)
+			userRouter.Post("/create", app.CreateUser)
+			userRouter.Delete("/delete/{id}", app.DeleteUser)
+			userRouter.Put("/update/{id}", app.UpdateUser)
+			userRouter.Get("/auth", app.authUser)
+		})
 
 	})
 
