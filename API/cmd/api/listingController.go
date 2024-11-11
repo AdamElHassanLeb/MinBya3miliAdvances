@@ -85,11 +85,21 @@ func (app *application) GetListingsByUserID(w http.ResponseWriter, r *http.Reque
 func (app *application) CreateListing(w http.ResponseWriter, r *http.Request) {
 	var listing Services.Listing
 
+	tokenUserId, ok := r.Context().Value("token_user_id").(int)
+
+	if !ok {
+		http.Error(w, "User ID not found in token", http.StatusUnauthorized)
+	}
+
 	// Decode the JSON request body into the Listing struct
 	err := json.NewDecoder(r.Body).Decode(&listing)
 	if err != nil {
 		http.Error(w, string(err.Error()), http.StatusBadRequest)
 		return
+	}
+
+	if tokenUserId != listing.UserID {
+		http.Error(w, "Cannot Create Listing For Another User", http.StatusUnauthorized)
 	}
 
 	// Call the service to create the listing
@@ -111,12 +121,28 @@ func (app *application) CreateListing(w http.ResponseWriter, r *http.Request) {
 func (app *application) UpdateListing(w http.ResponseWriter, r *http.Request) {
 	var listing Services.Listing
 
+	tokenUserId, ok := r.Context().Value("token_user_id").(int)
+
+	if !ok {
+		http.Error(w, "User ID not found in token", http.StatusUnauthorized)
+	}
+
 	// Extract listing ID from the URL
 	listingIDStr := chi.URLParam(r, "id")
 	listingID, err := strconv.Atoi(listingIDStr)
 	if err != nil {
 		http.Error(w, "Invalid listing ID", http.StatusBadRequest)
 		return
+	}
+
+	DbListing, err := app.Service.Listings.GetByID(r.Context(), listingID)
+	if err != nil {
+		http.Error(w, "Invalid listing ID", http.StatusBadRequest)
+		return
+	}
+
+	if DbListing.UserID != tokenUserId {
+		http.Error(w, "Cannot Delete Listing For Another User", http.StatusUnauthorized)
 	}
 
 	// Decode the JSON request body into the Listing struct
@@ -145,6 +171,22 @@ func (app *application) DeleteListing(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		http.Error(w, "Invalid listing ID", http.StatusBadRequest)
 		return
+	}
+
+	tokenUserId, ok := r.Context().Value("token_user_id").(int)
+
+	if !ok {
+		http.Error(w, "User ID not found in token", http.StatusUnauthorized)
+	}
+
+	DbListing, err := app.Service.Listings.GetByID(r.Context(), listingID)
+	if err != nil {
+		http.Error(w, "Invalid listing ID", http.StatusBadRequest)
+		return
+	}
+
+	if DbListing.UserID != tokenUserId {
+		http.Error(w, "Cannot Delete Listing For Another User", http.StatusUnauthorized)
 	}
 
 	// Call the service to delete the listing
@@ -209,6 +251,7 @@ func (app *application) GetListingsByDistance(w http.ResponseWriter, r *http.Req
 	}
 }
 
+/*
 // GetListingsByLocation handles the request to get listings by location and range.
 func (app *application) GetListingsByLocation(w http.ResponseWriter, r *http.Request) {
 	latitude, err := strconv.ParseFloat(chi.URLParam(r, "latitude"), 64)
@@ -241,6 +284,7 @@ func (app *application) GetListingsByLocation(w http.ResponseWriter, r *http.Req
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }
+*/
 
 // GetListingsByDate handles the request to get listings by date, sorted descending.
 func (app *application) GetListingsByDate(w http.ResponseWriter, r *http.Request) {

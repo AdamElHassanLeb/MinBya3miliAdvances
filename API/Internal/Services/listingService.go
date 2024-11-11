@@ -133,8 +133,9 @@ func (s *ListingService) Delete(ctx context.Context, listingID int) error {
 	return nil
 }
 
+// TODO rpleace with query by city
 // Get listings by location within a radius (QueryByLocation)
-func (s *ListingService) QueryByLocation(ctx context.Context, lat, lon, radius float64, listingType string) ([]Listing, error) {
+/*func (s *ListingService) QueryByLocation(ctx context.Context, lat, lon, radius float64, listingType string) ([]Listing, error) {
 	if listingType == "Request" || listingType == "Offer" {
 		query := `SELECT * FROM listings WHERE ST_Distance(location, ST_GeomFromText('POINT(?, ?)')) < ? AND type = ?`
 		return s.queryListings(ctx, query, lon, lat, radius, listingType)
@@ -142,7 +143,7 @@ func (s *ListingService) QueryByLocation(ctx context.Context, lat, lon, radius f
 		query := `SELECT * FROM listings WHERE ST_Distance(location, ST_GeomFromText('POINT(?, ?)')) < ?`
 		return s.queryListings(ctx, query, lon, lat, radius)
 	}
-}
+}*/
 
 // Get listings ordered by date created, descending (GetByDateCreatedDescending)
 func (s *ListingService) GetByDateCreatedDescending(ctx context.Context, listingType string) ([]Listing, error) {
@@ -180,10 +181,10 @@ func (s *ListingService) GetBySearch(ctx context.Context, searchTerm, listingTyp
 // Get listings by distance from a specific latitude and longitude (GetByDistance)
 func (s *ListingService) GetByDistance(ctx context.Context, latitude, longitude, maxDistance float64, listingType string) ([]Listing, error) {
 	if listingType == "Request" || listingType == "Offer" {
-		query := `SELECT * FROM listings WHERE ST_Distance(location, ST_GeomFromText('POINT(?, ?)')) < ? AND type = ?`
+		query := `SELECT * FROM listings WHERE ST_Distance_Sphere(location, ST_GeomFromText(CONCAT('POINT(', ?, ' ', ?, ')'))) < ? AND type = ?`
 		return s.queryListings(ctx, query, longitude, latitude, maxDistance, listingType)
 	} else {
-		query := `SELECT * FROM listings WHERE ST_Distance(location, ST_GeomFromText('POINT(?, ?)')) < ?`
+		query := `SELECT * FROM listings WHERE ST_Distance_Sphere(location, ST_GeomFromText(CONCAT('POINT(', ?, ' ', ?, ')'))) < ?`
 		return s.queryListings(ctx, query, longitude, latitude, maxDistance)
 	}
 }

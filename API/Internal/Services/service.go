@@ -25,7 +25,7 @@ type Service struct {
 		GetByID(ctx context.Context, listingID int) (Listing, error)
 		GetBySearch(ctx context.Context, query string, listingType string) ([]Listing, error)
 		GetByDistance(ctx context.Context, latitude, longitude, maxDistance float64, listingType string) ([]Listing, error)
-		QueryByLocation(ctx context.Context, latitude, longitude, maxRange float64, listingType string) ([]Listing, error)
+		//QueryByLocation(ctx context.Context, latitude, longitude, maxRange float64, listingType string) ([]Listing, error)
 		GetByDateCreatedDescending(ctx context.Context, listingType string) ([]Listing, error)
 		GetByDateCreatedAndSearchDescending(ctx context.Context, query string, listingType string) ([]Listing, error)
 	}
