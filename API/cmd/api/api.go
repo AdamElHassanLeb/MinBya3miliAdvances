@@ -45,11 +45,23 @@ func (app *application) mount() http.Handler {
 			userRouter.With(Middleware.AuthMiddleware).Put("/update/{id}", app.UpdateUser)
 			userRouter.Get("/auth", app.authUser)
 		})
+		mainRouter.Route("/listing", func(listingRouter chi.Router) {
+			listingRouter.Get("/listings/{type}", app.GetAllListings)
+			listingRouter.Get("/listingId/{id}", app.GetListingByID)
+			listingRouter.Get("/listings/user/{user_id}/{type}", app.GetListingsByUserID)
+			listingRouter.Get("/search/{query}/{type}", app.GetListingsBySearch)
+			listingRouter.Get("/date/{type}", app.GetListingsByDate)
+			listingRouter.Get("/date/search/{query}/{type}", app.GetListingsByDateAndSearch)
+			listingRouter.Get("/distance/{latitude}/{longitude}/{max_distance}/{type}", app.GetListingsByDistance)
+			listingRouter.Get("/location/{latitude}/{longitude}/{max_range}/{type}", app.GetListingsByLocation)
+			listingRouter.Post("/create", app.CreateListing)
+			listingRouter.Put("/update/{id}", app.UpdateListing)
+			listingRouter.Delete("/delete/{id}", app.DeleteListing)
+		})
 
 	})
 
 	return r
-
 }
 
 func (app *application) run(mux http.Handler) error {

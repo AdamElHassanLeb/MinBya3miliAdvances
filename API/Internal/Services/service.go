@@ -3,7 +3,6 @@ package Services
 import (
 	"context"
 	"database/sql"
-	geo "github.com/paulmach/go.geo"
 )
 
 type Service struct {
@@ -18,17 +17,17 @@ type Service struct {
 		GetByPhoneNumber(context.Context, string) (User, error)
 	}
 	Listings interface {
-		Create(userID int, title, description string, location *geo.Point, listingType string) (Listing, error)
-		Update(listingID int, title, description string, location *geo.Point, listingType string) (Listing, error)
-		Delete(listingID int) error
-		GetAll(listingType string) ([]Listing, error)
-		GetByUserID(userID int, listingType string) ([]Listing, error)
-		GetByID(listingID int) (Listing, error)
-		GetBySearch(query string, listingType string) ([]Listing, error)
-		GetByDistance(latitude, longitude, maxDistance float64, listingType string) ([]Listing, error)
-		QueryByLocation(latitude, longitude, maxRange float64, listingType string) ([]Listing, error)
-		GetByDateCreatedDescending(listingType string) ([]Listing, error)
-		GetByDateCreatedAndSearchDescending(query string, listingType string) ([]Listing, error)
+		Create(context.Context, *Listing) error
+		Update(context.Context, *Listing, int) error
+		Delete(ctx context.Context, listingID int) error
+		GetAll(ctx context.Context, listingType string) ([]Listing, error)
+		GetByUserID(ctx context.Context, userID int, listingType string) ([]Listing, error)
+		GetByID(ctx context.Context, listingID int) (Listing, error)
+		GetBySearch(ctx context.Context, query string, listingType string) ([]Listing, error)
+		GetByDistance(ctx context.Context, latitude, longitude, maxDistance float64, listingType string) ([]Listing, error)
+		QueryByLocation(ctx context.Context, latitude, longitude, maxRange float64, listingType string) ([]Listing, error)
+		GetByDateCreatedDescending(ctx context.Context, listingType string) ([]Listing, error)
+		GetByDateCreatedAndSearchDescending(ctx context.Context, query string, listingType string) ([]Listing, error)
 	}
 	Images interface {
 	}

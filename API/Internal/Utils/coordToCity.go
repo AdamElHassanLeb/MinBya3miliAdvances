@@ -22,6 +22,7 @@ type MapsCoResponse struct {
 }
 
 func ReverseGeocode(lat, lon float64) (string, string, error) {
+	//fmt.Println(lat, lon)
 	// Create a ticker that ticks once per second to limit requests
 	ticker := time.NewTicker(time.Second)
 	defer ticker.Stop()
@@ -35,6 +36,7 @@ func ReverseGeocode(lat, lon float64) (string, string, error) {
 	// Construct the request URL with the API key
 	reqURL := fmt.Sprintf("https://geocode.maps.co/reverse?lat=%f&lon=%f&api_key=%s", lat, lon, apiKey)
 
+	//fmt.Println(reqURL)
 	// Send the HTTP GET request
 	resp, err := http.Get(reqURL)
 	if err != nil {
@@ -59,6 +61,8 @@ func ReverseGeocode(lat, lon float64) (string, string, error) {
 	if err != nil {
 		return "", "", fmt.Errorf("error parsing JSON: %w", err)
 	}
+
+	//fmt.Println(string(body))
 
 	// Determine the city field
 	city := response.Address.City

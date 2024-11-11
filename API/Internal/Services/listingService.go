@@ -1,11 +1,11 @@
 package Services
 
 import (
+	"context"
 	"database/sql"
 	"fmt"
 	"github.com/AdamElHassanLeb/279MidtermAdamElHassan/API/Internal/Utils"
 	geo "github.com/paulmach/go.geo"
-	"time"
 )
 
 // Listing represents the listing structure
@@ -16,7 +16,7 @@ type Listing struct {
 	UserID      int        `json:"user_id"`
 	Title       string     `json:"title"`
 	Description string     `json:"description"`
-	DateCreated time.Time  `json:"date_created"` // Format as "2006-01-02 15:04:05"
+	DateCreated string     `json:"date_created"` // Format as "2006-01-02 15:04:05"
 	Active      bool       `json:"active"`
 	City        string     `json:"city"`
 	Country     string     `json:"country"`
@@ -27,10 +27,8 @@ type ListingService struct {
 	db *sql.DB
 }
 
-// ValidateCoordinates will check the longitude and latitude by calling the ReverseGeocode function
-// from the Utils package to validate the coordinates and get the city and country.
-func (s *ListingService) ValidateCoordinates(lat, lon float64) (string, string, error) {
-	// Call the ReverseGeocode function from the Utils package to get city and country
+// ValidateCoordinates validates longitude and latitude, returning city and country
+func (s *ListingService) ValidateCoordinates(ctx context.Context, lat, lon float64) (string, string, error) {
 	city, country, err := Utils.ReverseGeocode(lat, lon)
 	if err != nil {
 		return "", "", fmt.Errorf("error validating coordinates: %w", err)
@@ -39,8 +37,8 @@ func (s *ListingService) ValidateCoordinates(lat, lon float64) (string, string, 
 }
 
 // Reusable function to query listings based on different conditions
-func (s *ListingService) queryListings(query string, args ...interface{}) ([]Listing, error) {
-	rows, err := s.db.Query(query, args...)
+func (s *ListingService) queryListings(ctx context.Context, query string, args ...interface{}) ([]Listing, error) {
+	rows, err := s.db.QueryContext(ctx, query, args...)
 	if err != nil {
 		return nil, fmt.Errorf("could not retrieve listings: %v", err)
 	}
@@ -59,78 +57,71 @@ func (s *ListingService) queryListings(query string, args ...interface{}) ([]Lis
 		return nil, fmt.Errorf("could not iterate over listings: %v", err)
 	}
 
+	// Ensure an empty slice is returned if no rows were found
+	if len(listings) == 0 {
+		return []Listing{}, nil
+	}
+
 	return listings, nil
 }
 
-// Create a new listing with city and country based on coordinates
-func (s *ListingService) Create(userID int, title, description string, location *geo.Point, listingType string) (Listing, error) {
-	// Validate the coordinates (longitude, latitude) using the ReverseGeocode function
-	city, country, err := s.ValidateCoordinates(location.Lat(), location.Lng())
+// Create a new listing
+func (s *ListingService) Create(ctx context.Context, listing *Listing) error {
+	//fmt.Println(listing.Location.Lng(), listing.Location.Lat())
+	city, country, err := Utils.ReverseGeocode(listing.Location.Lat(), listing.Location.Lng())
+	//fmt.Println(country, city, err)
 	if err != nil {
-		return Listing{}, err
+		return err
 	}
 
-	// Prepare the insert query
+	listing.City = city
+	listing.Country = country
+	// Convert the location to WKT format
+	locationWKT := listing.Location.ToWKT()
+
 	query := `
 		INSERT INTO listings (type, location, user_id, title, description, city, country)
-		VALUES (?, ?, ?, ?, ?, ?, ?)
-		RETURNING listing_id, type, location, user_id, title, description, date_created, active, city, country
+		VALUES (?, ST_GeomFromText(?), ?, ?, ?, ?, ?)
 	`
-
-	// Execute the query
-	row := s.db.QueryRow(query, listingType, location, userID, title, description, city, country)
-
-	// Scan the result into a Listing struct
-	var listing Listing
-	if err := row.Scan(&listing.ListingID, &listing.Type, &listing.Location, &listing.UserID, &listing.Title, &listing.Description, &listing.DateCreated, &listing.Active, &listing.City, &listing.Country); err != nil {
-		return Listing{}, fmt.Errorf("could not create listing: %v", err)
+	_, err = s.db.ExecContext(ctx, query, listing.Type, locationWKT, listing.UserID, listing.Title, listing.Description, listing.City, listing.Country)
+	if err != nil {
+		//fmt.Println(listing)
+		return fmt.Errorf("could not create listing: %v", err)
 	}
 
-	return listing, nil
+	return nil
 }
 
-// Update a listing
-func (s *ListingService) Update(listingID int, title, description string, location *geo.Point, listingType string) (Listing, error) {
-	// Validate the coordinates (longitude, latitude) using the ReverseGeocode function
-	city, country, err := s.ValidateCoordinates(location.Lat(), location.Lng())
+// Update an existing listing
+func (s *ListingService) Update(ctx context.Context, listing *Listing, listingID int) error {
+	city, country, err := s.ValidateCoordinates(ctx, listing.Location.Lat(), listing.Location.Lng())
 	if err != nil {
-		return Listing{}, err
+		return err
 	}
 
-	// Prepare the update query
+	locationWKT := listing.Location.ToWKT()
+
 	query := `
 		UPDATE listings
-		SET title = ?, description = ?, location = ?, type = ?, city = ?, country = ?
+		SET title = ?, description = ?, location = ST_GeomFromText(?), type = ?, city = ?, country = ?
 		WHERE listing_id = ?
-		RETURNING listing_id, type, location, user_id, title, description, date_created, active, city, country
 	`
-
-	// Execute the query
-	row := s.db.QueryRow(query, title, description, location, listingType, city, country, listingID)
-
-	// Scan the result into a Listing struct
-	var listing Listing
-	if err := row.Scan(&listing.ListingID, &listing.Type, &listing.Location, &listing.UserID, &listing.Title, &listing.Description, &listing.DateCreated, &listing.Active, &listing.City, &listing.Country); err != nil {
-		return Listing{}, fmt.Errorf("could not update listing: %v", err)
+	_, err = s.db.ExecContext(ctx, query, listing.Title, listing.Description, locationWKT, listing.Type, city, country, listingID)
+	if err != nil {
+		return fmt.Errorf("could not update listing: %v", err)
 	}
 
-	return listing, nil
+	return nil
 }
 
 // Delete a listing
-func (s *ListingService) Delete(listingID int) error {
-	// Prepare the delete query
-	query := `
-		DELETE FROM listings WHERE listing_id = ?
-	`
-
-	// Execute the query
-	result, err := s.db.Exec(query, listingID)
+func (s *ListingService) Delete(ctx context.Context, listingID int) error {
+	query := `DELETE FROM listings WHERE listing_id = ?`
+	result, err := s.db.ExecContext(ctx, query, listingID)
 	if err != nil {
 		return fmt.Errorf("could not delete listing: %v", err)
 	}
 
-	// Check if any row was affected (ensuring the listing exists)
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
 		return fmt.Errorf("could not check affected rows: %v", err)
@@ -142,159 +133,98 @@ func (s *ListingService) Delete(listingID int) error {
 	return nil
 }
 
-// Get all listings, with the option to filter by type (request, offer, or both)
-func (s *ListingService) GetAll(listingType string) ([]Listing, error) {
-	var query string
-	switch listingType {
-	case "Request":
-		query = "SELECT * FROM listings WHERE type = 'Request'"
-	case "Offer":
-		query = "SELECT * FROM listings WHERE type = 'Offer'"
-	default:
-		query = "SELECT * FROM listings"
+// Get listings by location within a radius (QueryByLocation)
+func (s *ListingService) QueryByLocation(ctx context.Context, lat, lon, radius float64, listingType string) ([]Listing, error) {
+	if listingType == "Request" || listingType == "Offer" {
+		query := `SELECT * FROM listings WHERE ST_Distance(location, ST_GeomFromText('POINT(?, ?)')) < ? AND type = ?`
+		return s.queryListings(ctx, query, lon, lat, radius, listingType)
+	} else {
+		query := `SELECT * FROM listings WHERE ST_Distance(location, ST_GeomFromText('POINT(?, ?)')) < ?`
+		return s.queryListings(ctx, query, lon, lat, radius)
 	}
-
-	// Use the reusable query function to fetch results
-	return s.queryListings(query)
 }
 
-// Get listing by user ID, with type filter
-func (s *ListingService) GetByUserID(userID int, listingType string) ([]Listing, error) {
-	var query string
-	switch listingType {
-	case "Request":
-		query = "SELECT * FROM listings WHERE user_id = ? AND type = 'Request'"
-	case "Offer":
-		query = "SELECT * FROM listings WHERE user_id = ? AND type = 'Offer'"
-	default:
-		query = "SELECT * FROM listings WHERE user_id = ?"
+// Get listings ordered by date created, descending (GetByDateCreatedDescending)
+func (s *ListingService) GetByDateCreatedDescending(ctx context.Context, listingType string) ([]Listing, error) {
+	if listingType == "Request" || listingType == "Offer" {
+		query := `SELECT * FROM listings WHERE type = ? ORDER BY date_created DESC`
+		return s.queryListings(ctx, query, listingType)
+	} else {
+		query := `SELECT * FROM listings ORDER BY date_created DESC`
+		return s.queryListings(ctx, query)
 	}
-
-	// Use the reusable query function to fetch results
-	return s.queryListings(query, userID)
 }
 
-// Get listing by ID
-func (s *ListingService) GetByID(listingID int) (Listing, error) {
-	query := "SELECT * FROM listings WHERE listing_id = ?"
-	listings, err := s.queryListings(query, listingID)
+// Get listings ordered by date created and search term (GetByDateCreatedAndSearchDescending)
+func (s *ListingService) GetByDateCreatedAndSearchDescending(ctx context.Context, searchTerm, listingType string) ([]Listing, error) {
+	if listingType == "Request" || listingType == "Offer" {
+		query := `SELECT * FROM listings WHERE (title LIKE ? OR description LIKE ?) AND type = ? ORDER BY date_created DESC`
+		return s.queryListings(ctx, query, "%"+searchTerm+"%", "%"+searchTerm+"%", listingType)
+	} else {
+		query := `SELECT * FROM listings WHERE (title LIKE ? OR description LIKE ?) ORDER BY date_created DESC`
+		return s.queryListings(ctx, query, "%"+searchTerm+"%", "%"+searchTerm+"%")
+	}
+}
+
+// Get listings by a search query in title or description (GetBySearch)
+func (s *ListingService) GetBySearch(ctx context.Context, searchTerm, listingType string) ([]Listing, error) {
+	if listingType == "Request" || listingType == "Offer" {
+		query := `SELECT * FROM listings WHERE (title LIKE ? OR description LIKE ?) AND type = ?`
+		return s.queryListings(ctx, query, "%"+searchTerm+"%", "%"+searchTerm+"%", listingType)
+	} else {
+		query := `SELECT * FROM listings WHERE (title LIKE ? OR description LIKE ?)`
+		return s.queryListings(ctx, query, "%"+searchTerm+"%", "%"+searchTerm+"%")
+	}
+}
+
+// Get listings by distance from a specific latitude and longitude (GetByDistance)
+func (s *ListingService) GetByDistance(ctx context.Context, latitude, longitude, maxDistance float64, listingType string) ([]Listing, error) {
+	if listingType == "Request" || listingType == "Offer" {
+		query := `SELECT * FROM listings WHERE ST_Distance(location, ST_GeomFromText('POINT(?, ?)')) < ? AND type = ?`
+		return s.queryListings(ctx, query, longitude, latitude, maxDistance, listingType)
+	} else {
+		query := `SELECT * FROM listings WHERE ST_Distance(location, ST_GeomFromText('POINT(?, ?)')) < ?`
+		return s.queryListings(ctx, query, longitude, latitude, maxDistance)
+	}
+}
+
+// Get all listings (GetAll)
+func (s *ListingService) GetAll(ctx context.Context, listingType string) ([]Listing, error) {
+	if listingType == "Request" || listingType == "Offer" {
+		query := `SELECT * FROM listings WHERE type = ?`
+		return s.queryListings(ctx, query, listingType)
+	} else {
+		query := `SELECT * FROM listings`
+		return s.queryListings(ctx, query)
+	}
+}
+
+// Get listings by user ID (GetByUserID)
+func (s *ListingService) GetByUserID(ctx context.Context, userID int, listingType string) ([]Listing, error) {
+	if listingType == "Request" || listingType == "Offer" {
+		query := `SELECT * FROM listings WHERE user_id = ? AND type = ?`
+		return s.queryListings(ctx, query, userID, listingType)
+	} else {
+		query := `SELECT * FROM listings WHERE user_id = ?`
+		return s.queryListings(ctx, query, userID)
+	}
+}
+
+// Get a listing by its ID (GetByID)
+func (s *ListingService) GetByID(ctx context.Context, listingID int) (Listing, error) {
+	query := `SELECT * FROM listings WHERE listing_id = ?`
+	rows, err := s.db.QueryContext(ctx, query, listingID)
 	if err != nil {
-		return Listing{}, err
+		return Listing{}, fmt.Errorf("could not retrieve listing: %v", err)
 	}
+	defer rows.Close()
 
-	if len(listings) == 0 {
-		return Listing{}, fmt.Errorf("listing not found")
+	if rows.Next() {
+		var listing Listing
+		if err := rows.Scan(&listing.ListingID, &listing.Type, &listing.Location, &listing.UserID, &listing.Title, &listing.Description, &listing.DateCreated, &listing.Active, &listing.City, &listing.Country); err != nil {
+			return Listing{}, fmt.Errorf("could not scan listing: %v", err)
+		}
+		return listing, nil
 	}
-
-	return listings[0], nil
-}
-
-// Get listings by title or description with an optional type filter
-func (s *ListingService) GetBySearch(query string, listingType string) ([]Listing, error) {
-	var queryStr string
-	switch listingType {
-	case "Request":
-		queryStr = "SELECT * FROM listings WHERE (title LIKE ? OR description LIKE ?) AND type = 'Request'"
-	case "Offer":
-		queryStr = "SELECT * FROM listings WHERE (title LIKE ? OR description LIKE ?) AND type = 'Offer'"
-	default:
-		queryStr = "SELECT * FROM listings WHERE (title LIKE ? OR description LIKE ?)"
-	}
-
-	// Use the reusable query function to fetch results
-	return s.queryListings(queryStr, "%"+query+"%", "%"+query+"%")
-}
-
-// Get listings within a given distance from a location
-func (s *ListingService) GetByDistance(latitude, longitude, maxDistance float64, listingType string) ([]Listing, error) {
-	var query string
-	switch listingType {
-	case "Request":
-		query = `
-			SELECT * FROM listings
-			WHERE ST_Distance(location, ST_GeomFromText('POINT(? ?)', 4326)) <= ? AND type = 'Request'
-		`
-	case "Offer":
-		query = `
-			SELECT * FROM listings
-			WHERE ST_Distance(location, ST_GeomFromText('POINT(? ?)', 4326)) <= ? AND type = 'Offer'
-		`
-	default:
-		query = `
-			SELECT * FROM listings
-			WHERE ST_Distance(location, ST_GeomFromText('POINT(? ?)', 4326)) <= ?
-		`
-	}
-
-	// Use the reusable query function to fetch results
-	return s.queryListings(query, longitude, latitude, maxDistance)
-}
-
-// Query listings based on location and a max range for distance, with optional type filter
-func (s *ListingService) QueryByLocation(latitude, longitude, maxRange float64, listingType string) ([]Listing, error) {
-	var query string
-	switch listingType {
-	case "Request":
-		query = `
-			SELECT * FROM listings
-			WHERE ST_Distance(location, ST_GeomFromText('POINT(? ?)', 4326)) <= ? AND type = 'Request'
-		`
-	case "Offer":
-		query = `
-			SELECT * FROM listings
-			WHERE ST_Distance(location, ST_GeomFromText('POINT(? ?)', 4326)) <= ? AND type = 'Offer'
-		`
-	default:
-		query = `
-			SELECT * FROM listings
-			WHERE ST_Distance(location, ST_GeomFromText('POINT(? ?)', 4326)) <= ?
-		`
-	}
-
-	// Use the reusable query function to fetch results
-	return s.queryListings(query, longitude, latitude, maxRange)
-}
-
-// Get listings ordered by date created in descending order, with optional type filter
-func (s *ListingService) GetByDateCreatedDescending(listingType string) ([]Listing, error) {
-	var query string
-	switch listingType {
-	case "Request":
-		query = "SELECT * FROM listings WHERE type = 'Request' ORDER BY date_created DESC"
-	case "Offer":
-		query = "SELECT * FROM listings WHERE type = 'Offer' ORDER BY date_created DESC"
-	default:
-		query = "SELECT * FROM listings ORDER BY date_created DESC"
-	}
-
-	// Use the reusable query function to fetch results
-	return s.queryListings(query)
-}
-
-// Get listings ordered by date created in descending order with search query, and optional type filter
-func (s *ListingService) GetByDateCreatedAndSearchDescending(query string, listingType string) ([]Listing, error) {
-	var queryStr string
-	switch listingType {
-	case "Request":
-		queryStr = `
-			SELECT * FROM listings
-			WHERE (title LIKE ? OR description LIKE ?) AND type = 'Request'
-			ORDER BY date_created DESC
-		`
-	case "Offer":
-		queryStr = `
-			SELECT * FROM listings
-			WHERE (title LIKE ? OR description LIKE ?) AND type = 'Offer'
-			ORDER BY date_created DESC
-		`
-	default:
-		queryStr = `
-			SELECT * FROM listings
-			WHERE (title LIKE ? OR description LIKE ?)
-			ORDER BY date_created DESC
-		`
-	}
-
-	// Use the reusable query function to fetch results
-	return s.queryListings(queryStr, "%"+query+"%", "%"+query+"%")
+	return Listing{}, fmt.Errorf("listing not found")
 }
