@@ -24,6 +24,7 @@ type User struct {
 	Location    *geo.Point `json:"location"`
 	LocDetails  Address    `json:"loc_details"`
 	Password    string     `json:"password"`
+	ImageId     string     `json:"image_id"`
 }
 
 type Address struct {
@@ -42,6 +43,7 @@ type DBUser struct {
 	Password    string
 	City        string
 	Country     string
+	ImageId     string
 }
 
 // UserService provides methods to interact with user data.
@@ -52,7 +54,7 @@ type UserService struct {
 // GetAll retrieves all users from the database, including city and country.
 func (s *UserService) GetAll(ctx context.Context) ([]User, error) {
 	// SQL query to fetch all users, including city and country
-	rows, err := s.db.QueryContext(ctx, "SELECT user_id, first_name, last_name, phone_number, date_of_birth, profession, location, city, country, password FROM users")
+	rows, err := s.db.QueryContext(ctx, "SELECT user_id, first_name, last_name, phone_number, date_of_birth, profession, location, city, country, password, profile_image FROM users")
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +66,7 @@ func (s *UserService) GetAll(ctx context.Context) ([]User, error) {
 	for rows.Next() {
 		var dbUser DBUser
 		// Scan the row data into the DBUser struct
-		if err := rows.Scan(&dbUser.UserID, &dbUser.FirstName, &dbUser.LastName, &dbUser.PhoneNumber, &dbUser.DateOfBirth, &dbUser.Profession, &dbUser.Location, &dbUser.City, &dbUser.Country, &dbUser.Password); err != nil {
+		if err := rows.Scan(&dbUser.UserID, &dbUser.FirstName, &dbUser.LastName, &dbUser.PhoneNumber, &dbUser.DateOfBirth, &dbUser.Profession, &dbUser.Location, &dbUser.City, &dbUser.Country, &dbUser.Password, &dbUser.ImageId); err != nil {
 			return nil, err
 		}
 
@@ -86,7 +88,7 @@ func (s *UserService) GetAll(ctx context.Context) ([]User, error) {
 // GetById retrieves a user by their ID, including city and country.
 func (s *UserService) GetById(ctx context.Context, id int) (User, error) {
 	// Prepare the query to fetch the user by ID
-	query := `SELECT user_id, first_name, last_name, phone_number, date_of_birth, profession, location, city, country, password
+	query := `SELECT user_id, first_name, last_name, phone_number, date_of_birth, profession, location, city, country, password, profile_image
               FROM users WHERE user_id = ?`
 
 	// Execute the query
@@ -97,7 +99,7 @@ func (s *UserService) GetById(ctx context.Context, id int) (User, error) {
 
 	// Scan the result into the dbUser struct
 	err := row.Scan(&dbUser.UserID, &dbUser.FirstName, &dbUser.LastName, &dbUser.PhoneNumber,
-		&dbUser.DateOfBirth, &dbUser.Profession, &dbUser.Location, &dbUser.City, &dbUser.Country, &dbUser.Password)
+		&dbUser.DateOfBirth, &dbUser.Profession, &dbUser.Location, &dbUser.City, &dbUser.Country, &dbUser.Password, &dbUser.ImageId)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			// Return a User with zero values if the user doesn't exist
@@ -117,7 +119,7 @@ func (s *UserService) GetById(ctx context.Context, id int) (User, error) {
 // GetByName retrieves users by their first or last name, including city and country.
 func (s *UserService) GetByName(ctx context.Context, name string) ([]User, error) {
 	query := `
-        SELECT user_id, first_name, last_name, phone_number, date_of_birth, profession, location, city, country, password
+        SELECT user_id, first_name, last_name, phone_number, date_of_birth, profession, location, city, country, password, profile_image
         FROM users
         WHERE first_name LIKE ? OR last_name LIKE ?`
 
@@ -136,7 +138,7 @@ func (s *UserService) GetByName(ctx context.Context, name string) ([]User, error
 	for rows.Next() {
 		var dbUser DBUser
 		err := rows.Scan(&dbUser.UserID, &dbUser.FirstName, &dbUser.LastName, &dbUser.PhoneNumber,
-			&dbUser.DateOfBirth, &dbUser.Profession, &dbUser.Location, &dbUser.City, &dbUser.Country, &dbUser.Password)
+			&dbUser.DateOfBirth, &dbUser.Profession, &dbUser.Location, &dbUser.City, &dbUser.Country, &dbUser.Password, &dbUser.ImageId)
 		if err != nil {
 			return nil, err // Return error if scanning fails
 		}
@@ -193,6 +195,10 @@ func (s *UserService) Create(ctx context.Context, user *User) error {
 		return err
 	}
 
+	var user1 = mapUserToDBUser(*user)
+
+	*user = mapDBUserToUser(user1)
+
 	return nil
 }
 
@@ -232,6 +238,7 @@ func mapDBUserToUser(dbUser DBUser) User {
 			Country: dbUser.Country,
 		},
 		Password: "", // Password should not be exposed when mapping to User
+		ImageId:  dbUser.ImageId,
 	}
 }
 
@@ -247,6 +254,7 @@ func mapUserToDBUser(user User) DBUser {
 		Location:    user.Location,
 		City:        user.LocDetails.City,
 		Country:     user.LocDetails.Country,
+		ImageId:     user.ImageId,
 	}
 }
 
@@ -262,13 +270,22 @@ func (s *UserService) Update(ctx context.Context, user *User) error {
 	user.LocDetails.City = city
 	user.LocDetails.Country = country
 
+	// Hash the user's password before storing it
+	hashedPassword, err := auth.HashPassword(user.Password)
+	if err != nil {
+		return err
+	}
+
+	// Set the hashed password in the user struct
+	user.Password = hashedPassword
+
 	// Map the User to DBUser to include city and country
 	dbUser := mapUserToDBUser(*user)
 
 	// Prepare the SQL query to update the user's information
 	query := `
         UPDATE users
-        SET first_name = ?, last_name = ?, phone_number = ?, date_of_birth = ?, profession = ?, location = ST_GeomFromText(?), city = ?, country = ?, password = ?
+        SET first_name = ?, last_name = ?, phone_number = ?, date_of_birth = ?, profession = ?, location = ST_GeomFromText(?), city = ?, country = ?, password = ?, image_id = ?
         WHERE user_id = ?
     `
 
@@ -276,7 +293,7 @@ func (s *UserService) Update(ctx context.Context, user *User) error {
 	locationWKT := user.Location.ToWKT()
 
 	// Execute the query
-	_, err = s.db.ExecContext(ctx, query, dbUser.FirstName, dbUser.LastName, dbUser.PhoneNumber, dbUser.DateOfBirth, dbUser.Profession, locationWKT, user.LocDetails.City, user.LocDetails.Country, user.Password, dbUser.UserID)
+	_, err = s.db.ExecContext(ctx, query, dbUser.FirstName, dbUser.LastName, dbUser.PhoneNumber, dbUser.DateOfBirth, dbUser.Profession, locationWKT, user.LocDetails.City, user.LocDetails.Country, user.Password, dbUser.ImageId, dbUser.UserID)
 	if err != nil {
 		return err
 	}

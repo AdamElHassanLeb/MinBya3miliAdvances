@@ -24,9 +24,9 @@ type ImageService struct {
 	db *sql.DB
 }
 
-func (s *ImageService) AddImage(ctx context.Context, url string, userID int, listingID int) error {
+func (s *ImageService) AddImage(ctx context.Context, url string, userID int, listingID int) (int, error) {
 	var query string
-	var err error
+	var imageID int
 
 	if listingID != 0 {
 		// Insert with ListingID if it's provided
@@ -34,21 +34,37 @@ func (s *ImageService) AddImage(ctx context.Context, url string, userID int, lis
 			INSERT INTO images (url, user_id, listing_id, show_on_profile)
 			VALUES (?, ?, ?, ?)
 		`
-		_, err = s.db.ExecContext(ctx, query, url, userID, listingID, true) // Assuming show_on_profile is true by default
+		result, err := s.db.ExecContext(ctx, query, url, userID, listingID, true) // Assuming show_on_profile is true by default
+		if err != nil {
+			return 0, fmt.Errorf("could not insert image: %v", err)
+		}
+
+		// Get the last inserted ID
+		imageID64, err := result.LastInsertId()
+		if err != nil {
+			return 0, fmt.Errorf("could not get last insert ID: %v", err)
+		}
+		imageID = int(imageID64)
 	} else {
 		// Insert without ListingID if it's 0
 		query = `
 			INSERT INTO images (url, user_id, show_on_profile)
 			VALUES (?, ?, ?)
 		`
-		_, err = s.db.ExecContext(ctx, query, url, userID, true) // No ListingID field
+		result, err := s.db.ExecContext(ctx, query, url, userID, true)
+		if err != nil {
+			return 0, fmt.Errorf("could not insert image: %v", err)
+		}
+
+		// Get the last inserted ID
+		imageID64, err := result.LastInsertId()
+		if err != nil {
+			return 0, fmt.Errorf("could not get last insert ID: %v", err)
+		}
+		imageID = int(imageID64)
 	}
 
-	if err != nil {
-		return fmt.Errorf("could not insert image: %v", err)
-	}
-
-	return nil
+	return imageID, nil
 }
 
 func (s *ImageService) GetImageByID(ctx context.Context, imageID int) (Image, error) {
@@ -144,7 +160,20 @@ func (s *ImageService) GetImagesByUserProfile(ctx context.Context, userID int) (
 	return images, nil
 }
 
-func (s *ImageService) UpdateImage(ctx context.Context, imageID int, showOnProfile bool) error {
+func (s *ImageService) UpdateImageProfilePictureStatus(ctx context.Context, imageID int, user_id int) error {
+	query := `
+		UPDATE users 
+		SET profile_image = ? 
+		WHERE user_id = ?;`
+
+	_, err := s.db.ExecContext(ctx, query, imageID, user_id)
+	if err != nil {
+		return fmt.Errorf("could not update image: %v", err)
+	}
+	return nil
+}
+
+func (s *ImageService) UpdateImageProfileStatus(ctx context.Context, imageID int, showOnProfile bool) error {
 	query := `
 		UPDATE images 
 		SET show_on_profile = ? 

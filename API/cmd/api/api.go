@@ -61,13 +61,14 @@ func (app *application) mount() http.Handler {
 			})
 
 			mainRouter.Route("/image", func(imageRouter chi.Router) {
-				imageRouter.With(Middleware.AuthMiddleware).Post("/upload/{listing_id}", app.createImage)         // Upload image
-				imageRouter.Get("/imageId/{image_id}", app.GetImageByID)                                          // Get image by ID
-				imageRouter.Get("/listing/{listing_id}", app.GetImagesByListingID)                                // Get images by listing ID
-				imageRouter.With(Middleware.AuthMiddleware).Get("/user/{user_id}", app.GetImagesByUserID)         // Get images by user ID
-				imageRouter.Get("/profile/{user_id}", app.GetImagesByUserProfile)                                 // Get images by user with profile set to true
-				imageRouter.With(Middleware.AuthMiddleware).Delete("/{image_id}", app.DeleteImage)                // Delete image
-				imageRouter.With(Middleware.AuthMiddleware).Put("/{image_id}/{show_on_profile}", app.UpdateImage) // Update image
+				imageRouter.With(Middleware.AuthMiddleware).Post("/uploadForListing/{listing_id}", app.createListingImage)
+				imageRouter.With(Middleware.AuthMiddleware).Post("/uploadProfilePicture/{user_id}", app.createProfileImage) // Upload image
+				imageRouter.Get("/imageId/{image_id}", app.GetImageByID)                                                    // Get image by ID
+				imageRouter.Get("/listing/{listing_id}", app.GetImagesByListingID)                                          // Get images by listing ID
+				imageRouter.With(Middleware.AuthMiddleware).Get("/user/{user_id}", app.GetImagesByUserID)                   // Get images by user ID
+				imageRouter.Get("/profile/{user_id}", app.GetImagesByUserProfile)                                           // Get images by user with profile set to true
+				imageRouter.With(Middleware.AuthMiddleware).Delete("/{image_id}", app.DeleteImage)                          // Delete image
+				imageRouter.With(Middleware.AuthMiddleware).Put("/{image_id}/{show_on_profile}", app.UpdateImage)           // Update image
 			})
 
 		})

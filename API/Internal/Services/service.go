@@ -30,8 +30,9 @@ type Service struct {
 		GetByDateCreatedAndSearchDescending(ctx context.Context, query string, listingType string) ([]Listing, error)
 	}
 	Images interface {
-		AddImage(context.Context, string, int, int) error
-		UpdateImage(context.Context, int, bool) error
+		AddImage(ctx context.Context, url string, userID int, listingID int) (int, error)
+		UpdateImageProfileStatus(ctx context.Context, imageID int, showOnProfile bool) error
+		UpdateImageProfilePictureStatus(ctx context.Context, imageID int, user_id int) error
 		DeleteImage(context.Context, int) error
 		GetImageByID(context.Context, int) (Image, error)
 		GetImagesByListingID(context.Context, int) ([]Image, error)

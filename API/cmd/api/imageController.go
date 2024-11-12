@@ -17,7 +17,7 @@ import (
 
 var imagesDIR string = Env.GetString("SRV_DIR", "") + "/ServerImages/"
 
-func (app *application) createImage(w http.ResponseWriter, r *http.Request) {
+func (app *application) createListingImage(w http.ResponseWriter, r *http.Request) {
 	tokenUserId, ok := r.Context().Value("token_user_id").(int)
 	if !ok {
 		http.Error(w, "User ID not found in token", http.StatusUnauthorized)
@@ -82,9 +82,89 @@ func (app *application) createImage(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 
-			err = app.Service.Images.AddImage(r.Context(), newFileName, tokenUserId, listingID)
+			_, err = app.Service.Images.AddImage(r.Context(), newFileName, tokenUserId, listingID)
 			if err != nil {
 				http.Error(w, "Failed to insert image record: "+err.Error(), http.StatusInternalServerError)
+				return
+			}
+
+			fmt.Fprintf(w, "File %s uploaded successfully as %s\n", fileHeader.Filename, filePath)
+		}
+	}
+
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte("All image files uploaded successfully and stored in ServerImages"))
+}
+
+func (app *application) createProfileImage(w http.ResponseWriter, r *http.Request) {
+	tokenUserId, ok := r.Context().Value("token_user_id").(int)
+	if !ok {
+		http.Error(w, "User ID not found in token", http.StatusUnauthorized)
+		return // Ensure early exit
+	}
+
+	if err := r.ParseMultipartForm(10 << 20); err != nil {
+		http.Error(w, "Failed to parse multipart form: "+err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	basePath := Env.GetString("SRV_DIR", "/home/adam-elhassan/Desktop/ServerFiles")
+	serverImagesDir := filepath.Join(basePath, "ServerImages")
+
+	allowedExtensions := map[string]bool{
+		".jpg":  true,
+		".jpeg": true,
+		".png":  true,
+		".gif":  true,
+		".bmp":  true,
+	}
+
+	for _, fileHeaders := range r.MultipartForm.File {
+		for _, fileHeader := range fileHeaders {
+			ext := strings.ToLower(filepath.Ext(fileHeader.Filename))
+			if !allowedExtensions[ext] {
+				http.Error(w, "Invalid file type: "+fileHeader.Filename, http.StatusBadRequest)
+				return
+			}
+
+			file, err := fileHeader.Open()
+			if err != nil {
+				http.Error(w, "Failed to open file: "+err.Error(), http.StatusInternalServerError)
+				return
+			}
+			defer file.Close()
+
+			userIDStr := chi.URLParam(r, "user_id")
+			userID, err := strconv.Atoi(userIDStr)
+			if err != nil {
+				http.Error(w, "Invalid listing ID", http.StatusBadRequest)
+				return
+			}
+
+			if userID != tokenUserId {
+				http.Error(w, "Cannot upload image for another user's listing", http.StatusUnauthorized)
+			}
+
+			newFileName := uuid.New().String() + ext
+			filePath, err := Utils.SaveFile(file, serverImagesDir, newFileName)
+			if err != nil {
+				http.Error(w, "Failed to save file: "+err.Error(), http.StatusInternalServerError)
+				return
+			}
+
+			imageId, err := app.Service.Images.AddImage(r.Context(), newFileName, tokenUserId, 0)
+
+			fmt.Println(imageId)
+
+			if err != nil {
+				http.Error(w, "Failed to insert image record: "+err.Error(), http.StatusInternalServerError)
+				return
+			}
+
+			err = app.Service.Images.UpdateImageProfilePictureStatus(r.Context(), imageId, userID)
+
+			if err != nil {
+				http.Error(w, "Failed to set on profile: "+err.Error(), http.StatusInternalServerError)
 				return
 			}
 
@@ -345,7 +425,7 @@ func (app *application) UpdateImage(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Call the service to update the image
-	err = app.Service.Images.UpdateImage(r.Context(), imageID, showOnProfileBool)
+	err = app.Service.Images.UpdateImageProfileStatus(r.Context(), imageID, showOnProfileBool)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Could not update image: %v", err), http.StatusInternalServerError)
 		return
