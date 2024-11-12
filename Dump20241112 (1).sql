@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `minbya3mili` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `minbya3mili`;
 -- MySQL dump 10.13  Distrib 8.0.36, for Linux (x86_64)
 --
 -- Host: localhost    Database: minbya3mili
@@ -30,13 +28,14 @@ CREATE TABLE `images` (
   `user_id` int NOT NULL,
   `listing_id` int DEFAULT NULL,
   `show_on_profile` tinyint(1) DEFAULT '0',
+  `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`image_id`),
   UNIQUE KEY `url_UNIQUE` (`url`),
   KEY `user_id` (`user_id`),
   KEY `listing_id` (`listing_id`),
   CONSTRAINT `images_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
   CONSTRAINT `images_ibfk_2` FOREIGN KEY (`listing_id`) REFERENCES `listings` (`listing_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,6 +44,7 @@ CREATE TABLE `images` (
 
 LOCK TABLES `images` WRITE;
 /*!40000 ALTER TABLE `images` DISABLE KEYS */;
+INSERT INTO `images` VALUES (2,'2a5784e2-5070-4dce-8004-4503221f10c5.jpeg',1,1,1,'2024-11-12 01:25:48'),(3,'382b2f5b-f25b-4514-a85a-27b6cca40639.jpeg',1,2,1,'2024-11-12 02:06:07'),(4,'97fc408e-2920-4469-8fe8-e84f3ce1b50f.jpeg',1,1,1,'2024-11-12 02:06:26');
 /*!40000 ALTER TABLE `images` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -164,4 +164,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-11  9:36:11
+-- Dump completed on 2024-11-12  4:42:34

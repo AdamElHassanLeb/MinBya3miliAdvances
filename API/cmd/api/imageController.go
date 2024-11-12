@@ -187,12 +187,23 @@ func (app *application) GetImagesByListingID(w http.ResponseWriter, r *http.Requ
 
 // Get all images for a user and return them as a ZIP
 func (app *application) GetImagesByUserID(w http.ResponseWriter, r *http.Request) {
+
+	tokenUserId, ok := r.Context().Value("token_user_id").(int)
+	if !ok {
+		http.Error(w, "User ID not found in token", http.StatusUnauthorized)
+		return // Ensure early exit
+	}
+
 	// Extract user ID from the URL
 	userIDStr := chi.URLParam(r, "user_id")
 	userID, err := strconv.Atoi(userIDStr)
 	if err != nil {
 		http.Error(w, "Invalid user ID", http.StatusBadRequest)
 		return
+	}
+
+	if tokenUserId != userID {
+		http.Error(w, "Unauthorized", http.StatusUnauthorized)
 	}
 
 	// Get images for the user from the service
@@ -254,12 +265,29 @@ func (app *application) GetImagesByUserProfile(w http.ResponseWriter, r *http.Re
 }
 
 func (app *application) DeleteImage(w http.ResponseWriter, r *http.Request) {
+
+	tokenUserId, ok := r.Context().Value("token_user_id").(int)
+	if !ok {
+		http.Error(w, "User ID not found in token", http.StatusUnauthorized)
+		return // Ensure early exit
+	}
+
 	// Extract image ID from the URL
 	imageIDStr := chi.URLParam(r, "image_id")
 	imageID, err := strconv.Atoi(imageIDStr)
 	if err != nil {
 		http.Error(w, "Invalid image ID", http.StatusBadRequest)
 		return
+	}
+
+	image, err := app.Service.Images.GetImageByID(r.Context(), imageID)
+
+	if err != nil {
+		http.Error(w, fmt.Sprintf("Could not retrieve image: %v", err), http.StatusInternalServerError)
+	}
+
+	if image.UserID != tokenUserId {
+		http.Error(w, "Unauthorized", http.StatusUnauthorized)
 	}
 
 	// Call the service to delete the image
@@ -275,6 +303,13 @@ func (app *application) DeleteImage(w http.ResponseWriter, r *http.Request) {
 }
 
 func (app *application) UpdateImage(w http.ResponseWriter, r *http.Request) {
+
+	tokenUserId, ok := r.Context().Value("token_user_id").(int)
+	if !ok {
+		http.Error(w, "User ID not found in token", http.StatusUnauthorized)
+		return // Ensure early exit
+	}
+
 	// Extract image ID from the URL
 	imageIDStr := chi.URLParam(r, "image_id")
 	imageID, err := strconv.Atoi(imageIDStr)
@@ -289,6 +324,16 @@ func (app *application) UpdateImage(w http.ResponseWriter, r *http.Request) {
 	if err != nil || (showOnProfile != 0 && showOnProfile != 1) {
 		http.Error(w, "Invalid value for show_on_profile (use 1 for true, 0 for false)", http.StatusBadRequest)
 		return
+	}
+
+	image, err := app.Service.Images.GetImageByID(r.Context(), imageID)
+
+	if err != nil {
+		http.Error(w, fmt.Sprintf("Could not retrieve image: %v", err), http.StatusInternalServerError)
+	}
+
+	if image.UserID != tokenUserId {
+		http.Error(w, "Unauthorized", http.StatusUnauthorized)
 	}
 
 	// Convert 1 -> true and 0 -> false
