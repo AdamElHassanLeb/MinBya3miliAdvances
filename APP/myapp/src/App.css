@@ -1,24 +1,131 @@
-.App {
-  text-align: center;
+/* Base Styles */
+body {
+  background-color: #F8F9FA; /* Light Grayish */
+  color: #004080; /* Dark Blue */
+  font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+/* Headers */
+h1, h2, h3, h4, h5, h6 {
+  color: #0056D2; /* Deep Blue */
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
+/* Links */
+a {
+  color: #007BFF; /* Primary Blue */
+  text-decoration: none;
+}
+a:hover {
+  color: #00A2FF; /* Accent Blue */
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: #007BFF; /* Primary Blue */
+  border-color: #0056D2; /* Deep Blue */
+}
+.btn-primary:hover {
+  background-color: #0056D2; /* Deep Blue */
+  border-color: #004080; /* Dark Blue */
+}
+
+.btn-outline-primary {
+  color: #007BFF; /* Primary Blue */
+  border-color: #007BFF;
+}
+.btn-outline-primary:hover {
+  background-color: #E5F0FF; /* Light Blue */
+  color: #004080; /* Dark Blue */
+}
+
+/* Inputs */
+input, textarea, select {
+  border: 1px solid #D1D1D1; /* Gray */
+  background-color: #FFFFFF; /* White */
+  color: #004080; /* Dark Blue */
+}
+input:focus, textarea:focus, select:focus {
+  border-color: #007BFF; /* Primary Blue */
+  outline: none;
+}
+
+/* Navbar */
+.navbar {
+  background-color: #004080; /* Dark Blue */
+}
+.navbar .nav-link, .navbar-brand {
+  color: #FFFFFF; /* White */
+}
+.navbar .nav-link:hover {
+  color: #E5F0FF; /* Light Blue */
+}
+
+/* Cards */
+.card {
+  border: 1px solid #D1D1D1; /* Gray */
+  background-color: #FFFFFF; /* White */
+}
+.card-header {
+  background-color: #E5F0FF; /* Light Blue */
+  color: #004080; /* Dark Blue */
+}
+
+/* Footer */
+footer {
+  background-color: #004080; /* Dark Blue */
+  color: #FFFFFF; /* White */
   padding: 20px;
-  color: white;
 }
 
-.App-intro {
-  font-size: large;
+/* Custom Classes */
+.text-accent {
+  color: #00A2FF; /* Accent Blue */
+}
+.bg-light-blue {
+  background-color: #E5F0FF; /* Light Blue */
+}
+.border-accent {
+  border-color: #00A2FF; /* Accent Blue */
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+
+/* src/components/HorizontalHeader.css */
+.horizontal-header {
+  width: 100%;
+  background-color: #1A1A1A; /* Dark Blue */
+  color: #FFFFFF; /* White */
+  display: flex;
+  justify-content: center; /* Center the items */
+  padding: 10px 0;
+}
+
+.horizontal-header nav ul {
+  list-style-type: none;
+  display: flex;
+  gap: 20px; /* Space between links */
+  margin: 0;
+  padding: 0;
+}
+
+.horizontal-header li {
+  display: inline; /* Make list items inline */
+}
+
+.horizontal-header a {
+  text-decoration: none;
+  color: #FFFFFF; /* White */
+  font-size: 18px;
+  padding: 5px 10px;
+}
+
+.horizontal-header a:hover {
+  color: #E5F0FF; /* Light Blue */
+}
+
+
+@media (max-width: 768px) {
+  .horizontal-header nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
 }
