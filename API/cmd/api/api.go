@@ -5,6 +5,7 @@ import (
 	"github.com/AdamElHassanLeb/279MidtermAdamElHassan/API/Internal/Services"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
+	"github.com/go-chi/cors"
 	"log"
 	"net/http"
 	"time"
@@ -35,6 +36,16 @@ func (app *application) mount() http.Handler {
 
 	r.Use(middleware.Timeout(60 * time.Second))
 
+	// CORS middleware settings
+	r.Use(cors.Handler(cors.Options{
+		AllowedOrigins:   []string{"http://localhost:3000"}, // Replace with your frontend's origin
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
+		ExposedHeaders:   []string{"Link"},
+		AllowCredentials: true,
+		MaxAge:           300, // Maximum value not ignored by any of major browsers
+	}))
+
 	r.Route("/api", func(v1Router chi.Router) {
 		v1Router.Route("/v1", func(mainRouter chi.Router) {
 			mainRouter.Route("/user", func(userRouter chi.Router) {
@@ -44,7 +55,7 @@ func (app *application) mount() http.Handler {
 				userRouter.Post("/create", app.CreateUser)
 				userRouter.With(Middleware.AuthMiddleware).Delete("/delete/{id}", app.DeleteUser)
 				userRouter.With(Middleware.AuthMiddleware).Put("/update/{id}", app.UpdateUser)
-				userRouter.Get("/auth", app.authUser)
+				userRouter.Post("/auth", app.authUser)
 			})
 			mainRouter.Route("/listing", func(listingRouter chi.Router) {
 				listingRouter.Get("/listings/{type}", app.GetAllListings)

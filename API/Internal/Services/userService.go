@@ -309,36 +309,46 @@ type Claims struct {
 	jwt.RegisteredClaims
 }
 
-// Auth method verifies phone number and password, and returns a JWT if valid
-func (s *UserService) Auth(ctx context.Context, phoneNumber, password string) (string, error) {
-	// SQL query to check if the user exists with the given phone number
-	query := `SELECT user_id, first_name, last_name, phone_number, password FROM users WHERE phone_number = ?`
+// Auth method verifies phone number and password, and returns a JWT and User struct if valid
+func (s *UserService) Auth(ctx context.Context, phoneNumber, password string) (string, User, error) {
+	// SQL query to retrieve the complete user details with the given phone number
+	query := `
+        SELECT user_id, first_name, last_name, phone_number, date_of_birth, profession, location, city, country, password, profile_image
+        FROM users WHERE phone_number = ?
+    `
 
-	// Prepare the query
+	// Prepare the query and scan the results into DBUser
 	var dbUser DBUser
-	err := s.db.QueryRowContext(ctx, query, phoneNumber).Scan(&dbUser.UserID, &dbUser.FirstName, &dbUser.LastName, &dbUser.PhoneNumber, &dbUser.Password)
+	err := s.db.QueryRowContext(ctx, query, phoneNumber).Scan(
+		&dbUser.UserID, &dbUser.FirstName, &dbUser.LastName, &dbUser.PhoneNumber,
+		&dbUser.DateOfBirth, &dbUser.Profession, &dbUser.Location, &dbUser.City,
+		&dbUser.Country, &dbUser.Password, &dbUser.ImageId,
+	)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			// User not found
-			return "", errors.New("user not found")
+			return "", User{}, errors.New("user not found")
 		}
-		return "", err
+		return "", User{}, err
 	}
 
-	// Compare the password provided by the user with the hashed password from the database
+	// Compare the provided password with the hashed password from the database
 	err = bcrypt.CompareHashAndPassword([]byte(dbUser.Password), []byte(password))
 	if err != nil {
 		// Password does not match
-		return "", errors.New("incorrect password")
+		return "", User{}, errors.New("incorrect password")
 	}
+
+	// Map DBUser to User struct (excluding the password)
+	user := mapDBUserToUser(dbUser)
 
 	// Create JWT Claims with UserID
 	claims := &Claims{
-		UserID:      dbUser.UserID, // Populate UserID here
+		UserID:      dbUser.UserID,
 		PhoneNumber: phoneNumber,
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(24 * time.Hour)), // Token expiration (24 hours)
-			Issuer:    "MinBya3mili",                                      // Set the issuer (can be your app's name or any string)
+			Issuer:    "MinBya3mili",                                      // Set the issuer (your app's name)
 		},
 	}
 
@@ -348,11 +358,11 @@ func (s *UserService) Auth(ctx context.Context, phoneNumber, password string) (s
 	// Sign the token with the secret key
 	tokenString, err := token.SignedString(jwtKey)
 	if err != nil {
-		return "", err
+		return "", User{}, err
 	}
 
-	// Return the JWT token
-	return tokenString, nil
+	// Return the JWT token and the complete user struct
+	return tokenString, user, nil
 }
 
 func (s *UserService) GetByPhoneNumber(ctx context.Context, phoneNumber string) (User, error) {

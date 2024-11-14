@@ -210,7 +210,7 @@ func (app *application) authUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Call the Auth function from UserService to generate the token
-	token, err := app.Service.Users.Auth(r.Context(), authRequest.PhoneNumber, authRequest.Password)
+	token, user, err := app.Service.Users.Auth(r.Context(), authRequest.PhoneNumber, authRequest.Password)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusUnauthorized)
 		return
@@ -218,5 +218,18 @@ func (app *application) authUser(w http.ResponseWriter, r *http.Request) {
 
 	// Return the JWT token
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(map[string]string{"token": token})
+
+	// Create a response struct to hold the token and user data
+	response := struct {
+		Token string        `json:"token"`
+		User  Services.User `json:"user"`
+	}{
+		Token: token,
+		User:  user,
+	}
+
+	// Encode the response struct to JSON and write it to the response writer
+	if err := json.NewEncoder(w).Encode(response); err != nil {
+		http.Error(w, "Failed to encode response", http.StatusInternalServerError)
+	}
 }

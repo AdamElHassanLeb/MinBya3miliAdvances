@@ -13,7 +13,7 @@ type Service struct {
 		Create(context.Context, *User) error
 		Update(context.Context, *User) error
 		Delete(context.Context, int) (bool, error)
-		Auth(context.Context, string, string) (string, error)
+		Auth(context.Context, string, string) (string, User, error)
 		GetByPhoneNumber(context.Context, string) (User, error)
 	}
 	Listings interface {
