@@ -1,6 +1,6 @@
 // src/services/ListingService.js
 import axiosInstance from "../utils/Axios";
-import {getTokenBearer} from "../utils/Token";
+import Token, {getTokenBearer} from "../utils/Token";
 
 const URL = '/listing';
 
@@ -78,13 +78,24 @@ const updateListing = async (id, updatedData) => {
     }
 };
 
-const deleteListing = async (id) => {
+const deleteListing = async (listingId) => {
     try {
-        return await axiosInstance.delete(`${URL}/delete/${id}`);
+        // Get the token from your utility function
+        const token = Token.getTokenBearer();
+
+        // Send the DELETE request with the Authorization header
+        const response = await axiosInstance.delete(`${URL}/delete/${listingId}`, {
+            headers: {
+                'Authorization': token, // Add the token here with Bearer prefix
+            },
+        });
+
+        return response;
     } catch (error) {
-        console.log(error);
+        console.error("Error deleting listing:", error);
     }
 };
+
 
 // Function to fetch listings by distance and search query
 const getListingsByDistanceAndSearch = async (longitude, latitude, maxDistance, listingType, searchQuery) => {

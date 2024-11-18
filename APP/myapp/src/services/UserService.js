@@ -30,9 +30,21 @@ const signUp = async (first_name, last_name, phone_number, date_of_birth, profes
     }
 }
 
+const getUserById = async (userId) => {
+    try {
+        const response = await axiosInstance.get(`${URL}/userId/${userId}`);
+        return response.data;  // Return the user data from the response
+    } catch (error) {
+        console.error("Error fetching user by ID:", error);
+        throw error;  // Re-throw error so it can be handled by the component
+    }
+};
+
+
 
 export default {
     login,
     signUp,
+    getUserById
 }
 

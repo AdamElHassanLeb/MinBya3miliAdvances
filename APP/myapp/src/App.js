@@ -7,6 +7,7 @@ import Offers from './components/Offers';
 import Requests from './components/Requests';
 import CreateListing from './components/CreateListing';
 import { UserContext, UserProvider } from './utils/UserContext';
+import ListingDetail from "./components/ListingDetails";
 
 // PrivateRoutes wrapper to protect multiple routes at once
 const PrivateRoutes = ({ children }) => {
@@ -39,6 +40,7 @@ function App() {
                                 <Route path="/Offers" element={<Offers />} />
                                 <Route path="/Requests" element={<Requests />} />
                                 <Route path="/CreateListing" element={<CreateListing />} />
+                                <Route path="/listing/:listingId" element={<ListingDetail/>} />
                             </Routes>
                         </PrivateRoutes>
                     }

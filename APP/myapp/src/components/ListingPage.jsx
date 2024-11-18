@@ -128,15 +128,7 @@ const ScrollableListings = (listingType) => {
                     onChange={(e) => setSearchQuery(e.target.value)}
                 />
 
-                {/* Search Button */}
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleSearch}
-                    fullWidth
-                >
-                    Search
-                </Button>
+
 
                 {/* Dropdown Menu for Distance or Date */}
                 <FormControl fullWidth>
@@ -185,6 +177,15 @@ const ScrollableListings = (listingType) => {
                         </MapContainer>
                     </Box>
                 )}
+                {/* Search Button */}
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleSearch}
+                    fullWidth
+                >
+                    Search
+                </Button>
 
                 <Button
                     sx={{

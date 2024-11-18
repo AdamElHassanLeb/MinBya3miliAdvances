@@ -1,11 +1,12 @@
 // src/components/ListingCard.js
 import React, {useEffect, useState} from 'react';
 import { Card, CardMedia, CardContent, Typography, Link } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import ImageService from "../services/ImageService";
 
 const ListingCard = ({ listing }) => {
 
+    const navigate = useNavigate();
     const [images, setImages] = useState([]);
 
     useEffect(() => {
@@ -18,6 +19,10 @@ const ListingCard = ({ listing }) => {
     }, []);
 
 
+    // Complete onClick function to navigate to the detailed listing page
+    const handleCardClick = () => {
+        navigate(`/listing/${listing.listing_id}`);
+    };
 
     return (
         <Card sx={{ minWidth: 300, maxWidth: 300, flexShrink: 0 }}>
@@ -28,7 +33,7 @@ const ListingCard = ({ listing }) => {
                 image={`data:image/png;base64,${images[0]?.image_data || ''}`} // Make sure base64 data is properly formatted
                 alt={listing.title}
                 sx={{ cursor: 'pointer' }}
-                onClick={() => console.log(`Open modal for listing ID: ${listing.listing_id}`)}
+                onClick={handleCardClick}
             />
             <CardContent>
                 <Typography variant="h6">{listing.title}</Typography>
