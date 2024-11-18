@@ -23,16 +23,17 @@ function App() {
     //const { user } = useContext(UserContext);
 
     return (
+        <>
         <div className="App">
             {/* Conditionally render the Header only if not on the /login route */}
             {location.pathname !== '/Login' && <Header />}
-
+        </div>
             <Routes>
                 {/* All routes below are protected by the PrivateRoute wrapper */}
                 <Route path="/home" element={<PrivateRoute element={<Home />} />} />
                 <Route path="/Login" element={<Login />} />
             </Routes>
-        </div>
+        </>
     );
 }
 

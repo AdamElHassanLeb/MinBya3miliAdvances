@@ -232,7 +232,7 @@ func mapDBUserToUser(dbUser DBUser) User {
 		PhoneNumber: dbUser.PhoneNumber,
 		DateOfBirth: dbUser.DateOfBirth,
 		Profession:  dbUser.Profession,
-		Location:    nil,
+		Location:    dbUser.Location,
 		LocDetails: Address{
 			City:    dbUser.City,
 			Country: dbUser.Country,

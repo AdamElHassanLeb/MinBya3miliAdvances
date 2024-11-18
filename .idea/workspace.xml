@@ -5,19 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86ed5ec0-1b64-4da5-913b-01262db22ba1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/APP/myapp/src/services/UserService.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/APP/myapp/src/utils/UserContext.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/APP/myapp/src/components/ListingCard.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/APP/myapp/src/components/ListingPage.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/APP/myapp/src/services/ImageService.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/APP/myapp/src/services/ListingService.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Internal/Services/listingService.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Services/listingService.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/Internal/Services/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Services/service.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/Internal/Services/userService.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Services/userService.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/cmd/api/api.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/cmd/api/api.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/cmd/api/userController.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/cmd/api/userController.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/API/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/API/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/cmd/api/listingController.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/cmd/api/listingController.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/APP/myapp/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/components/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/components/Login.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/src/components/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/components/Home.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/APP/myapp/src/static/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/static/Header.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -69,6 +68,7 @@
     &quot;Go Build.go build github.com/AdamElHassanLeb/279MidtermAdamElHassan/API/cmd/api.executor&quot;: &quot;Run&quot;,
     &quot;Go Build.go build github.com/AdamElHassanLeb/279MidtermAdamElHassan/APP/cmd/api.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
@@ -130,8 +130,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-gosdk-5df93f7ad4aa-df9ad98b711f-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-242.23339.24" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-GO-242.23339.24" />
+        <option value="bundled-gosdk-d297c17c1fbd-b87a2f8923ed-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-243.21565.208" />
+        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-GO-243.21565.208" />
       </set>
     </attachedChunks>
   </component>

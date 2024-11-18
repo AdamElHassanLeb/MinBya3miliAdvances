@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import LogoutIcon from '@mui/icons-material/Logout';
+
 
 const Header = () => {
     return (
@@ -25,7 +27,10 @@ const Header = () => {
                             Requests
                         </Button>
                         <Button color="inherit" component={Link} to="/option3">
-                            Create Listing
+                            People
+                        </Button>
+                        <Button color="inherit" component={Link} to="/option3">
+                            Messages
                         </Button>
                     </Box>
 
@@ -40,6 +45,9 @@ const Header = () => {
                     <IconButton color="inherit" component={Link} to="/profile">
                         <AccountCircleIcon />
                     </IconButton>
+                        <IconButton color="inherit" component={Link} to="/Login">
+                            <LogoutIcon />
+                        </IconButton>
                 </Box>
 
                 </Toolbar>

@@ -65,6 +65,7 @@ func (app *application) mount() http.Handler {
 				listingRouter.Get("/date/{type}", app.GetListingsByDate)
 				listingRouter.Get("/date/search/{query}/{type}", app.GetListingsByDateAndSearch)
 				listingRouter.Get("/distance/{longitude}/{latitude}/{max_distance}/{type}", app.GetListingsByDistance)
+				listingRouter.Get("/distance/{longitude}/{latitude}/{max_distance}/{type}/{query}", app.GetListingsByDistanceAndSearch)
 				//listingRouter.Get("/location/{longitude}/{latitude}/{max_range}/{type}", app.GetListingsByLocation)
 				listingRouter.With(Middleware.AuthMiddleware).Post("/create", app.CreateListing)
 				listingRouter.With(Middleware.AuthMiddleware).Put("/update/{id}", app.UpdateListing)

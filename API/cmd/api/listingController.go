@@ -251,6 +251,41 @@ func (app *application) GetListingsByDistance(w http.ResponseWriter, r *http.Req
 	}
 }
 
+// GetListingsByDistanceAndSearch handles the request to get listings by location and distance.
+func (app *application) GetListingsByDistanceAndSearch(w http.ResponseWriter, r *http.Request) {
+	latitude, err := strconv.ParseFloat(chi.URLParam(r, "latitude"), 64)
+	if err != nil {
+		http.Error(w, "Invalid latitude", http.StatusBadRequest)
+		return
+	}
+	longitude, err := strconv.ParseFloat(chi.URLParam(r, "longitude"), 64)
+	if err != nil {
+		http.Error(w, "Invalid longitude", http.StatusBadRequest)
+		return
+	}
+	maxDistance, err := strconv.ParseFloat(chi.URLParam(r, "max_distance"), 64)
+	if err != nil {
+		http.Error(w, "Invalid maxDistance", http.StatusBadRequest)
+		return
+	}
+	listingType := chi.URLParam(r, "type")
+
+	query := chi.URLParam(r, "query")
+
+	// Call the service to get listings by distance
+	listings, err := app.Service.Listings.GetByDistanceAndSearch(r.Context(), latitude, longitude, maxDistance, listingType, query)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	err = json.NewEncoder(w).Encode(listings)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
 /*
 // GetListingsByLocation handles the request to get listings by location and range.
 func (app *application) GetListingsByLocation(w http.ResponseWriter, r *http.Request) {

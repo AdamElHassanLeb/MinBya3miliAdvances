@@ -189,6 +189,28 @@ func (s *ListingService) GetByDistance(ctx context.Context, latitude, longitude,
 	}
 }
 
+func (s *ListingService) GetByDistanceAndSearch(ctx context.Context, latitude, longitude, maxDistance float64, listingType string, searchQuery string) ([]Listing, error) {
+	// Sanitize or escape the search query to prevent SQL injection (optional but recommended)
+	escapedSearchQuery := "%" + searchQuery + "%"
+
+	var query string
+	// Check if listingType is valid and apply the relevant filter
+	if listingType == "Request" || listingType == "Offer" {
+		query = `SELECT * FROM listings 
+                 WHERE ST_Distance_Sphere(location, ST_GeomFromText(CONCAT('POINT(', ?, ' ', ?, ')'))) < ? 
+                 AND type = ? 
+                 AND (title LIKE ? OR description LIKE ?)`
+		// Execute the query with the appropriate parameters, including the search query
+		return s.queryListings(ctx, query, longitude, latitude, maxDistance, listingType, escapedSearchQuery, escapedSearchQuery)
+	} else {
+		query = `SELECT * FROM listings 
+                 WHERE ST_Distance_Sphere(location, ST_GeomFromText(CONCAT('POINT(', ?, ' ', ?, ')'))) < ? 
+                 AND (title LIKE ? OR description LIKE ?)`
+		// Execute the query with the search filter
+		return s.queryListings(ctx, query, longitude, latitude, maxDistance, escapedSearchQuery, escapedSearchQuery)
+	}
+}
+
 // Get all listings (GetAll)
 func (s *ListingService) GetAll(ctx context.Context, listingType string) ([]Listing, error) {
 	if listingType == "Request" || listingType == "Offer" {
