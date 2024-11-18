@@ -20,10 +20,10 @@ const Header = () => {
 
                     {/* Center Text Options */}
                     <Box sx={{ display: 'flex', gap: 2 }}>
-                        <Button color="inherit" component={Link} to="/">
+                        <Button color="inherit" component={Link} to="/Offers">
                             Offers
                         </Button>
-                        <Button color="inherit" component={Link} to="/option2">
+                        <Button color="inherit" component={Link} to="/Requests">
                             Requests
                         </Button>
                         <Button color="inherit" component={Link} to="/option3">

@@ -25,7 +25,7 @@ const ListingCard = ({ listing }) => {
             <CardMedia
                 component="img"
                 height="140"
-                image={`data:image/png;base64,${images[0].image_data}`} // Make sure base64 data is properly formatted
+                image={`data:image/png;base64,${images[0]?.image_data || ''}`} // Make sure base64 data is properly formatted
                 alt={listing.title}
                 sx={{ cursor: 'pointer' }}
                 onClick={() => console.log(`Open modal for listing ID: ${listing.listing_id}`)}

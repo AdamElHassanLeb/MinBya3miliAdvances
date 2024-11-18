@@ -1,5 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
-import {Box, TextField, Button, FormControl, InputLabel, Select, MenuItem, Typography, Slider} from '@mui/material';
+import {
+    Box,
+    TextField,
+    Button,
+    FormControl,
+    InputLabel,
+    Select,
+    MenuItem,
+    Typography,
+    Slider,
+    Grid
+} from '@mui/material';
 import { UserContext } from '../utils/UserContext';
 import ListingCard from './ListingCard';
 import ListingService from '../services/ListingService';
@@ -39,7 +50,8 @@ const ScrollableListings = (listingType) => {
 
                     // Fetch listings based on the user's location and distance
                     const response = await ListingService.getListingsByDistance(longitude, latitude, maxDistance, listingType.listingType);
-                    console.log(longitude, latitude, maxDistance, listingType.listingType)
+                    //console.log(longitude, latitude, maxDistance, listingType.listingType)
+                    //console.log(response.data)
                     setListings(response.data); // Assuming response contains listings data
                     setLoading(false);
                 } catch (error) {
@@ -54,31 +66,32 @@ const ScrollableListings = (listingType) => {
 
     // Function for handling search button click
     const handleSearch = async () => {
-        console.log('Search button clicked');
-        console.log('Search Query:', searchQuery);
-        console.log('Filter Type:', filterType);
-        console.log('Selected Location:', selectedLocation);
+        //console.log('Search button clicked');
+        //console.log('Search Query:', searchQuery);
+        //console.log('Filter Type:', filterType);
+        //console.log('Selected Location:', selectedLocation);
         setListings([])
         var currListings;
         if (filterType === "date"){
             if(searchQuery === ""){
-                currListings = await ListingService.getListingsByDate(listingType)
+                //console.log(listingType)
+                currListings = await ListingService.getListingsByDate(listingType.listingType)
                 setListings(currListings.data)
                 return;
             }
-            currListings = await ListingService.getListingsByDateAndSearch(searchQuery, listingType)
+            currListings = await ListingService.getListingsByDateAndSearch(searchQuery, listingType.listingType)
             setListings(currListings.data)
             return
         }
         //distance
         if(searchQuery === ""){
 
-            currListings = await  ListingService.getListingsByDistance(selectedLocation[0], selectedLocation[1], maxDistance, listingType)
+            currListings = await  ListingService.getListingsByDistance(selectedLocation[0], selectedLocation[1], maxDistance, listingType.listingType)
             setListings(currListings.data)
             return;
         }
 
-        currListings = await ListingService.getListingsByDistanceAndSearch(selectedLocation[0], selectedLocation[1], maxDistance, listingType, searchQuery)
+        currListings = await ListingService.getListingsByDistanceAndSearch(selectedLocation[0], selectedLocation[1], maxDistance, listingType.listingType, searchQuery)
         setListings(currListings.data)
     };
 
@@ -168,32 +181,35 @@ const ScrollableListings = (listingType) => {
             </Box>
 
             {/* Right Panel with Listings */}
-            <Box
+            <Grid
+                container
+                spacing={2}
                 sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 2,
                     padding: 2,
                     overflowY: 'auto',
                     maxHeight: '80vh',
-                    alignItems: 'center',
-                    justifyContent: 'center',
                     margin: '0 auto',
                     width: '100%',
-                    maxWidth: '900px',
-                    paddingTop: '150px',  // Use a relative unit for scalability
+                    maxWidth: '1200px',
+                    paddingTop: '100px',
                 }}
             >
                 {loading ? (
-                    <div>Loading...</div> // Show a loading message
+                    <Grid item xs={12}>
+                        <div>Loading...</div>
+                    </Grid>
                 ) : listings.length > 0 ? (
                     listings.map((listing) => (
-                        <ListingCard key={listing.listing_id} listing={listing} />
+                        <Grid item xs={12} sm={6} md={4} key={listing.listing_id}>
+                            <ListingCard listing={listing} />
+                        </Grid>
                     ))
                 ) : (
-                    <div>No listings found within the specified distance.</div>
+                    <Grid item xs={12}>
+                        <div>No listings found within the specified distance.</div>
+                    </Grid>
                 )}
-            </Box>
+            </Grid>
         </Box>
     );
 };
