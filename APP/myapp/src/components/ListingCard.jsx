@@ -1,16 +1,31 @@
 // src/components/ListingCard.js
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Card, CardMedia, CardContent, Typography, Link } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
+import ImageService from "../services/ImageService";
 
 const ListingCard = ({ listing }) => {
+
+    const [images, setImages] = useState([]);
+
+    useEffect(() => {
+        const fetchImages = async () => {
+            const imagesFromServer = await ImageService.getImagesByListingId(listing.listing_id)
+            //console.log(imagesFromServer[0].image_data)
+            setImages(imagesFromServer)
+        }
+        fetchImages()
+    }, []);
+
+
+
     return (
         <Card sx={{ minWidth: 300, maxWidth: 300, flexShrink: 0 }}>
             {/* Display the image with a placeholder for click-to-open modal */}
             <CardMedia
                 component="img"
                 height="140"
-                image={ '../assets/placeholder.png'} // Placeholder if no image
+                image={`data:image/png;base64,${images[0].image_data}`} // Make sure base64 data is properly formatted
                 alt={listing.title}
                 sx={{ cursor: 'pointer' }}
                 onClick={() => console.log(`Open modal for listing ID: ${listing.listing_id}`)}

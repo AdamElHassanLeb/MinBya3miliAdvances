@@ -5,19 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86ed5ec0-1b64-4da5-913b-01262db22ba1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/APP/myapp/src/components/ListingCard.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/APP/myapp/src/components/ListingPage.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/APP/myapp/src/services/ImageService.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/APP/myapp/src/services/ListingService.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/APP/myapp/src/utils/Token.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Internal/Services/listingService.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Services/listingService.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Internal/Services/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Services/service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Internal/Services/userService.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Services/userService.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/cmd/api/api.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/cmd/api/api.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/cmd/api/listingController.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/cmd/api/listingController.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/components/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/components/Home.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/static/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/static/Header.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/cmd/api/imageController.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/cmd/api/imageController.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/src/components/ListingCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/components/ListingCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/src/components/ListingPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/components/ListingPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/src/services/ImageService.js" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/services/ImageService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/src/utils/Axios.js" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/utils/Axios.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

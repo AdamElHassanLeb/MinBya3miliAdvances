@@ -6,6 +6,7 @@ import ListingService from '../services/ListingService';
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import UserService from "../services/UserService";
+import ImageService from "../services/ImageService";
 
 const ScrollableListings = (listingType) => {
     const { user } = useContext(UserContext); // Access user data from context
