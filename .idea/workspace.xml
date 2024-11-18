@@ -5,14 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86ed5ec0-1b64-4da5-913b-01262db22ba1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/APP/myapp/src/components/Offers.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/APP/myapp/src/components/Requests.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/APP/myapp/src/components/CreateListing.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Internal/Services/listingService.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Services/listingService.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Internal/Services/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Services/service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/cmd/api/listingController.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/cmd/api/listingController.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/APP/myapp/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/components/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/components/Home.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/components/ListingCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/components/ListingCard.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/APP/myapp/src/components/ListingPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/components/ListingPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/static/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/static/Header.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/src/services/ImageService.js" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/services/ImageService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/src/services/ListingService.js" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/services/ListingService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/src/utils/Token.js" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/utils/Token.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,6 +135,17 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="LAST_COMMIT_MESSAGE" value="" />

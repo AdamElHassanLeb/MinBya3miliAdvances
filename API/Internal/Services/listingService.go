@@ -66,30 +66,40 @@ func (s *ListingService) queryListings(ctx context.Context, query string, args .
 }
 
 // Create a new listing
-func (s *ListingService) Create(ctx context.Context, listing *Listing) error {
-	//fmt.Println(listing.Location.Lng(), listing.Location.Lat())
+func (s *ListingService) Create(ctx context.Context, listing *Listing) (Listing, error) {
 	city, country, err := Utils.ReverseGeocode(listing.Location.Lat(), listing.Location.Lng())
-	//fmt.Println(country, city, err)
 	if err != nil {
-		return err
+		return Listing{}, fmt.Errorf("could not validate coordinates: %w", err)
 	}
 
 	listing.City = city
 	listing.Country = country
+
 	// Convert the location to WKT format
 	locationWKT := listing.Location.ToWKT()
 
 	query := `
-		INSERT INTO listings (type, location, user_id, title, description, city, country)
-		VALUES (?, ST_GeomFromText(?), ?, ?, ?, ?, ?)
-	`
-	_, err = s.db.ExecContext(ctx, query, listing.Type, locationWKT, listing.UserID, listing.Title, listing.Description, listing.City, listing.Country)
+        INSERT INTO listings (type, location, user_id, title, description, city, country)
+        VALUES (?, ST_GeomFromText(?), ?, ?, ?, ?, ?)
+    `
+	result, err := s.db.ExecContext(ctx, query, listing.Type, locationWKT, listing.UserID, listing.Title, listing.Description, listing.City, listing.Country)
 	if err != nil {
-		//fmt.Println(listing)
-		return fmt.Errorf("could not create listing: %v", err)
+		return Listing{}, fmt.Errorf("could not create listing: %v", err)
 	}
 
-	return nil
+	// Get the ID of the newly inserted listing
+	listingID, err := result.LastInsertId()
+	if err != nil {
+		return Listing{}, fmt.Errorf("could not retrieve last insert ID: %v", err)
+	}
+
+	// Retrieve the full listing by its ID
+	createdListing, err := s.GetByID(ctx, int(listingID))
+	if err != nil {
+		return Listing{}, fmt.Errorf("could not retrieve newly created listing: %v", err)
+	}
+
+	return createdListing, nil
 }
 
 // Update an existing listing

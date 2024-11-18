@@ -103,7 +103,7 @@ func (app *application) CreateListing(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Call the service to create the listing
-	err = app.Service.Listings.Create(r.Context(), &listing)
+	createdListing, err := app.Service.Listings.Create(r.Context(), &listing)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -111,7 +111,7 @@ func (app *application) CreateListing(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
-	err = json.NewEncoder(w).Encode(listing)
+	err = json.NewEncoder(w).Encode(createdListing)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}

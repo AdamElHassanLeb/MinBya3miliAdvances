@@ -17,7 +17,7 @@ type Service struct {
 		GetByPhoneNumber(context.Context, string) (User, error)
 	}
 	Listings interface {
-		Create(context.Context, *Listing) error
+		Create(context.Context, *Listing) (Listing, error)
 		Update(context.Context, *Listing, int) error
 		Delete(ctx context.Context, listingID int) error
 		GetAll(ctx context.Context, listingType string) ([]Listing, error)

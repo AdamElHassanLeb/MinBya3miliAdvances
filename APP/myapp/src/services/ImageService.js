@@ -1,20 +1,26 @@
 import axiosInstance from "../utils/Axios";
+import Token from "../utils/Token";
 
 const URL = '/image';
 
-const uploadListingImage = async (listingId, imageFile) => {
+const uploadListingImage = async (listingId, imageFiles) => {
     try {
         const formData = new FormData();
-        formData.append("file", imageFile);
+        imageFiles.forEach((file) => {
+            formData.append("images", file); // Append each image with the key 'images'
+        });
 
+        const token = Token.getTokenBearer()
+        // Send the request with the Authorization header
         const response = await axiosInstance.post(`${URL}/uploadForListing/${listingId}`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
+                'Authorization': token, // Add the token here
             },
         });
         return response;
     } catch (error) {
-        console.error("Error uploading listing image:", error);
+        console.error("Error uploading listing images:", error);
     }
 };
 

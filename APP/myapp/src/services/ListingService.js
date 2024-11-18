@@ -1,5 +1,6 @@
 // src/services/ListingService.js
 import axiosInstance from "../utils/Axios";
+import {getTokenBearer} from "../utils/Token";
 
 const URL = '/listing';
 
@@ -61,7 +62,9 @@ const getListingsByDistance = async (longitude, latitude, max_distance, type) =>
 
 const createListing = async (listingData) => {
     try {
-        return await axiosInstance.post(`${URL}/create`, listingData);
+        const token = getTokenBearer()
+        console.log(listingData)
+        return await axiosInstance.post(`${URL}/create`, listingData,  { headers: { Authorization: token } } );
     } catch (error) {
         console.log(error);
     }

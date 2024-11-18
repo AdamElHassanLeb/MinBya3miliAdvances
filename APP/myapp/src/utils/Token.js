@@ -1,9 +1,11 @@
 const getToken = () => {
-    const token = JSON.parse(localStorage.getItem("token"));
+    const token = localStorage.getItem('token');
     return token;
 };
 
-const getTokenBearer = () => {
+export const getTokenBearer = () => {
     const token = getToken();
     return `Bearer ${token}`;
 }
+
+export default {getTokenBearer}

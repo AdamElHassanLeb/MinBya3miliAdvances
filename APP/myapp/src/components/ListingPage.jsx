@@ -18,6 +18,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaf
 import 'leaflet/dist/leaflet.css';
 import UserService from "../services/UserService";
 import ImageService from "../services/ImageService";
+import {Link} from "react-router-dom";
 
 const ScrollableListings = (listingType) => {
     const { user } = useContext(UserContext); // Access user data from context
@@ -105,15 +106,21 @@ const ScrollableListings = (listingType) => {
                     gap: 2,
                     padding: 2,
                     width: '300px',
+                    height: `100vh`,
                     backgroundColor: 'white',
+                    border: '2px solid #ccc',
                     borderRadius: '8px',
                     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
                     position: 'sticky',
                     top: '10px',
+
                 }}
             >
                 {/* Search Bar */}
                 <TextField
+                    sx={{
+                        marginTop: '7vh',
+                    }}
                     label="Search"
                     variant="outlined"
                     fullWidth
@@ -178,6 +185,22 @@ const ScrollableListings = (listingType) => {
                         </MapContainer>
                     </Box>
                 )}
+
+                <Button
+                    sx={{
+                        padding: 2,
+                        position: 'sticky',
+                        marginTop : '10vh'
+                    }}
+                    component={Link}
+                    variant="contained"
+                    color="warning"
+                    to="/CreateListing"
+                    fullWidth
+                >
+                    Create Listing
+                </Button>
+
             </Box>
 
             {/* Right Panel with Listings */}
