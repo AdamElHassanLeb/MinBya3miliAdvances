@@ -42,7 +42,7 @@ const Header = () => {
                     <IconButton color="inherit" component={Link} to="/notifications">
                         <NotificationsIcon />
                     </IconButton>
-                    <IconButton color="inherit" component={Link} to="/profile">
+                    <IconButton color="inherit" component={Link} to="/UserPrvateProfile">
                         <AccountCircleIcon />
                     </IconButton>
                         <IconButton color="inherit" component={Link} to="/Login">

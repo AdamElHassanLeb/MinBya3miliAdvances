@@ -3,6 +3,8 @@ import React, {useEffect, useState} from 'react';
 import { Card, CardMedia, CardContent, Typography, Link } from '@mui/material';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import ImageService from "../services/ImageService";
+import placeholderImage from '../assets/placeholder.png';
+
 
 const ListingCard = ({ listing }) => {
 
@@ -25,12 +27,13 @@ const ListingCard = ({ listing }) => {
     };
 
     return (
-        <Card sx={{ minWidth: 300, maxWidth: 300, flexShrink: 0 }}>
+        <Card sx={{ minWidth: 300, maxWidth: 300, flexShrink: 0, backgroundColor : '#FEFEFE'}}>
             {/* Display the image with a placeholder for click-to-open modal */}
             <CardMedia
                 component="img"
                 height="140"
-                image={`data:image/png;base64,${images[0]?.image_data || ''}`} // Make sure base64 data is properly formatted
+                image={images.length > 0 ? `data:image/png;base64,${images[0].image_data}` : placeholderImage}
+                // Make sure base64 data is properly formatted
                 alt={listing.title}
                 sx={{ cursor: 'pointer' }}
                 onClick={handleCardClick}

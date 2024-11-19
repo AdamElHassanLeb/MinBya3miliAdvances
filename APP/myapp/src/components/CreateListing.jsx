@@ -6,6 +6,7 @@ import axios from 'axios';
 import {UserContext} from "../utils/UserContext";
 import ListingService from "../services/ListingService";
 import ImageService from "../services/ImageService";
+import {useNavigate} from "react-router-dom";
 
 const CreateListing = () => {
     const [listingType, setListingType] = useState('');
@@ -13,7 +14,7 @@ const CreateListing = () => {
     const [description, setDescription] = useState('');
     const [selectedLocation, setSelectedLocation] = useState([0, 0]);
     const [selectedImages, setSelectedImages] = useState([]);
-
+    const navigate = useNavigate()
     const {user} = useContext(UserContext)
 
     // Function to handle map click
@@ -89,6 +90,7 @@ const CreateListing = () => {
         } catch (error) {
             console.error("Error during form submission:", error);
         }
+        navigate('/Home')
     };
 
 

@@ -65,7 +65,12 @@ const getImagesByListingId = async (listingId) => {
 
 const getImagesByUserId = async (userId) => {
     try {
-        const response = await axiosInstance.get(`${URL}/user/${userId}`);
+        const token = Token.getTokenBearer()
+        const response = await axiosInstance.get(`${URL}/user/${userId}`, {
+            headers: {
+                'Authorization': token, // Add the token here with Bearer prefix
+            },
+        });
         if (response.data && response.data.images) {
             return response.data.images.map(image => image.base64Image);
         }

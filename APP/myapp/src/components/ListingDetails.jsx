@@ -7,6 +7,7 @@ import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Import carousel styles
 import { Box, Typography, Divider, Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { UserContext } from "../utils/UserContext"; // Assuming you have a context for user data
+import placeholderImage from '../assets/placeholder.png';
 
 const ListingDetail = () => {
     const { listingId } = useParams(); // Get the listingId from URL params
@@ -24,10 +25,11 @@ const ListingDetail = () => {
                 const listingData = await ListingService.getListingById(listingId);
                 setListing(listingData.data);
 
+
                 const imagesData = await ImageService.getImagesByListingId(listingId);
                 setImages(imagesData);
 
-                console.log(user)
+                console.log(listingData.data)
 
                 // Fetch user details using the userId from the listing
                 if (listingData.data) {
@@ -82,20 +84,32 @@ const ListingDetail = () => {
                 boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
             }}
         >
+
             {/* Image Carousel */}
             <Box sx={{ width: '100%', marginBottom: '20px' }}>
                 <Carousel showThumbs={false} infiniteLoop autoPlay>
-                    {images.map((image, index) => (
-                        <div key={index}>
+                    {images.length > 0 ? (
+                        images.map((image, index) => (
+                            <div key={index}>
+                                <img
+                                    src={`data:image/png;base64,${image.image_data}`}
+                                    alt={`Listing Image ${index + 1}`}
+                                    style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
+                                />
+                            </div>
+                        ))
+                    ) : (
+                        <div>
                             <img
-                                src={`data:image/png;base64,${image.image_data}`}
-                                alt={`Listing Image ${index + 1}`}
+                                src={placeholderImage} // Use the imported placeholder image
+                                alt="Placeholder Image"
                                 style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
                             />
                         </div>
-                    ))}
+                    )}
                 </Carousel>
             </Box>
+
 
             {/* Listing Title */}
             <Typography variant="h3" sx={{
@@ -129,10 +143,12 @@ const ListingDetail = () => {
             {/* Additional Details */}
             <Divider sx={{ marginBottom: '15px', marginTop: '20px' }} />
             <Typography variant="h6" sx={{ fontWeight: 'bold', marginBottom: '10px' }}>
-                Additional Details:
+                Listing Details:
             </Typography>
             <Typography variant="body1">Created: {formattedDate}</Typography>
             <Typography variant="body1">Listing Type: {listing.type === 'offer' ? 'Offer' : 'Request'}</Typography>
+            <Typography variant="body1">City: {listing.city}</Typography>
+            <Typography variant="body1">Country: {listing.country}</Typography>
 
             {/* Delete Button if the user is the owner of the listing */}
             {user && user.user_id === listing.user_id && (

@@ -1,4 +1,5 @@
 import axiosInstance from "../utils/Axios";
+import {getTokenBearer} from "../utils/Token";
 
 const URL = '/user'
 
@@ -41,10 +42,36 @@ const getUserById = async (userId) => {
 };
 
 
+const updateUser = async (userId, updatedData) => {
+    try {
+        const token = getTokenBearer(); // Get the JWT token
+        return await axiosInstance.put(`${URL}/update/${userId}`, updatedData, {
+            headers: { Authorization: token }
+        });
+    } catch (error) {
+        console.error("Error updating user:", error);
+        throw error; // Re-throw for component handling
+    }
+};
+
+const deleteUser = async (userId) => {
+    try {
+        const token = getTokenBearer(); // Get the JWT token
+        return await axiosInstance.delete(`${URL}/delete/${userId}`, {
+            headers: { Authorization: token }
+        });
+    } catch (error) {
+        console.error("Error deleting user:", error);
+        throw error; // Re-throw for component handling
+    }
+};
+
 
 export default {
     login,
     signUp,
-    getUserById
+    getUserById,
+    updateUser,
+    deleteUser
 }
 

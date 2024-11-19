@@ -49,8 +49,9 @@ const ScrollableListings = (listingType) => {
                     const latitude = user.location[1];
                     const maxDistance = 60; // Set your desired max distance in km
 
+                    setSelectedLocation([longitude, latitude])
                     // Fetch listings based on the user's location and distance
-                    const response = await ListingService.getListingsByDistance(longitude, latitude, maxDistance, listingType.listingType);
+                    const response = await ListingService.getListingsByDate(listingType.listingType);
                     //console.log(longitude, latitude, maxDistance, listingType.listingType)
                     //console.log(response.data)
                     setListings(response.data); // Assuming response contains listings data
@@ -88,7 +89,9 @@ const ScrollableListings = (listingType) => {
         if(searchQuery === ""){
 
             currListings = await  ListingService.getListingsByDistance(selectedLocation[0], selectedLocation[1], maxDistance, listingType.listingType)
-            setListings(currListings.data)
+            console.log(currListings)
+            if(currListings && currListings.data)
+                setListings(currListings.data)
             return;
         }
 

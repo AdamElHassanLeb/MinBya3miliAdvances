@@ -285,7 +285,7 @@ func (s *UserService) Update(ctx context.Context, user *User) error {
 	// Prepare the SQL query to update the user's information
 	query := `
         UPDATE users
-        SET first_name = ?, last_name = ?, phone_number = ?, date_of_birth = ?, profession = ?, location = ST_GeomFromText(?), city = ?, country = ?, password = ?, image_id = ?
+        SET first_name = ?, last_name = ?, phone_number = ?, date_of_birth = ?, profession = ?, location = ST_GeomFromText(?), city = ?, country = ?, password = ?, profile_image = ?
         WHERE user_id = ?
     `
 
