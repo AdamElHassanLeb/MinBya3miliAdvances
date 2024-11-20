@@ -49,6 +49,7 @@ const UserProfile = () => {
 
     const handleMapClick = (e) => {
         const { lat, lng } = e.latlng;
+        console.log(lng, lat)
         setSelectedLocation([lat, lng]);
         setEditableData({ ...editableData, location: [lng, lat] });
     };

@@ -72,7 +72,12 @@ const createListing = async (listingData) => {
 
 const updateListing = async (id, updatedData) => {
     try {
-        return await axiosInstance.put(`${URL}/update/${id}`, updatedData);
+        const token = Token.getTokenBearer();
+        return await axiosInstance.put(`${URL}/update/${id}`, updatedData, {
+            headers: {
+                'Authorization': token, // Add the token here with Bearer prefix
+            },
+        });
     } catch (error) {
         console.log(error);
     }
@@ -100,7 +105,7 @@ const deleteListing = async (listingId) => {
 // Function to fetch listings by distance and search query
 const getListingsByDistanceAndSearch = async (longitude, latitude, maxDistance, listingType, searchQuery) => {
     try {
-        const response = await axiosInstance.get(`/api/v1/listing/distance/${longitude}/${latitude}/${maxDistance}/${listingType}/${searchQuery}`);
+        const response = await axiosInstance.get(`/listing/distance/${longitude}/${latitude}/${maxDistance}/${listingType}/${searchQuery}`);
         return response.data; // Assuming your API returns the data in a structure like { listings: [...], ... }
     } catch (error) {
         console.error("Error fetching listings by distance and search:", error);
