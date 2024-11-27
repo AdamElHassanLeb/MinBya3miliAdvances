@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ScrollableListings from "./ListingPage";
+import ScrollableListings from "../components/Listings/ListingPage";
 
 const Home = () => {
 

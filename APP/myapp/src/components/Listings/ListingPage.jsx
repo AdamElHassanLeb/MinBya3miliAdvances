@@ -11,13 +11,13 @@ import {
     Slider,
     Grid
 } from '@mui/material';
-import { UserContext } from '../utils/UserContext';
+import { UserContext } from '../../utils/UserContext';
 import ListingCard from './ListingCard';
-import ListingService from '../services/ListingService';
+import ListingService from '../../services/ListingService';
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import UserService from "../services/UserService";
-import ImageService from "../services/ImageService";
+import UserService from "../../services/UserService";
+import ImageService from "../../services/ImageService";
 import {Link} from "react-router-dom";
 
 const ScrollableListings = (listingType) => {

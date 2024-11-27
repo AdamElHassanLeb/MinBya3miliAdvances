@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import ListingService from '../services/ListingService'; // Service to fetch listing details
-import ImageService from '../services/ImageService'; // Service to fetch images
-import UserService from '../services/UserService';  // Import the new UserService
+import ListingService from '../../services/ListingService'; // Service to fetch listing details
+import ImageService from '../../services/ImageService'; // Service to fetch images
+import UserService from '../../services/UserService';  // Import the new UserService
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Import carousel styles
 import { Box, Typography, Divider, Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
-import { UserContext } from "../utils/UserContext"; // Assuming you have a context for user data
-import placeholderImage from '../assets/placeholder.png';
+import { UserContext } from "../../utils/UserContext"; // Assuming you have a context for user data
+import placeholderImage from '../../assets/placeholder.png';
 
 const ListingDetail = () => {
     const { listingId } = useParams(); // Get the listingId from URL params

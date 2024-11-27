@@ -2,10 +2,10 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Box, Typography, Avatar, Divider, Grid, Button, TextField, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Import carousel styles
-import UserService from '../services/UserService';
-import ListingService from '../services/ListingService';
-import { UserContext } from '../utils/UserContext';
-import ListingCard from './ListingCard'; // Assuming there's a ListingCard component
+import UserService from '../../services/UserService';
+import ListingService from '../../services/ListingService';
+import { UserContext } from '../../utils/UserContext';
+import ListingCard from '../../components/Listings/ListingCard'; // Assuming there's a ListingCard component
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 

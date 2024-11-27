@@ -1,14 +1,14 @@
 import React, { useContext } from 'react';
 import { Route, Routes, Navigate, useLocation } from 'react-router-dom';
-import Login from './components/Login';
+import Login from './Pages/Login';
 import Header from './static/Header';
-import Home from './components/Home';
-import Offers from './components/Offers';
-import Requests from './components/Requests';
-import CreateListing from './components/CreateListing';
+import Home from './Pages/Home';
+import Offers from './Pages/Listings/Offers';
+import Requests from './Pages/Listings/Requests';
+import CreateListing from './Pages/Listings/CreateListing';
 import { UserContext, UserProvider } from './utils/UserContext';
-import ListingDetail from "./components/ListingDetails";
-import UserPrivateProfile from "./components/UserPrivateProfile";
+import ListingDetail from "./Pages/Listings/ListingDetails";
+import UserPrivateProfile from "./Pages/Profile/UserPrivateProfile";
 
 // PrivateRoutes wrapper to protect multiple routes at once
 const PrivateRoutes = ({ children }) => {

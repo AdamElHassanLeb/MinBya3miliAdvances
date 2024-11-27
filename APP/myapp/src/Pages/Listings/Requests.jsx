@@ -1,4 +1,4 @@
-import ScrollableListings from "./ListingPage";
+import ScrollableListings from "../../components/Listings/ListingPage";
 import React from "react";
 
 const Requests = () => {

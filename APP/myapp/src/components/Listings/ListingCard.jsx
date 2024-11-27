@@ -2,8 +2,8 @@
 import React, {useEffect, useState} from 'react';
 import { Card, CardMedia, CardContent, Typography, Link } from '@mui/material';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import ImageService from "../services/ImageService";
-import placeholderImage from '../assets/placeholder.png';
+import ImageService from "../../services/ImageService";
+import placeholderImage from '../../assets/placeholder.png';
 
 
 const ListingCard = ({ listing }) => {

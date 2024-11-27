@@ -3,9 +3,9 @@ import { Box, Button, TextField, FormControl, InputLabel, Select, MenuItem, Typo
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import axios from 'axios';
-import {UserContext} from "../utils/UserContext";
-import ListingService from "../services/ListingService";
-import ImageService from "../services/ImageService";
+import {UserContext} from "../../utils/UserContext";
+import ListingService from "../../services/ListingService";
+import ImageService from "../../services/ImageService";
 import {useNavigate} from "react-router-dom";
 
 const CreateListing = () => {
@@ -32,25 +32,6 @@ const CreateListing = () => {
         setSelectedImages(Array.from(event.target.files));
     };
 
-    const handleImageUpload = async () => {
-        if (selectedImages.length > 0) {
-            const formData = new FormData();
-            selectedImages.forEach((file, index) => {
-                formData.append(`image${index + 1}`, file);
-            });
-
-            try {
-                const response = await axios.post('/your-upload-endpoint', formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                    },
-                });
-                console.log('Upload successful:', response.data);
-            } catch (error) {
-                console.error('Error uploading images:', error);
-            }
-        }
-    };
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
