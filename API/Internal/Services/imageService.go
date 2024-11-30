@@ -11,7 +11,7 @@ import (
 
 type Image struct {
 	ImageID       int    `json:"image_id"`
-	URL           string `json:"-"`
+	URL           string `json:"url"`
 	UserID        int    `json:"user_id"`
 	ListingID     int    `json:"listing_id,omitempty"` // Nullable
 	ShowOnProfile bool   `json:"show_on_profile"`

@@ -436,27 +436,7 @@ func (app *application) GetImagesByUserProfile(w http.ResponseWriter, r *http.Re
 		return
 	}
 
-	// Prepare the image data for response
-	var imagesBase64 []map[string]interface{}
-	for _, img := range images {
-		imagePath := imagesDIR + img.URL
-		base64Image, err := imageToBase64(imagePath)
-		if err != nil {
-			http.Error(w, fmt.Sprintf("Failed to convert image to base64: %v", err), http.StatusInternalServerError)
-			return
-		}
-
-		imagesBase64 = append(imagesBase64, map[string]interface{}{
-			"image_id":   img.ImageID,
-			"image_data": base64Image,
-		})
+	if err := json.NewEncoder(w).Encode(images); err != nil {
+		http.Error(w, "Failed to encode response", http.StatusInternalServerError)
 	}
-
-	// Return the images as a JSON response
-	w.Header().Set("Content-Type", "application/json")
-	if len(imagesBase64) == 0 {
-		http.Error(w, "No profile images found for this user", http.StatusNotFound)
-		return
-	}
-	w.Write([]byte(fmt.Sprintf(`{"images": %v}`, imagesBase64)))
 }
