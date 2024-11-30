@@ -1,19 +1,18 @@
 package main
 
 import (
-	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"github.com/AdamElHassanLeb/279MidtermAdamElHassan/API/Internal/Env"
 	"github.com/AdamElHassanLeb/279MidtermAdamElHassan/API/Internal/Utils"
 	"github.com/go-chi/chi/v5"
 	"github.com/google/uuid"
-	"io/ioutil"
 	"net/http"
 	"os"
 	"path/filepath"
 	"strconv"
 	"strings"
+	"time"
 )
 
 var imagesDIR string = Env.GetString("SRV_DIR", "") + "/ServerImages/"
@@ -269,24 +268,6 @@ func (app *application) UpdateImage(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Image updated successfully"))
 }
 
-// Utility function to convert image file to base64 string
-func imageToBase64(imagePath string) (string, error) {
-	imageFile, err := os.Open(imagePath)
-	if err != nil {
-		return "", fmt.Errorf("failed to open image file: %v", err)
-	}
-	defer imageFile.Close()
-
-	// Read the image file's content
-	imageBytes, err := ioutil.ReadAll(imageFile)
-	if err != nil {
-		return "", fmt.Errorf("failed to read image file: %v", err)
-	}
-
-	// Encode the image content to base64
-	return base64.StdEncoding.EncodeToString(imageBytes), nil
-}
-
 func (app *application) GetImageByID(w http.ResponseWriter, r *http.Request) {
 	// Extract image ID from the URL
 	imageIDStr := chi.URLParam(r, "image_id")
@@ -306,16 +287,71 @@ func (app *application) GetImageByID(w http.ResponseWriter, r *http.Request) {
 	// Get the image path
 	imagePath := imagesDIR + image.URL
 
-	// Convert image to base64
-	base64Image, err := imageToBase64(imagePath)
+	// Open the image file
+	file, err := os.Open(imagePath)
 	if err != nil {
-		http.Error(w, fmt.Sprintf("Failed to convert image to base64: %v", err), http.StatusInternalServerError)
+		http.Error(w, "Image not found", http.StatusNotFound)
+		return
+	}
+	defer file.Close()
+
+	// Detect the content type
+	buffer := make([]byte, 512)
+	if _, err := file.Read(buffer); err != nil {
+		http.Error(w, "Error reading image file", http.StatusInternalServerError)
+		return
+	}
+	contentType := http.DetectContentType(buffer)
+
+	// Set the Content-Type header
+	w.Header().Set("Content-Type", contentType)
+
+	// Reset the file pointer to the beginning of the file
+	if _, err := file.Seek(0, 0); err != nil {
+		http.Error(w, "Error resetting file pointer", http.StatusInternalServerError)
 		return
 	}
 
-	// Return the base64 image in the response
-	w.Header().Set("Content-Type", "application/json")
-	w.Write([]byte(fmt.Sprintf(`{"image_id": %d, "image_data": "%s"}`, imageID, base64Image)))
+	// Serve the image file
+	http.ServeContent(w, r, image.URL, time.Now(), file)
+
+}
+
+func (app *application) GetImageByUUID(w http.ResponseWriter, r *http.Request) {
+	// Extract image ID from the URL
+	imageIDStr := chi.URLParam(r, "image_id")
+
+	// Get the image path
+	imagePath := imagesDIR + imageIDStr
+
+	// Open the image file
+	file, err := os.Open(imagePath)
+	if err != nil {
+		http.Error(w, "Image not found", http.StatusNotFound)
+		return
+	}
+	defer file.Close()
+
+	// Detect the content type
+	buffer := make([]byte, 512)
+	if _, err := file.Read(buffer); err != nil {
+		http.Error(w, "Error reading image file", http.StatusInternalServerError)
+		return
+	}
+	contentType := http.DetectContentType(buffer)
+
+	// Set the Content-Type header
+	w.Header().Set("Content-Type", contentType)
+
+	// Reset the file pointer to the beginning of the file
+	if _, err := file.Seek(0, 0); err != nil {
+		http.Error(w, "Error resetting file pointer", http.StatusInternalServerError)
+		return
+	}
+
+	// Serve the image file
+	http.ServeContent(w, r, imagePath, time.Now(), file)
+
 }
 
 func (app *application) GetImagesByListingID(w http.ResponseWriter, r *http.Request) {
@@ -334,38 +370,8 @@ func (app *application) GetImagesByListingID(w http.ResponseWriter, r *http.Requ
 		return
 	}
 
-	// Prepare the image data for response
-	var imagesBase64 []map[string]interface{}
-	for _, img := range images {
-		imagePath := imagesDIR + img.URL
-		base64Image, err := imageToBase64(imagePath)
-		if err != nil {
-			http.Error(w, fmt.Sprintf("Failed to convert image to base64: %v", err), http.StatusInternalServerError)
-			return
-		}
-
-		imagesBase64 = append(imagesBase64, map[string]interface{}{
-			"image_id":   img.ImageID,
-			"image_data": base64Image,
-		})
-	}
-
-	// Return the images as a JSON response
-	w.Header().Set("Content-Type", "application/json")
-	if len(imagesBase64) == 0 {
-		// Return an empty array instead of an error
-		w.Write([]byte(`{"images": []}`))
-		return
-	}
-
-	// Use json.NewEncoder to properly serialize the response
-	response := map[string]interface{}{
-		"images": imagesBase64,
-	}
-	err = json.NewEncoder(w).Encode(response)
-	if err != nil {
-		http.Error(w, fmt.Sprintf("Error encoding JSON response: %v", err), http.StatusInternalServerError)
-		return
+	if err := json.NewEncoder(w).Encode(images); err != nil {
+		http.Error(w, "Failed to encode response", http.StatusInternalServerError)
 	}
 }
 
@@ -395,29 +401,9 @@ func (app *application) GetImagesByUserID(w http.ResponseWriter, r *http.Request
 		return
 	}
 
-	// Prepare the image data for response
-	var imagesBase64 []map[string]interface{}
-	for _, img := range images {
-		imagePath := imagesDIR + img.URL
-		base64Image, err := imageToBase64(imagePath)
-		if err != nil {
-			http.Error(w, fmt.Sprintf("Failed to convert image to base64: %v", err), http.StatusInternalServerError)
-			return
-		}
-
-		imagesBase64 = append(imagesBase64, map[string]interface{}{
-			"image_id":   img.ImageID,
-			"image_data": base64Image,
-		})
+	if err := json.NewEncoder(w).Encode(images); err != nil {
+		http.Error(w, "Failed to encode response", http.StatusInternalServerError)
 	}
-
-	// Return the images as a JSON response
-	w.Header().Set("Content-Type", "application/json")
-	if len(imagesBase64) == 0 {
-		http.Error(w, "No images found for this user", http.StatusNotFound)
-		return
-	}
-	w.Write([]byte(fmt.Sprintf(`{"images": %v}`, imagesBase64)))
 }
 
 func (app *application) GetImagesByUserProfile(w http.ResponseWriter, r *http.Request) {
