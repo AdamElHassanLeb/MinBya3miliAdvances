@@ -1,8 +1,10 @@
+CREATE DATABASE  IF NOT EXISTS `minbya3mili` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `minbya3mili`;
 -- MySQL dump 10.13  Distrib 8.0.36, for Linux (x86_64)
 --
 -- Host: localhost    Database: minbya3mili
 -- ------------------------------------------------------
--- Server version	8.0.39-0ubuntu0.24.04.2
+-- Server version	8.0.40-0ubuntu0.24.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -26,16 +28,14 @@ CREATE TABLE `images` (
   `image_id` int NOT NULL AUTO_INCREMENT,
   `url` varchar(255) NOT NULL,
   `user_id` int NOT NULL,
-  `listing_id` int DEFAULT NULL,
+  `listing_id` int NOT NULL DEFAULT '0',
   `show_on_profile` tinyint(1) DEFAULT '0',
   `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`image_id`),
   UNIQUE KEY `url_UNIQUE` (`url`),
-  KEY `user_id` (`user_id`),
-  KEY `listing_id` (`listing_id`),
-  CONSTRAINT `images_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
-  CONSTRAINT `images_ibfk_2` FOREIGN KEY (`listing_id`) REFERENCES `listings` (`listing_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `fk_images_1_idx` (`user_id`),
+  CONSTRAINT `fk_images_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +44,7 @@ CREATE TABLE `images` (
 
 LOCK TABLES `images` WRITE;
 /*!40000 ALTER TABLE `images` DISABLE KEYS */;
-INSERT INTO `images` VALUES (2,'2a5784e2-5070-4dce-8004-4503221f10c5.jpeg',1,1,1,'2024-11-12 01:25:48'),(3,'382b2f5b-f25b-4514-a85a-27b6cca40639.jpeg',1,2,1,'2024-11-12 02:06:07'),(4,'97fc408e-2920-4469-8fe8-e84f3ce1b50f.jpeg',1,1,1,'2024-11-12 02:06:26');
+INSERT INTO `images` VALUES (26,'a3746f6f-64f1-4305-8ea5-2435aa7577d0.png',6,0,1,'2024-11-12 19:09:16'),(27,'76abbd58-a766-44d8-a48a-c4021a6333e3.png',6,5,1,'2024-11-18 08:12:53'),(28,'d5412e25-36c4-4929-9a0a-c107d0740481.png',6,4,1,'2024-11-18 08:56:28'),(29,'0f51c2ab-78d8-4808-8019-e3af9372759c.png',6,11,1,'2024-11-18 20:23:33'),(30,'16e139d8-23f9-41a2-957b-f1ec96e299d3.png',6,11,1,'2024-11-18 20:23:33'),(31,'020132e3-2c1f-4f2a-919e-7f1c5c486cef.png',6,12,1,'2024-11-18 20:25:05'),(32,'55e94a5b-7bdb-41b6-9e94-b486a4f964ad.png',6,12,1,'2024-11-18 20:25:05'),(33,'33aeff0a-3603-4784-b253-36fa99d81d50.png',6,16,1,'2024-11-19 13:17:02'),(34,'62199bb5-6cc2-473c-9639-25dce5ea79b7.png',6,17,1,'2024-11-19 18:44:14'),(35,'3f428f54-096a-4b90-8b47-abe97a178ddc.png',6,17,1,'2024-11-19 18:44:14'),(36,'ed74fba2-6831-4f08-a29c-fe9c2274ad6f.png',6,18,1,'2024-11-19 19:32:55'),(37,'ee227802-6ea0-4e2f-955f-1f09f68fd537.png',6,18,1,'2024-11-19 19:32:55'),(38,'7ab08e08-3929-4e38-ae13-d7895bb4b4f0.png',6,4,1,'2024-11-30 16:53:16');
 /*!40000 ALTER TABLE `images` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -70,7 +70,7 @@ CREATE TABLE `listings` (
   SPATIAL KEY `location` (`location`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `listings_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -79,7 +79,7 @@ CREATE TABLE `listings` (
 
 LOCK TABLES `listings` WRITE;
 /*!40000 ALTER TABLE `listings` DISABLE KEYS */;
-INSERT INTO `listings` VALUES (1,'Offer',_binary '\0\0\0\0\0\0\0ªñ\ÒMb€R@^K\È=[D@',1,'Sample Listing Title','This is a sample description for the test listing.','2024-11-11 01:33:05',1,'Osh Region','Kyrgyzstan'),(2,'Request',_binary '\0\0\0\0\0\0\0ªñ\ÒMbÀR@^K\È=[D@',1,'Sample Listing Title','This is a sample description for the test listing.','2024-11-11 01:33:28',1,'Naryn Region','Kyrgyzstan');
+INSERT INTO `listings` VALUES (4,'Offer',_binary '\0\0\0\0\0\0\0öB\Û{RÀ¶ä „]D@',6,'Professional Lawn Mowing Service','Offering reliable lawn mowing services with 5 years of experience.','2024-11-18 05:13:39',1,'New York','United States'),(11,'Offer',_binary '\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',6,'2111','21111','2024-11-18 20:23:33',1,'',''),(12,'Request',_binary '\0\0\0\0\0\0\0ù?°\Éb.A@8ÿ+ \êA@',6,'ImageTest','222','2024-11-18 20:25:05',1,'','Cyprus'),(14,'Offer',_binary '\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',6,'ImageTest','222','2024-11-19 10:44:51',1,'',''),(15,'Offer',_binary '\0\0\0\0\0\0\0«\Ë)1ŸK@qZð¢¯A@',6,'ImageTest','2223','2024-11-19 10:45:00',1,'Ø¯Ù‡Ø³ØªØ§Ù† Ø¨ÛŒØ§Ø¨Ø§Ù†Ú©','Iran');
 /*!40000 ALTER TABLE `listings` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -138,11 +138,13 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `city` varchar(25) NOT NULL,
   `country` varchar(25) NOT NULL,
+  `profile_image` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_id_UNIQUE` (`user_id`),
   UNIQUE KEY `phone_number_UNIQUE` (`phone_number`),
-  SPATIAL KEY `location` (`location`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  SPATIAL KEY `location` (`location`),
+  KEY `profile_image_idx` (`profile_image`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -151,7 +153,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Doe','John','+123456789021','1990-01-15','Software Engineer',_binary '\0\0\0\0\0\0\0\Ð\ÕV\ì/\ãB@¡ø1æ®µF@','$2a$10$AMw4iQgt3NMRJ65lDPCoSeD4T8MuQf5rptlTDKeHs7X78QSs2SDfq','Krasnodar Krai','Russia');
+INSERT INTO `users` VALUES (2,'John','Doe','+1234567890','1990-05-15','Software Engineer',_binary '\0\0\0\0\0\0\0«\Ë)1ŸK@qZð¢¯A@','$2a$10$yk0iyuXu/BreqUpTtZI26OO0rsdepXXrW2xP.0xGpLug2y8KoXmFy','Ø¯Ù‡Ø³ØªØ§Ù† Ø¨ÛŒØ§Ø¨Ø§Ù†Ú©','Iran',16),(4,'John','Doe','1234567890','1990-05-15','Software Engineer',_binary '\0\0\0\0\0\0\0«\Ë)1ŸK@qZð¢¯A@','$2a$10$uajyaEVQArQHHdkXCeCuYO/6LjUMVc1p7R9NTx28v25exAGGAJLXy','Ø¯Ù‡Ø³ØªØ§Ù† Ø¨ÛŒØ§Ø¨Ø§Ù†Ú©','Iran',0),(6,'John','Doe','11234567890','1990-05-15','Software Engineer L1',_binary '\0\0\0\0\0\0\0¥\×\Ú\ëO.A@²ývž\êA@','$2a$10$5qGZEiE0nolEnb0/qQ1/deUN1bdolB6vMYtSdMDvpJbTi4TtfmZJ.','','Cyprus',26),(12,'Adam','Elhassan','03601360','2003-08-01','SWE',_binary '\0\0\0\0\0\0\0\0$\0Î§\êA@\á_MPf.A@','$2a$10$Y50XCNXr2Bp5Jz0Cf0l2fe9ZopxlNEBzQNYTdALubM4szFXTtOgwu','Nakhleh','Lebanon',0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -164,4 +166,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-12  4:42:34
+-- Dump completed on 2024-11-30 19:24:46
