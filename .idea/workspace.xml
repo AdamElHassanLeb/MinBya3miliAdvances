@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="86ed5ec0-1b64-4da5-913b-01262db22ba1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dump20241112 (1).sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/src/Pages/Listings/ListingDetails.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Listings/ListingDetails.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/src/components/Listings/ListingCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/components/Listings/ListingCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/src/services/ImageService.js" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/services/ImageService.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,26 +53,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
-    &quot;Go Build.go build github.com/AdamElHassanLeb/279MidtermAdamElHassan/API/cmd/api.executor&quot;: &quot;Run&quot;,
-    &quot;Go Build.go build github.com/AdamElHassanLeb/279MidtermAdamElHassan/APP/cmd/api.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/adam-elhassan/GolandProjects/279MidtermAdamElHassan&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;/home/adam-elhassan/GolandProjects/279MidtermAdamElHassan/main.go&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/adam-elhassan/.local/share/JetBrains/Toolbox/apps/goland/plugins/javascript-plugin/jsLanguageServicesImpl/external&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultGoTemplateProperty": "Go File",
+    "Go Build.go build github.com/AdamElHassanLeb/279MidtermAdamElHassan/API/cmd/api.executor": "Run",
+    "Go Build.go build github.com/AdamElHassanLeb/279MidtermAdamElHassan/APP/cmd/api.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "git-widget-placeholder": "main",
+    "go.import.settings.migrated": "true",
+    "last_opened_file_path": "/home/adam-elhassan/GolandProjects/279MidtermAdamElHassan/APP/myapp",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "/home/adam-elhassan/GolandProjects/279MidtermAdamElHassan/main.go",
+    "ts.external.directory.path": "/home/adam-elhassan/.local/share/JetBrains/Toolbox/apps/goland/plugins/javascript-plugin/jsLanguageServicesImpl/external"
   }
-}</component>
+}]]></component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -82,6 +84,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/APP/myapp" />
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">

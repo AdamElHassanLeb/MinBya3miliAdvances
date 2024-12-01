@@ -110,7 +110,7 @@ const ListingDetail = () => {
                         images.map((image, index) => (
                             <div key={index}>
                                 <img
-                                    src={`data:image/png;base64,${image.image_data}`}
+                                    src={`http://localhost:8080/api/v1/image/image/${images[index].url}`}
                                     alt={`Listing Image ${index + 1}`}
                                     style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
                                 />

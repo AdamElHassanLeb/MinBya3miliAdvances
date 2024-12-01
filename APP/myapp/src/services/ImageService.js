@@ -53,9 +53,10 @@ const getImagesByListingId = async (listingId) => {
     try {
         const response = await axiosInstance.get(`${URL}/listing/${listingId}`);
 
-        //console.log(response.data.images[0])
+        if(response && response.data)
+            return response.data
 
-        return response.data.images
+        return []
     } catch (error) {
         console.error("Error fetching images for listing:", error);
         return [];

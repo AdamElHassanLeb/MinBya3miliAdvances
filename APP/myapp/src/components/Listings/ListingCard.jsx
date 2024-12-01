@@ -14,7 +14,6 @@ const ListingCard = ({ listing }) => {
     useEffect(() => {
         const fetchImages = async () => {
             const imagesFromServer = await ImageService.getImagesByListingId(listing.listing_id)
-            //console.log(imagesFromServer[0].image_data)
             setImages(imagesFromServer)
         }
         fetchImages()
@@ -32,7 +31,7 @@ const ListingCard = ({ listing }) => {
             <CardMedia
                 component="img"
                 height="140"
-                image={images.length > 0 ? `data:image/png;base64,${images[0].image_data}` : placeholderImage}
+                image={images.length > 0 ? `http://localhost:8080/api/v1/image/image/${images[0].url}` : placeholderImage}
                 // Make sure base64 data is properly formatted
                 alt={listing.title}
                 sx={{ cursor: 'pointer' }}
