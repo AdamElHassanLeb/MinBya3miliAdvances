@@ -5,7 +5,18 @@ import ImageService from '../../services/ImageService'; // Service to fetch imag
 import UserService from '../../services/UserService';  // Import the new UserService
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Import carousel styles
-import { Box, Typography, Divider, Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
+import {
+    Box,
+    Typography,
+    Divider,
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    TextField,
+    Avatar
+} from '@mui/material';
 import { UserContext } from "../../utils/UserContext"; // Assuming you have a context for user data
 import placeholderImage from '../../assets/placeholder.png';
 
@@ -101,7 +112,7 @@ const ListingDetail = () => {
                 borderRadius: '10px',
                 boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
             }}
-        >
+            className="MUIBox">
 
             {/* Image Carousel */}
             <Box sx={{ width: '100%', marginBottom: '20px' }}>
@@ -177,7 +188,12 @@ const ListingDetail = () => {
             <Typography variant="h6" sx={{ fontWeight: 'bold', marginBottom: '10px' }}>
                 Seller Info:
             </Typography>
-            <Typography variant="body1">Name: {listingUser.first_name + ' ' + listingUser.last_name}</Typography>
+            <Avatar
+                src={`http://localhost:8080/api/v1/image/imageId/${listingUser.image_id}` || `../assets/default-avatar.png`}
+                alt="Profile Picture"
+                sx={{ width: 70, height: 70 }}
+            />
+                <Typography variant="body1">Name: {listingUser.first_name + ' ' + listingUser.last_name}</Typography>
             <Typography variant="body1">City: {listingUser.loc_details.city}</Typography>
             <Typography variant="body1">Country: {listingUser.loc_details.country}</Typography>
 

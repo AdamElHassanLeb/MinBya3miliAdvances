@@ -121,7 +121,7 @@ const UserProfile = () => {
                 boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
                 marginTop: '10vh'
             }}
-        >
+            className="MUIBox">
             {/* Profile Picture */}
             <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
                 <Avatar
@@ -129,12 +129,15 @@ const UserProfile = () => {
                     alt="Profile Picture"
                     sx={{ width: 150, height: 150 }}
                 />
+
+            </Box>
+            <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
                 <Button
                     variant="contained"
                     component="label"
-                    color="secondary"
+                    color="info"
                     fullWidth
-                    sx={{ width: 50, height: 50 }}
+                    sx={{ width: 145 , height: 20 }}
                 >
                     Select Image
                     <input

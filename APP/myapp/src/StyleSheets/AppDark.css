@@ -1,0 +1,110 @@
+/* Dark Mode Color Overrides */
+
+/* Base Styles */
+body {
+    background-color: #121212; /* Dark Background */
+    color: #FFFFFF; /* White text for general body */
+}
+
+/* AppBar */
+.MuiAppBar-root {
+    background-color: #1A1A1A; /* Dark Gray */
+}
+
+.MuiToolbar-root {
+    color: #FFFFFF; /* White Text */
+}
+
+.MuiAppBar-root .MuiButtonBase-root {
+    color: #FFFFFF; /* White Text */
+}
+
+/* Typography (Text Elements) */
+.MuiTypography-root {
+    color: #FFFFFF; /* White Text */
+}
+
+/* Links */
+a {
+    color: #BB86FC; /* Light Purple */
+}
+
+a:hover {
+    color: #3700B3; /* Darker Purple */
+}
+
+/* Buttons */
+.MuiButton-root {
+    background-color: #6200EE; /* Purple Button */
+    color: #FFFFFF; /* White Text */
+}
+
+.MuiButton-root:hover {
+    background-color: #3700B3; /* Dark Purple */
+}
+
+.MuiButton-outlined {
+    color: #BB86FC; /* Light Purple */
+    border: 1px solid #BB86FC;
+}
+
+.MuiButton-outlined:hover {
+    background-color: #3700B3; /* Darker Purple */
+    color: #FFFFFF; /* White Text */
+}
+
+/* Cards */
+.MuiCard-root {
+    background-color: #1F1F1F; /* Dark Background */
+}
+
+.MuiCard-header {
+    background-color: #3700B3; /* Dark Purple */
+    color: #FFFFFF; /* White Text */
+}
+
+/* Custom Classes */
+.text-accent {
+    color: #BB86FC; /* Light Purple */
+}
+
+.bg-light-blue {
+    background-color: #3700B3; /* Dark Purple Background */
+}
+
+.border-accent {
+    border-color: #BB86FC; /* Light Purple Border */
+}
+
+/* Horizontal Header */
+.horizontal-header {
+    background-color: #121212; /* Dark Background */
+    color: #FFFFFF; /* White Text */
+}
+
+.horizontal-header a {
+    color: #FFFFFF; /* White Text */
+}
+
+.horizontal-header a:hover {
+    color: #BB86FC; /* Light Purple on Hover */
+}
+
+/* Text Fields */
+.MuiInputBase-root {
+    color: #FFFFFF; /* White Text */
+}
+
+.MuiInputLabel-root {
+    color: #FFFFFF; /* White Label Text */
+}
+
+.MuiInputBase-root:focus {
+    border-color: #BB86FC; /* Light Purple */
+}
+
+/* Horizontal Header Links */
+.horizontal-header a {
+    color: #FFFFFF; /* White Text */
+}
+

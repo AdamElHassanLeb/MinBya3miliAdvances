@@ -1,0 +1,199 @@
+/* Base Styles (Light Mode by default) */
+body {
+  background-color: #F8F9FA; /* Light Grayish */
+  color: #004080; /* Dark Blue */
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.MuiTypography-root {
+  color: #004080; /* Dark Blue text */
+}
+
+#WhiteText{
+  color: #ffffff
+}
+
+/* AppBar */
+.MuiAppBar-root {
+  background-color: #004080; /* Dark Blue */
+}
+
+.MuiToolbar-root {
+  color: #FFFFFF; /* White */
+}
+
+.MuiAppBar-root .MuiButtonBase-root {
+  color: #FFFFFF; /* White */
+}
+
+/* Cards */
+.MuiCard-root {
+  border: 1px solid #D1D1D1; /* Gray */
+  background-color: #FFFFFF; /* White */
+}
+
+/* Custom Classes */
+.text-accent {
+  color: #00A2FF; /* Accent Blue */
+}
+
+.bg-light-blue {
+  background-color: #E5F0FF; /* Light Blue */
+}
+
+/* Horizontal Header */
+.horizontal-header {
+  width: 100%;
+  background-color: #1A1A1A; /* Dark Blue */
+  color: #FFFFFF; /* White */
+  display: flex;
+  justify-content: center; /* Center the items */
+  padding: 10px 0;
+}
+
+.horizontal-header nav ul {
+  list-style-type: none;
+  display: flex;
+  gap: 20px; /* Space between links */
+  margin: 0;
+  padding: 0;
+}
+
+.horizontal-header li {
+  display: inline; /* Make list items inline */
+}
+
+.horizontal-header a {
+  text-decoration: none;
+  color: #FFFFFF; /* White */
+  font-size: 18px;
+  padding: 5px 10px;
+}
+
+.horizontal-header a:hover {
+  color: #E5F0FF; /* Light Blue */
+}
+
+
+/* Dark Mode Color Overrides (when dark-mode class is added) */
+
+/* Base Styles */
+body.dark-mode {
+  background-color: #3f3f3f; /* Dark Background */
+  color: #FFFFFF; /* White text for general body */
+}
+
+body.dark-mode .MUIContainer-root {
+  background-color: #000000;
+}
+
+body.dark-mode .MUIBox {
+  background-color: #121212;
+  border-color: #000000;
+}
+
+body.dark-mode .MuiTypography-root {
+  color: #FFFFFF; /* White Text */
+}
+
+/* AppBar */
+body.dark-mode .MuiAppBar-root {
+  background-color: #1A1A1A; /* Dark Gray */
+}
+
+body.dark-mode .MuiToolbar-root {
+  color: #FFFFFF; /* White Text */
+}
+
+body.dark-mode .MuiAppBar-root .MuiButtonBase-root {
+  color: #FFFFFF; /* White Text */
+}
+
+/* Links */
+body.dark-mode a {
+  color: #BB86FC; /* Light Purple */
+}
+
+body.dark-mode a:hover {
+  color: #3700B3; /* Darker Purple */
+}
+
+/* Buttons */
+body.dark-mode .MuiButton-root {
+  background-color: #6200EE; /* Purple Button */
+  color: #FFFFFF; /* White Text */
+}
+
+body.dark-mode .HeaderButton{
+  background-color: #1A1A1A;
+  color: #FFFFFF; /* White Text */
+}
+
+body.dark-mode .MuiButton-root:hover {
+  background-color: #3700B3; /* Dark Purple */
+}
+
+body.dark-mode .HeaderButton:hover {
+  background-color: #3700B3; /* Dark Purple */
+  color: #FFFFFF; /* White Text */
+}
+
+body.dark-mode .MuiButton-outlined {
+  color: #BB86FC; /* Light Purple */
+  border: 1px solid #BB86FC;
+}
+
+body.dark-mode .MuiButton-outlined:hover {
+  background-color: #3700B3; /* Darker Purple */
+  color: #FFFFFF; /* White Text */
+}
+
+/* Cards */
+body.dark-mode .MuiCard-root {
+  background-color: #1F1F1F; /* Dark Background */
+}
+
+body.dark-mode .MuiCard-header {
+  background-color: #3700B3; /* Dark Purple */
+  color: #FFFFFF; /* White Text */
+}
+
+/* Custom Classes */
+body.dark-mode .text-accent {
+  color: #BB86FC; /* Light Purple */
+}
+
+body.dark-mode .bg-light-blue {
+  background-color: #3700B3; /* Dark Purple Background */
+}
+
+body.dark-mode .border-accent {
+  border-color: #BB86FC; /* Light Purple Border */
+}
+
+/* Horizontal Header */
+body.dark-mode .horizontal-header {
+  background-color: #121212; /* Dark Background */
+  color: #FFFFFF; /* White Text */
+}
+
+body.dark-mode .horizontal-header a {
+  color: #FFFFFF; /* White Text */
+}
+
+body.dark-mode .horizontal-header a:hover {
+  color: #BB86FC; /* Light Purple on Hover */
+}
+
+/* Text Fields */
+body.dark-mode .MuiInputBase-root {
+  color: #FFFFFF; /* White Text */
+}
+
+body.dark-mode .MuiInputLabel-root {
+  color: #FFFFFF; /* White Label Text */
+}
+
+body.dark-mode .MuiInputBase-root:focus {
+  border-color: #BB86FC; /* Light Purple */
+}

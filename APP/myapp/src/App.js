@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Route, Routes, Navigate, useLocation } from 'react-router-dom';
 import Login from './Pages/Login';
 import Header from './static/Header';
@@ -9,8 +9,10 @@ import CreateListing from './Pages/Listings/CreateListing';
 import { UserContext, UserProvider } from './utils/UserContext';
 import ListingDetail from "./Pages/Listings/ListingDetails";
 import UserPrivateProfile from "./Pages/Profile/UserPrivateProfile";
+ // Light Mode CSS
+// Dark Mode CSS (if needed for specific overrides)
+import './StyleSheets/App.css'
 
-// PrivateRoutes wrapper to protect multiple routes at once
 const PrivateRoutes = ({ children }) => {
     const { user } = useContext(UserContext);
 
@@ -19,13 +21,30 @@ const PrivateRoutes = ({ children }) => {
 };
 
 function App() {
+
     const location = useLocation();
+    const [isDarkMode, setIsDarkMode] = useState(false);
+
+    // Toggle between Dark and Light mode
+    const toggleTheme = () => {
+        setIsDarkMode(!isDarkMode);
+    };
+
+    // Set the theme class on the body element
+    useEffect(() => {
+        if (isDarkMode) {
+            document.body.classList.add('dark-mode');
+        } else {
+            document.body.classList.remove('dark-mode');
+
+        }
+    }, [isDarkMode]);
 
     return (
         <>
             <div className="App">
                 {/* Conditionally render the Header only if not on the /Login route */}
-                {location.pathname !== '/Login' && <Header />}
+                {location.pathname !== '/Login' && <Header toggleTheme={toggleTheme} />}
             </div>
             <Routes>
                 {/* Public route */}
@@ -41,8 +60,8 @@ function App() {
                                 <Route path="/Offers" element={<Offers />} />
                                 <Route path="/Requests" element={<Requests />} />
                                 <Route path="/CreateListing" element={<CreateListing />} />
-                                <Route path="/listing/:listingId" element={<ListingDetail/>} />
-                                <Route path="/UserPrvateProfile" element = {<UserPrivateProfile/>}/>
+                                <Route path="/listing/:listingId" element={<ListingDetail />} />
+                                <Route path="/UserPrvateProfile" element={<UserPrivateProfile />} />
                             </Routes>
                         </PrivateRoutes>
                     }

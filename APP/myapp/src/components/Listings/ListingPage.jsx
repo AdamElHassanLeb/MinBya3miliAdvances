@@ -110,7 +110,6 @@ const ScrollableListings = (listingType) => {
                     padding: 2,
                     width: '300px',
                     height: `100vh`,
-                    backgroundColor: 'white',
                     border: '2px solid #ccc',
                     borderRadius: '8px',
                     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
@@ -118,7 +117,7 @@ const ScrollableListings = (listingType) => {
                     top: '10px',
 
                 }}
-            >
+            className="MUIBox">
                 {/* Search Bar */}
                 <TextField
                     sx={{

@@ -143,9 +143,9 @@ const Login = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    backgroundColor: 'background.paper',
                     marginTop: 8,
                 }}
+                className="MUIContainer-root"
             >
                 <Typography variant="h4" gutterBottom>
                     Login
@@ -153,7 +153,7 @@ const Login = () => {
 
                 {/* Login Form */}
                 <TextField
-                    label="Phone Number"
+                    placeholder="Phone Number"
                     variant="outlined"
                     fullWidth
                     margin="normal"
@@ -162,7 +162,7 @@ const Login = () => {
                     onChange={handleChange}
                 />
                 <TextField
-                    label="Password"
+                    placeholder="Password"
                     type="password"
                     variant="outlined"
                     fullWidth
