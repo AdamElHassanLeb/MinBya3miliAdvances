@@ -8,6 +8,8 @@ import { UserContext } from '../../utils/UserContext';
 import ListingCard from '../../components/Listings/ListingCard'; // Assuming there's a ListingCard component
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import ImageService from "../../services/ImageService";
+import {useNavigate} from "react-router-dom";
 
 const UserProfile = () => {
     const { user } = useContext(UserContext);
@@ -17,6 +19,8 @@ const UserProfile = () => {
     const [editableData, setEditableData] = useState({});
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const [selectedLocation, setSelectedLocation] = useState([0, 0]); // Default coordinates
+    const [selectedImages, setSelectedImages] = useState([]);
+    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -25,6 +29,8 @@ const UserProfile = () => {
                 setUserData(userDetails);
                 setEditableData(userDetails);
                 setSelectedLocation(userDetails.location || [0, 0]); // Set initial map location
+
+                console.log(editableData)
 
                 // Fetch user listings
                 const userListings = await ListingService.getListingsByUserId(user.user_id);
@@ -37,6 +43,20 @@ const UserProfile = () => {
 
         fetchUserData();
     }, [user.user_id]);
+
+    const handleImageChange = async (event) => {
+        setSelectedImages(Array.from(event.target.files));
+        //console.log(Array.from(event.target.files))
+        try {
+            const res = await ImageService.uploadProfileImage(userData.user_id, Array.from(event.target.files))
+        }catch (error){
+
+        }
+       const user1 = await UserService.getUserById(userData.user_id)
+        setEditableData(user1)
+        setUserData(user1)
+        navigate('/UserPrvateProfile')
+    };
 
     const handleUpdateClick = () => {
         setIsEditing(true);
@@ -105,10 +125,24 @@ const UserProfile = () => {
             {/* Profile Picture */}
             <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
                 <Avatar
-                    src={`data:image/png;base64,${userData.profile_picture || '../assets/default-avatar.png'}`}
+                    src={`http://localhost:8080/api/v1/image/imageId/${userData.image_id}` || `../assets/default-avatar.png`}
                     alt="Profile Picture"
                     sx={{ width: 150, height: 150 }}
                 />
+                <Button
+                    variant="contained"
+                    component="label"
+                    color="secondary"
+                    fullWidth
+                    sx={{ width: 50, height: 50 }}
+                >
+                    Select Image
+                    <input
+                        type="file"
+                        hidden
+                        onChange={handleImageChange}
+                    />
+                </Button>
             </Box>
 
             {/* User Details */}

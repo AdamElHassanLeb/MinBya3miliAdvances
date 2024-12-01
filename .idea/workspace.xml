@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="86ed5ec0-1b64-4da5-913b-01262db22ba1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/Pages/Listings/ListingDetails.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Listings/ListingDetails.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/components/Listings/ListingCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/components/Listings/ListingCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/cmd/api/imageController.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/cmd/api/imageController.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/src/Pages/Profile/UserPrivateProfile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Profile/UserPrivateProfile.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/APP/myapp/src/services/ImageService.js" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/services/ImageService.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -88,11 +88,11 @@
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/APP/myapp/src/components/Listings" />
       <recent name="$PROJECT_DIR$/APP/myapp/src/Pages/Profile" />
       <recent name="$PROJECT_DIR$/APP/myapp/src/Pages" />
       <recent name="$PROJECT_DIR$/APP/myapp/src/Pages/Listings" />
-      <recent name="$PROJECT_DIR$/APP/myapp/src/components" />
     </key>
   </component>
   <component name="RunManager" selected="Go Build.go build github.com/AdamElHassanLeb/279MidtermAdamElHassan/API/cmd/api">

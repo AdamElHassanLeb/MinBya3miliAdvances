@@ -154,8 +154,6 @@ func (app *application) createProfileImage(w http.ResponseWriter, r *http.Reques
 
 			imageId, err := app.Service.Images.AddImage(r.Context(), newFileName, tokenUserId, 0)
 
-			fmt.Println(imageId)
-
 			if err != nil {
 				http.Error(w, "Failed to insert image record: "+err.Error(), http.StatusInternalServerError)
 				return
@@ -313,8 +311,7 @@ func (app *application) GetImageByID(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Serve the image file
-	http.ServeContent(w, r, image.URL, time.Now(), file)
-
+	http.ServeContent(w, r, imagePath, time.Now(), file)
 }
 
 func (app *application) GetImageByUUID(w http.ResponseWriter, r *http.Request) {

@@ -27,11 +27,14 @@ const uploadListingImage = async (listingId, imageFiles) => {
 const uploadProfileImage = async (userId, imageFile) => {
     try {
         const formData = new FormData();
-        formData.append("file", imageFile);
+        console.log(imageFile)
+        formData.append("file", imageFile[0]);
 
+        const token = Token.getTokenBearer()
         const response = await axiosInstance.post(`${URL}/uploadProfilePicture/${userId}`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
+                'Authorization': token,
             },
         });
         return response;
