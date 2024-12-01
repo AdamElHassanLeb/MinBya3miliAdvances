@@ -90,7 +90,9 @@ body.dark-mode {
 }
 
 body.dark-mode .MUIContainer-root {
-  background-color: #000000;
+  background-color: #212121;
+  color: #FFFFFF;
+
 }
 
 body.dark-mode .MUIBox {

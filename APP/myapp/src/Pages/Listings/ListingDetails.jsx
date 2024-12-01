@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import {Link, useNavigate, useParams} from 'react-router-dom';
 import ListingService from '../../services/ListingService'; // Service to fetch listing details
 import ImageService from '../../services/ImageService'; // Service to fetch images
 import UserService from '../../services/UserService';  // Import the new UserService
@@ -111,6 +111,7 @@ const ListingDetail = () => {
                 border: '1px solid #ccc',
                 borderRadius: '10px',
                 boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                marginTop: '10vh',
             }}
             className="MUIBox">
 
@@ -192,6 +193,7 @@ const ListingDetail = () => {
                 src={`http://localhost:8080/api/v1/image/imageId/${listingUser.image_id}` || `../assets/default-avatar.png`}
                 alt="Profile Picture"
                 sx={{ width: 70, height: 70 }}
+                component={Link} to={`/User/${listingUser.user_id}`}
             />
                 <Typography variant="body1">Name: {listingUser.first_name + ' ' + listingUser.last_name}</Typography>
             <Typography variant="body1">City: {listingUser.loc_details.city}</Typography>

@@ -195,8 +195,10 @@ const Login = () => {
 
             {/* Sign Up Modal */}
             <Dialog open={openModal} onClose={handleModalClose}>
-                <DialogTitle>Sign Up</DialogTitle>
-                <DialogContent>
+                <DialogTitle
+                    className="MUIContainer-root">Sign Up</DialogTitle>
+                <DialogContent
+                    className="MUIContainer-root">
                     <Grid container spacing={2}>
                         {/* First Name Input */}
                         <Grid item xs={6}>
@@ -283,6 +285,7 @@ const Login = () => {
                                 <MapEvents />
                             </MapContainer>
                             <TextField
+                                sx = {{color : "#ffffff"}}
                                 label="Location (Latitude, Longitude)"
                                 variant="outlined"
                                 fullWidth
@@ -310,7 +313,8 @@ const Login = () => {
                         </Grid>
                     </Grid>
                 </DialogContent>
-                <DialogActions>
+                <DialogActions
+                    className="MUIContainer-root">
                     <Button onClick={handleModalClose} color="primary">
                         Cancel
                     </Button>

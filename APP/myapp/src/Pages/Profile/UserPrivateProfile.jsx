@@ -131,22 +131,6 @@ const UserProfile = () => {
                 />
 
             </Box>
-            <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
-                <Button
-                    variant="contained"
-                    component="label"
-                    color="info"
-                    fullWidth
-                    sx={{ width: 145 , height: 20 }}
-                >
-                    Select Image
-                    <input
-                        type="file"
-                        hidden
-                        onChange={handleImageChange}
-                    />
-                </Button>
-            </Box>
 
             {/* User Details */}
             <Grid container spacing={2}>
@@ -179,6 +163,7 @@ const UserProfile = () => {
                                 fullWidth
                             />
                         </Grid>
+
                         <Grid item xs={6}>
                             <TextField
                                 label="Profession"
@@ -228,37 +213,40 @@ const UserProfile = () => {
                     </>
                 ) : (
                     <>
-                        <Grid item xs={6}>
+                        <Grid item xs={4}>
                             <Typography variant="body2">
                                 <strong>First Name:</strong> {userData.first_name || 'N/A'}
                             </Typography>
                         </Grid>
-                        <Grid item xs={6}>
+
+                        <Grid item xs={4}>
                             <Typography variant="body2">
                                 <strong>Last Name:</strong> {userData.last_name || 'N/A'}
                             </Typography>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={4}>
                             <Typography variant="body2">
                                 <strong>Phone:</strong> {userData.phone_number || 'N/A'}
                             </Typography>
                         </Grid>
-                        <Grid item xs={6}>
+
+                        <Grid item xs={4}>
                             <Typography variant="body2">
                                 <strong>Profession:</strong> {userData.profession || 'N/A'}
                             </Typography>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={4}>
                             <Typography variant="body2">
                                 <strong>Date of Birth:</strong> {userData.date_of_birth || 'N/A'}
                             </Typography>
                         </Grid>
-                        <Grid item xs={6}>
+
+                        <Grid item xs={4}>
                             <Typography variant="body2">
                                 <strong>City:</strong> {userData.loc_details.country || 'N/A'}
                             </Typography>
 
-                        <Grid item xs={6}>
+                        <Grid item xs={4}>
                             <Typography variant="body2">
                                 <strong>Country:</strong> {userData.loc_details.country || 'N/A'}
                             </Typography>
@@ -273,6 +261,21 @@ const UserProfile = () => {
                 <Button variant="contained" color="error" onClick={handleDeleteClick}>
                     Delete
                 </Button>
+                <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
+                    <Button
+                        variant="contained"
+                        component="label"
+                        color="info"
+                        fullWidth
+                    >
+                        Select Image
+                        <input
+                            type="file"
+                            hidden
+                            onChange={handleImageChange}
+                        />
+                    </Button>
+                </Box>
                 {isEditing ? (
                     <Button variant="contained" color="primary" onClick={handleSubmit}>
                         Save

@@ -1,18 +1,28 @@
-import React from 'react';
-import { AppBar, Toolbar, Typography, Button, IconButton, Box, Container } from '@mui/material';
+import React, {useContext} from 'react';
+import {AppBar, Toolbar, Typography, Button, IconButton, Box, Container, Avatar} from '@mui/material';
 import { Link } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import LogoutIcon from '@mui/icons-material/Logout';
 import LightModeIcon from '@mui/icons-material/LightMode'; // Light mode icon
-import DarkModeIcon from '@mui/icons-material/DarkMode'; // Dark mode icon
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import {UserContext} from "../utils/UserContext"; // Dark mode icon
+
 
 const Header = ({ toggleTheme }) => {
+    const { user } = useContext(UserContext);
     return (
         <AppBar position="fixed" color="primary">
             <Container maxWidth="lg">
                 <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                    {/*<Box>
+                    {user?
+                    <Typography variant="h6" component={Link} to="/UserPrvateProfile" color="white" sx={{ textDecoration: 'none' }}>
+                        {user.first_name + " " + user.last_name}
+                    </Typography>
+                     : ""}
+                    </Box>*/}
                     {/* "Min Bya3mili" text as a link to home */}
                     <Typography variant="h6" component={Link} to="/Home" color="white" sx={{ textDecoration: 'none' }}>
                         Min Bya3mili
@@ -43,7 +53,10 @@ const Header = ({ toggleTheme }) => {
                             {true ? <LightModeIcon /> : <DarkModeIcon />} {/* Change based on current theme */}
                         </IconButton>
                         <IconButton color="inherit" component={Link} to="/UserPrvateProfile">
-                            <AccountCircleIcon />
+                            {user?  <Avatar
+                                src={`http://localhost:8080/api/v1/image/imageId/${user.image_id}` || `../assets/default-avatar.png`}
+                                alt="Profile Picture"
+                            />: <AccountCircleIcon />}
                         </IconButton>
                         <IconButton color="inherit" component={Link} to="/Login">
                             <LogoutIcon />

@@ -109,12 +109,13 @@ const ScrollableListings = (listingType) => {
                     gap: 2,
                     padding: 2,
                     width: '300px',
-                    height: `100vh`,
+                    height: `90vh`,
                     border: '2px solid #ccc',
                     borderRadius: '8px',
                     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
                     position: 'sticky',
                     top: '10px',
+                    marginTop: '1vh',
 
                 }}
             className="MUIBox">
