@@ -26,7 +26,7 @@ const ListingCard = ({ listing }) => {
     };
 
     return (
-        <Card sx={{ minWidth: 300, maxWidth: 300, flexShrink: 0, backgroundColor : '#FEFEFE'}}>
+        <Card sx={{ minWidth: 300, maxWidth: 300, flexShrink: 0, backgroundColor : '#FEFEFE'}} onClick={handleCardClick} sx={{ cursor: 'pointer' }} className="zoom">
             {/* Display the image with a placeholder for click-to-open modal */}
             <CardMedia
                 component="img"
@@ -34,8 +34,7 @@ const ListingCard = ({ listing }) => {
                 image={images.length > 0 ? `http://localhost:8080/api/v1/image/image/${images[0].url}` : placeholderImage}
                 // Make sure base64 data is properly formatted
                 alt={listing.title}
-                sx={{ cursor: 'pointer' }}
-                onClick={handleCardClick}
+
             />
             <CardContent>
                 <Typography variant="h6">{listing.title}</Typography>

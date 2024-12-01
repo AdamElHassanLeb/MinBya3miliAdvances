@@ -74,6 +74,12 @@ body {
   color: #E5F0FF; /* Light Blue */
 }
 
+.zoom {
+  transition: all 1s ease-in-out;
+}
+.zoom:hover {
+  transform: scale(1.1);
+}
 
 /* Dark Mode Color Overrides (when dark-mode class is added) */
 

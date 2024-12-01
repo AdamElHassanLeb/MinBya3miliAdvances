@@ -121,7 +121,7 @@ const ScrollableListings = (listingType) => {
                 {/* Search Bar */}
                 <TextField
                     sx={{
-                        marginTop: '7vh',
+                        marginTop: '10vh',
                     }}
                     label="Search"
                     variant="outlined"
@@ -209,9 +209,9 @@ const ScrollableListings = (listingType) => {
             {/* Right Panel with Listings */}
             <Grid
                 container
-                spacing={2}
+                spacing={2.5}
                 sx={{
-                    padding: 2,
+                    padding: 3,
                     overflowY: 'auto',
                     maxHeight: '80vh',
                     margin: '0 auto',
