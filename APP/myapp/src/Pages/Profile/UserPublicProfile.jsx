@@ -1,24 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { Box, Typography, Avatar, Grid } from '@mui/material';
-import { useParams } from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import UserService from '../../services/UserService';
 import ListingService from '../../services/ListingService';
 import ListingCard from '../../components/Listings/ListingCard'; // Assuming there's a ListingCard component
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import {UserContext} from "../../utils/UserContext";
 
 const UserPublicProfile = () => {
     const { userId } = useParams(); // Get userId from URL
     const [userData, setUserData] = useState(null);
     const [listings, setListings] = useState([]);
     const [selectedLocation, setSelectedLocation] = useState([0, 0]); // Default coordinates
-
+    const navigate = useNavigate()
+    const { user } = useContext(UserContext);
     useEffect(() => {
         const fetchUserData = async () => {
             try {
+                if(user && user.user_id == userId) {
+                    navigate("/UserPrvateProfile")
+                }
+
                 const userDetails = await UserService.getUserById(userId);
                 setUserData(userDetails);
-                console.log(userDetails)
                 setSelectedLocation(userDetails.location ? [userDetails.location.latitude, userDetails.location.longitude] : [0, 0]);
 
                 // Fetch user listings
