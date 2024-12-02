@@ -9,7 +9,7 @@ import {
     MenuItem,
     Typography,
     Slider,
-    Grid
+    Grid, IconButton
 } from '@mui/material';
 import { UserContext } from '../../utils/UserContext';
 import ListingCard from './ListingCard';
@@ -19,6 +19,7 @@ import 'leaflet/dist/leaflet.css';
 import UserService from "../../services/UserService";
 import ImageService from "../../services/ImageService";
 import {Link} from "react-router-dom";
+import {ArrowBack, ArrowForward} from "@mui/icons-material";
 
 const ScrollableListings = (listingType) => {
     const { user } = useContext(UserContext); // Access user data from context
@@ -28,6 +29,20 @@ const ScrollableListings = (listingType) => {
     const [filterType, setFilterType] = useState(''); // For dropdown filter type (distance or date)
     const [selectedLocation, setSelectedLocation] = useState([0, 0]); // For map's selected location (longitude, latitude)
     const [maxDistance, setMaxDistance] = useState(60);
+    const [zoomLevel, setZoomLevel] = useState(1); // Default zoom level
+    const [leftPanelVisible, setLeftPanelVisible] = useState(true);
+
+    //Zoom
+    const handleZoom = () => {
+        const zoom = window.devicePixelRatio;
+        setZoomLevel(zoom);
+        if(zoom < 2) {
+            setLeftPanelVisible(true);
+            return
+        }
+        setLeftPanelVisible(false);
+    };
+
 
     // Function to handle location click on the map
     const MapEvents = () => {
@@ -66,6 +81,12 @@ const ScrollableListings = (listingType) => {
         }
     }, []);
 
+    useEffect(() => {
+        window.addEventListener('resize', handleZoom);
+        handleZoom(); // Check zoom on initial load
+        return () => window.removeEventListener('resize', handleZoom);
+    }, []);
+
     // Function for handling search button click
     const handleSearch = async () => {
         //console.log('Search button clicked');
@@ -99,16 +120,17 @@ const ScrollableListings = (listingType) => {
         setListings(currListings.data)
     };
 
-    return (
-        <Box sx={{ display: 'flex', gap: 2 }}>
+    return (<>
+
+        <Box sx={{ display: 'flex', gap: 2, overflow : 'hidden' }}>
             {/* Left Panel with Search Bar, Button, and Filter Dropdown */}
             <Box
                 sx={{
-                    display: 'flex',
+                    display: !leftPanelVisible ? 'none' : 'flex',
                     flexDirection: 'column',
                     gap: 2,
                     padding: 2,
-                    width: '300px',
+                    width: '15vw',
                     height: `90vh`,
                     border: '2px solid #ccc',
                     borderRadius: '8px',
@@ -116,6 +138,7 @@ const ScrollableListings = (listingType) => {
                     position: 'sticky',
                     top: '10px',
                     marginTop: '1vh',
+                    overflow: 'auto',
 
                 }}
             className="MUIBox">
@@ -164,11 +187,18 @@ const ScrollableListings = (listingType) => {
 
                 {/* Show Map for Distance Option */}
                 {filterType === 'distance' && (
-                    <Box sx={{ width: '100%', height: '300px' }}>
+                    <Box sx={{  width: '100%',
+                        minHeight: '300px',
+                        minWidth: '200px',
+                        marginTop: '1vh',
+                        marginBottom: '2vh',
+                        overflow: 'hidden',}}>
                         <MapContainer
                             center={selectedLocation}
                             zoom={13}
-                            style={{ width: '100%', height: '100%' }}
+                            style={{ width: '100%',
+                                height: '100%',
+                                position: 'relative',}}
                         >
                             <TileLayer
                                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -194,7 +224,7 @@ const ScrollableListings = (listingType) => {
                     sx={{
                         padding: 2,
                         position: 'sticky',
-                        marginTop : '10vh'
+                        marginTop : '2vh'
                     }}
                     component={Link}
                     variant="contained"
@@ -206,6 +236,23 @@ const ScrollableListings = (listingType) => {
                 </Button>
 
             </Box>
+            {/* Toggle Button with Arrows */}
+            <IconButton
+                sx={{
+                    display: zoomLevel < 2 ? '' : 'none',
+                    position: 'absolute',
+                    left: leftPanelVisible ? '15vw' : '0px', // Dynamically position button
+                    top: '45vh',
+                    zIndex: 10,
+                    transform: 'translateY(-50%)',
+                    backgroundColor: '',
+                    borderRadius: '50%',
+                }}
+                className={"LeftTabOpenClose"}
+                onClick={() => setLeftPanelVisible(!leftPanelVisible)} // Toggle visibility
+            >
+                {leftPanelVisible ? <ArrowBack /> : <ArrowForward />} {/* Toggle arrows */}
+            </IconButton>
 
             {/* Right Panel with Listings */}
             <Grid
@@ -238,6 +285,7 @@ const ScrollableListings = (listingType) => {
                 )}
             </Grid>
         </Box>
+        </>
     );
 };
 

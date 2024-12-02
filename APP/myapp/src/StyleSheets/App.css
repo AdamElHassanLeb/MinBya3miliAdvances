@@ -1,3 +1,25 @@
+/* Hide Scrollbars for Webkit Browsers (Chrome, Safari, etc.) */
+::-webkit-scrollbar {
+  width: 0px; /* Removes horizontal scrollbar */
+  height: 0px; /* Removes vertical scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+  background: transparent; /* Make the scrollbar thumb invisible */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* Make the track invisible */
+}
+
+/* For Firefox */
+body {
+  scrollbar-width: thin; /* Makes scrollbar thinner */
+  scrollbar-color: transparent transparent; /* Makes scrollbar thumb and track invisible */
+}
+
+
+
 /* Base Styles (Light Mode by default) */
 body {
   background-color: #F8F9FA; /* Light Grayish */
@@ -79,6 +101,23 @@ body {
 }
 .zoom:hover {
   transform: scale(1.1);
+}
+
+
+/* Button Styles (Light Mode) */
+.LeftTabOpenClose {
+  background-color: #00A2FF; /* Light Blue */
+  border: 1px solid #004080; /* Dark Purple */
+  color: #004080; /* White Text */
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.3s ease-in-out;
+}
+
+.LeftTabOpenClose:hover {
+  background-color: #004080; /* Dark Purple on Hover */
+  border-color: #003366; /* Darker Purple Border */
+  color: #004080; /* White Text */
 }
 
 /* Dark Mode Color Overrides (when dark-mode class is added) */
@@ -204,4 +243,14 @@ body.dark-mode .MuiInputLabel-root {
 
 body.dark-mode .MuiInputBase-root:focus {
   border-color: #BB86FC; /* Light Purple */
+}
+/* Dark Mode Button Styles */
+body.dark-mode .LeftTabOpenClose {
+  color: #BB86FC; /* White Text */
+}
+
+body.dark-mode .LeftTabOpenClose:hover {
+  background-color: #3700B3; /* Darker Purple on Hover */
+  border-color: #BB86FC; /* Light Purple Border */
+  color: #FFFFFF; /* White Text */
 }
