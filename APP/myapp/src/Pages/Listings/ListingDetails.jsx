@@ -19,6 +19,7 @@ import {
 } from '@mui/material';
 import { UserContext } from "../../utils/UserContext"; // Assuming you have a context for user data
 import placeholderImage from '../../assets/placeholder.png';
+import serverAddress from "../../utils/ServerAddress";
 
 const ListingDetail = () => {
     const { listingId } = useParams(); // Get the listingId from URL params
@@ -122,7 +123,7 @@ const ListingDetail = () => {
                         images.map((image, index) => (
                             <div key={index}>
                                 <img
-                                    src={`http://localhost:8080/api/v1/image/image/${images[index].url}`}
+                                    src={serverAddress() + `/api/v1/image/image/${images[index].url}`}
                                     alt={`Listing Image ${index + 1}`}
                                     style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
                                 />
@@ -190,7 +191,7 @@ const ListingDetail = () => {
                 Seller Info:
             </Typography>
             <Avatar
-                src={`http://localhost:8080/api/v1/image/imageId/${listingUser.image_id}` || `../assets/default-avatar.png`}
+                src={serverAddress() + `/api/v1/image/imageId/${listingUser.image_id}` || `../assets/default-avatar.png`}
                 alt="Profile Picture"
                 sx={{ width: 70, height: 70 }}
                 component={Link} to={`/User/${listingUser.user_id}`}

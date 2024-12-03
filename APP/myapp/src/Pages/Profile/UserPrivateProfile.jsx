@@ -10,6 +10,7 @@ import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import ImageService from "../../services/ImageService";
 import {useNavigate} from "react-router-dom";
+import serverAddress from "../../utils/ServerAddress";
 
 const UserProfile = () => {
     const { user } = useContext(UserContext);
@@ -125,7 +126,7 @@ const UserProfile = () => {
             {/* Profile Picture */}
             <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
                 <Avatar
-                    src={`http://localhost:8080/api/v1/image/imageId/${userData.image_id}` || `../assets/default-avatar.png`}
+                    src={serverAddress() + `/api/v1/image/imageId/${userData.image_id}` || `../assets/default-avatar.png`}
                     alt="Profile Picture"
                     sx={{ width: 150, height: 150 }}
                 />

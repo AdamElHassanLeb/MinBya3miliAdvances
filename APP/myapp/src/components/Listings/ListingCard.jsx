@@ -4,6 +4,7 @@ import { Card, CardMedia, CardContent, Typography, Link } from '@mui/material';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import ImageService from "../../services/ImageService";
 import placeholderImage from '../../assets/placeholder.png';
+import serverAddress from "../../utils/ServerAddress";
 
 
 const ListingCard = ({ listing }) => {
@@ -31,7 +32,7 @@ const ListingCard = ({ listing }) => {
             <CardMedia
                 component="img"
                 height="140"
-                image={images.length > 0 ? `http://localhost:8080/api/v1/image/image/${images[0].url}` : placeholderImage}
+                image={images.length > 0 ? serverAddress() + `/api/v1/image/image/${images[0].url}` : placeholderImage}
                 // Make sure base64 data is properly formatted
                 alt={listing.title}
 

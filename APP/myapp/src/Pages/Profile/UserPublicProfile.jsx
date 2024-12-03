@@ -7,6 +7,7 @@ import ListingCard from '../../components/Listings/ListingCard'; // Assuming the
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import {UserContext} from "../../utils/UserContext";
+import serverAddress from "../../utils/ServerAddress";
 
 const UserPublicProfile = () => {
     const { userId } = useParams(); // Get userId from URL
@@ -55,7 +56,7 @@ const UserPublicProfile = () => {
             {/* Profile Picture */}
             <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
                 <Avatar
-                    src={`http://localhost:8080/api/v1/image/imageId/${userData.image_id}` || `../assets/default-avatar.png`}
+                    src={serverAddress() + `/api/v1/image/imageId/${userData.image_id}` || `../assets/default-avatar.png`}
                     alt="Profile Picture"
                     sx={{ width: 150, height: 150 }}
                 />

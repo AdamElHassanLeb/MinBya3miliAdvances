@@ -7,7 +7,8 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import LogoutIcon from '@mui/icons-material/Logout';
 import LightModeIcon from '@mui/icons-material/LightMode'; // Light mode icon
 import DarkModeIcon from '@mui/icons-material/DarkMode';
-import {UserContext} from "../utils/UserContext"; // Dark mode icon
+import {UserContext} from "../utils/UserContext";
+import serverAddress from "../utils/ServerAddress"; // Dark mode icon
 
 
 const Header = ({ toggleTheme }) => {
@@ -54,7 +55,7 @@ const Header = ({ toggleTheme }) => {
                         </IconButton>
                         <IconButton color="inherit" component={Link} to="/UserPrvateProfile">
                             {user?  <Avatar
-                                src={`http://localhost:8080/api/v1/image/imageId/${user.image_id}` || `../assets/default-avatar.png`}
+                                src={serverAddress() + `/api/v1/image/imageId/${user.image_id}` || `../assets/default-avatar.png`}
                                 alt="Profile Picture"
                             />: <AccountCircleIcon />}
                         </IconButton>
