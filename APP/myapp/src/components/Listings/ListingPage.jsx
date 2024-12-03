@@ -266,6 +266,7 @@ const ScrollableListings = (listingType) => {
                     width: '100%',
                     maxWidth: '1200px',
                     paddingTop: '100px',
+                    alignContent: 'flex-start',
                 }}
             >
                 {loading ? (

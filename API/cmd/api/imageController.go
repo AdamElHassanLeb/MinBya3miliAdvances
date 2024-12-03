@@ -32,6 +32,12 @@ func (app *application) createListingImage(w http.ResponseWriter, r *http.Reques
 	basePath := Env.GetString("SRV_DIR", "/home/adam-elhassan/Desktop/ServerFiles")
 	serverImagesDir := filepath.Join(basePath, "ServerImages")
 
+	// Ensure the directory exists
+	if err := os.MkdirAll(serverImagesDir, os.ModePerm); err != nil {
+		http.Error(w, "Failed to create directory: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+
 	allowedExtensions := map[string]bool{
 		".jpg":  true,
 		".jpeg": true,
@@ -110,6 +116,12 @@ func (app *application) createProfileImage(w http.ResponseWriter, r *http.Reques
 
 	basePath := Env.GetString("SRV_DIR", "/home/adam-elhassan/Desktop/ServerFiles")
 	serverImagesDir := filepath.Join(basePath, "ServerImages")
+
+	// Ensure the directory exists
+	if err := os.MkdirAll(serverImagesDir, os.ModePerm); err != nil {
+		http.Error(w, "Failed to create directory: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
 
 	allowedExtensions := map[string]bool{
 		".jpg":  true,
