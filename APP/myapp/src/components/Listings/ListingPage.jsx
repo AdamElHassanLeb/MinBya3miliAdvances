@@ -241,7 +241,7 @@ const ScrollableListings = (listingType) => {
                 sx={{
                     display: zoomLevel < 2 ? '' : 'none',
                     position: 'absolute',
-                    left: leftPanelVisible ? '15vw' : '0px', // Dynamically position button
+                    left: leftPanelVisible ? '15.3vw' : '0px', // Dynamically position button
                     top: '45vh',
                     zIndex: 10,
                     transform: 'translateY(-50%)',
@@ -261,7 +261,7 @@ const ScrollableListings = (listingType) => {
                 sx={{
                     padding: 3,
                     overflowY: 'auto',
-                    maxHeight: '80vh',
+                    maxHeight: '100vh',
                     margin: '0 auto',
                     width: '100%',
                     maxWidth: '1200px',

@@ -135,7 +135,7 @@ body.dark-mode .MUIContainer-root {
 }
 
 body.dark-mode .MUIBox {
-  background-color: #121212;
+  background-color: #1e1e1e;
   border-color: #000000;
 }
 
@@ -195,10 +195,13 @@ body.dark-mode .MuiButton-outlined:hover {
   color: #FFFFFF; /* White Text */
 }
 
+
 /* Cards */
 body.dark-mode .MuiCard-root {
-  background-color: #1F1F1F; /* Dark Background */
+  background-color: #1F1F1F;/* Dark Background */
+  border: 1px solid #464646; /* Gray */
 }
+
 
 body.dark-mode .MuiCard-header {
   background-color: #3700B3; /* Dark Purple */
