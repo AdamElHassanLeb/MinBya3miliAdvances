@@ -1,14 +1,14 @@
 // src/components/Login.js
 import React, {useState, useEffect, useContext} from 'react';
 import { TextField, Button, Typography, Container, Box, Dialog, DialogActions, DialogContent, DialogTitle, Grid } from '@mui/material';
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents} from 'react-leaflet';
 import L from 'leaflet';
 import UserService from '../services/UserService';
 import 'leaflet/dist/leaflet.css';
 import { toast } from 'react-toastify';
 import {UserContext} from "../utils/UserContext";
 import {useNavigate} from "react-router-dom";
-
+import MapIcon from "../utils/Icons"
 
 const Login = () => {
     const [openModal, setOpenModal] = useState(false);
@@ -128,6 +128,7 @@ const Login = () => {
                     ...prevData,
                     location: [lng, lat],
                 }));
+                setUserLocation([lat, lng]);
             },
         });
         return null;
@@ -277,9 +278,10 @@ const Login = () => {
                                 style={{ width: '100%', height: '300px', marginBottom: '16px' }}
                             >
                                 <TileLayer
+                                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                                 />
-                                <Marker position={userLocation}>
+                                <Marker position={userLocation} icon={MapIcon}>
                                     <Popup>Your current location</Popup>
                                 </Marker>
                                 <MapEvents />

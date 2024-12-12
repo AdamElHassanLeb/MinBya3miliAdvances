@@ -189,6 +189,12 @@ func (s *UserService) Create(ctx context.Context, user *User) error {
 	// Convert the location to WKT format
 	locationWKT := user.Location.ToWKT()
 
+	userPn, err := s.GetByPhoneNumber(ctx, user.PhoneNumber)
+
+	if userPn.UserID != 0 {
+		return errors.New("Phone number already exists")
+	}
+
 	// Execute the query
 	_, err = s.db.ExecContext(ctx, query, dbUser.FirstName, dbUser.LastName, dbUser.PhoneNumber, dbUser.DateOfBirth, dbUser.Profession, locationWKT, user.LocDetails.City, user.LocDetails.Country, user.Password)
 	if err != nil {

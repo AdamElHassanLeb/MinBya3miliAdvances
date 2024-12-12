@@ -20,6 +20,7 @@ import UserService from "../../services/UserService";
 import ImageService from "../../services/ImageService";
 import {Link} from "react-router-dom";
 import {ArrowBack, ArrowForward} from "@mui/icons-material";
+import MapIcon from "../../utils/Icons";
 
 const ScrollableListings = (listingType) => {
     const { user } = useContext(UserContext); // Access user data from context
@@ -203,7 +204,7 @@ const ScrollableListings = (listingType) => {
                             <TileLayer
                                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                             />
-                            <Marker position={selectedLocation}>
+                            <Marker position={selectedLocation} icon={MapIcon}>
                                 <Popup>Your selected location</Popup>
                             </Marker>
                             <MapEvents />

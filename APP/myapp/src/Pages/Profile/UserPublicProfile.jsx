@@ -1,5 +1,14 @@
 import React, {useState, useEffect, useContext} from 'react';
-import { Box, Typography, Avatar, Grid } from '@mui/material';
+import {
+    Box,
+    Typography,
+    Avatar,
+    Grid,
+    FormControl,
+    InputLabel,
+    Select,
+    MenuItem,
+} from '@mui/material';
 import {useNavigate, useParams} from 'react-router-dom';
 import UserService from '../../services/UserService';
 import ListingService from '../../services/ListingService';
@@ -14,6 +23,7 @@ const UserPublicProfile = () => {
     const [userData, setUserData] = useState(null);
     const [listings, setListings] = useState([]);
     const [selectedLocation, setSelectedLocation] = useState([0, 0]); // Default coordinates
+    const [listingType, setListingType] = useState("Any");
     const navigate = useNavigate()
     const { user } = useContext(UserContext);
     useEffect(() => {
@@ -28,7 +38,7 @@ const UserPublicProfile = () => {
                 setSelectedLocation(userDetails.location ? [userDetails.location.latitude, userDetails.location.longitude] : [0, 0]);
 
                 // Fetch user listings
-                const userListings = await ListingService.getListingsByUserId(userId);
+                const userListings = await ListingService.getListingsByUserId(userId, listingType);
                 setListings(userListings.data);
             } catch (error) {
                 console.error('Error fetching user data:', error);
@@ -36,9 +46,13 @@ const UserPublicProfile = () => {
         };
 
         fetchUserData();
-    }, []);
+    }, [listingType]);
 
     if (!userData) return <div>Loading...</div>;
+
+    function handleChangeType(event) {
+        setListingType(event.target.value);
+    }
 
     return (
         <Box
@@ -123,6 +137,22 @@ const UserPublicProfile = () => {
             {/* Scrollable Collection of User Listings */}
             <Box sx={{ marginTop: '20px' }}>
                 <Typography variant="h6" gutterBottom>User Listings</Typography>
+
+                <FormControl sx = {{width : "10vw", maxWidth:"200px"}}>
+                    <InputLabel id="demo-simple-select-label" sx={{ marginBottom: '5vh' }}>Type</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        label="Type"
+                        onChange={handleChangeType}
+                        defaultValue={"Any"}
+                    >
+                        <MenuItem value={"Any"}>Any</MenuItem>
+                        <MenuItem value={"Offer"}>Offers</MenuItem>
+                        <MenuItem value={"Request"}>Requests</MenuItem>
+                    </Select>
+                </FormControl>
+
                 <Box
                     sx={{
                         display: 'flex',

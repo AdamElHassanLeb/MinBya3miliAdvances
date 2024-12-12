@@ -1,5 +1,18 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Box, Typography, Avatar, Divider, Grid, Button, TextField, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
+import {
+    Box,
+    Typography,
+    Avatar,
+    Divider,
+    Grid,
+    Button,
+    TextField,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogActions,
+    FormControl, InputLabel, Select, MenuItem
+} from '@mui/material';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Import carousel styles
 import UserService from '../../services/UserService';
@@ -21,6 +34,7 @@ const UserProfile = () => {
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const [selectedLocation, setSelectedLocation] = useState([0, 0]); // Default coordinates
     const [selectedImages, setSelectedImages] = useState([]);
+    const [listingType, setListingType] = useState("Any");
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -30,11 +44,9 @@ const UserProfile = () => {
                 setUserData(userDetails);
                 setEditableData(userDetails);
                 setSelectedLocation(userDetails.location || [0, 0]); // Set initial map location
-
-                console.log(editableData)
-
+                
                 // Fetch user listings
-                const userListings = await ListingService.getListingsByUserId(user.user_id);
+                const userListings = await ListingService.getListingsByUserId(user.user_id, listingType);
                 if(userListings && userListings.data)
                     setListings(userListings.data);
             } catch (error) {
@@ -43,7 +55,12 @@ const UserProfile = () => {
         };
 
         fetchUserData();
-    }, [user.user_id]);
+    }, [listingType]);
+
+
+    function handleChangeType(event) {
+        setListingType(event.target.value);
+    }
 
     const handleImageChange = async (event) => {
         setSelectedImages(Array.from(event.target.files));
@@ -307,6 +324,22 @@ const UserProfile = () => {
             {/* Scrollable Collection of User Listings */}
             <Box sx={{ marginTop: '20px' }}>
                 <Typography variant="h6" gutterBottom>User Listings</Typography>
+
+                <FormControl sx = {{width : "10vw", maxWidth:"200px"}}>
+                    <InputLabel id="demo-simple-select-label" sx={{ marginBottom: '5vh' }}>Type</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        label="Type"
+                        onChange={handleChangeType}
+                        defaultValue={"Any"}
+                    >
+                        <MenuItem value={"Any"}>Any</MenuItem>
+                        <MenuItem value={"Offer"}>Offers</MenuItem>
+                        <MenuItem value={"Request"}>Requests</MenuItem>
+                    </Select>
+                </FormControl>
+
                 <Box
                     sx={{
                         display: 'flex',
