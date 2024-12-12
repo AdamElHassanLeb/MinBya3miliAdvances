@@ -41,7 +41,7 @@ const Header = ({ toggleTheme }) => {
                             People
                         </Button>
                         <Button className="HeaderButton" color="inherit" component={Link} to="/option3">
-                            Messages
+                            Transactions
                         </Button>
                     </Box>
 

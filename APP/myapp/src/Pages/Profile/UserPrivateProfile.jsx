@@ -44,7 +44,7 @@ const UserProfile = () => {
                 setUserData(userDetails);
                 setEditableData(userDetails);
                 setSelectedLocation(userDetails.location || [0, 0]); // Set initial map location
-                
+
                 // Fetch user listings
                 const userListings = await ListingService.getListingsByUserId(user.user_id, listingType);
                 if(userListings && userListings.data)
@@ -334,7 +334,7 @@ const UserProfile = () => {
                         onChange={handleChangeType}
                         defaultValue={"Any"}
                     >
-                        <MenuItem value={"Any"}>Any</MenuItem>
+                        <MenuItem value={"Any"}>All</MenuItem>
                         <MenuItem value={"Offer"}>Offers</MenuItem>
                         <MenuItem value={"Request"}>Requests</MenuItem>
                     </Select>

@@ -5,16 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86ed5ec0-1b64-4da5-913b-01262db22ba1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/APP/myapp/src/assets/LocationIcon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/APP/myapp/src/utils/Icons.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/APP/myapp/src/assets/WhatsAppButtonGreenLarge.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/.env" beforeDir="false" afterPath="$PROJECT_DIR$/API/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Internal/Services/userService.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Services/userService.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/Pages/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Login.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/APP/myapp/src/Pages/Profile/UserPrivateProfile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Profile/UserPrivateProfile.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/APP/myapp/src/Pages/Profile/UserPublicProfile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Profile/UserPublicProfile.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/components/Listings/ListingPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/components/Listings/ListingPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/src/static/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/static/Header.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

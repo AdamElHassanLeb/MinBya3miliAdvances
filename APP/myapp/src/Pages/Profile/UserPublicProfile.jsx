@@ -17,6 +17,7 @@ import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import {UserContext} from "../../utils/UserContext";
 import serverAddress from "../../utils/ServerAddress";
+import WhatsAppButton from '../../assets/WhatsAppButtonGreenLarge.png';
 
 const UserPublicProfile = () => {
     const { userId } = useParams(); // Get userId from URL
@@ -68,11 +69,11 @@ const UserPublicProfile = () => {
             className="MUIBox"
         >
             {/* Profile Picture */}
-            <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
+            <Box sx={{display: 'flex', justifyContent: 'center', marginBottom: '20px'}}>
                 <Avatar
                     src={serverAddress() + `/api/v1/image/imageId/${userData.image_id}` || `../assets/default-avatar.png`}
                     alt="Profile Picture"
-                    sx={{ width: 150, height: 150 }}
+                    sx={{width: 150, height: 150}}
                 />
             </Box>
 
@@ -134,46 +135,54 @@ const UserPublicProfile = () => {
                 </Grid>
             )}
             */}
-            {/* Scrollable Collection of User Listings */}
-            <Box sx={{ marginTop: '20px' }}>
-                <Typography variant="h6" gutterBottom>User Listings</Typography>
 
-                <FormControl sx = {{width : "10vw", maxWidth:"200px"}}>
-                    <InputLabel id="demo-simple-select-label" sx={{ marginBottom: '5vh' }}>Type</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        label="Type"
-                        onChange={handleChangeType}
-                        defaultValue={"Any"}
+
+                {/* Scrollable Collection of User Listings */}
+            <Box sx={{marginTop: '20px'}}>
+                <a aria-label="Chat on WhatsApp"
+                   href={'https://wa.me/' + userData.phone_number}
+                   target="_blank"
+                   rel="noopener noreferrer"  >
+                    <img alt="Chat on WhatsApp" src={WhatsAppButton} style = {{width: '10vw', maxWidth: '300px'}} />
+                    </a>
+                    <Typography variant="h6" gutterBottom>User Listings</Typography>
+
+                    <FormControl sx={{width: "10vw", maxWidth: "200px"}}>
+                        <InputLabel id="demo-simple-select-label" sx={{marginBottom: '5vh'}}>Type</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            label="Type"
+                            onChange={handleChangeType}
+                            defaultValue={"Any"}
+                        >
+                            <MenuItem value={"Any"}>All</MenuItem>
+                            <MenuItem value={"Offer"}>Offers</MenuItem>
+                            <MenuItem value={"Request"}>Requests</MenuItem>
+                        </Select>
+                    </FormControl>
+
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexWrap: 'wrap',
+                            gap: '50px', // Space between items
+                            maxHeight: '400px',
+                            overflowY: 'auto',
+                            marginLeft: '50px',
+                        }}
                     >
-                        <MenuItem value={"Any"}>Any</MenuItem>
-                        <MenuItem value={"Offer"}>Offers</MenuItem>
-                        <MenuItem value={"Request"}>Requests</MenuItem>
-                    </Select>
-                </FormControl>
-
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexWrap: 'wrap',
-                        gap: '50px', // Space between items
-                        maxHeight: '400px',
-                        overflowY: 'auto',
-                        marginLeft: '50px',
-                    }}
-                >
-                    {listings.length > 0 ? (
-                        listings.map((listing, index) => (
-                            <ListingCard key={index} listing={listing} />
-                        ))
-                    ) : (
-                        <Typography variant="body2">No listings available.</Typography>
-                    )}
-                </Box>
+                        {listings.length > 0 ? (
+                            listings.map((listing, index) => (
+                                <ListingCard key={index} listing={listing}/>
+                            ))
+                        ) : (
+                            <Typography variant="body2">No listings available.</Typography>
+                        )}
+                    </Box>
             </Box>
         </Box>
-    );
+);
 };
 
 export default UserPublicProfile;
