@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {AppBar, Toolbar, Typography, Button, IconButton, Box, Container, Avatar} from '@mui/material';
 import { Link } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
@@ -8,12 +8,20 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import LightModeIcon from '@mui/icons-material/LightMode'; // Light mode icon
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import {UserContext} from "../utils/UserContext";
-import serverAddress from "../utils/ServerAddress"; // Dark mode icon
+import serverAddress from "../utils/ServerAddress";
+import PeopleModal from "../Pages/Profile/PeopleModal"; // Dark mode icon
 
 
 const Header = ({ toggleTheme }) => {
     const { user } = useContext(UserContext);
+
+    const [isPeopleModalOpen, setIsPeopleModalOpen] = useState(false);
+
+    const handleOpenPeopleModal = () => setIsPeopleModalOpen(true);
+    const handleClosePeopleModal = () => setIsPeopleModalOpen(false);
+
     return (
+        <>
         <AppBar position="fixed" color="primary">
             <Container maxWidth="lg">
                 <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -37,7 +45,7 @@ const Header = ({ toggleTheme }) => {
                         <Button className="HeaderButton" color="inherit" component={Link} to="/Requests">
                             Requests
                         </Button>
-                        <Button className="HeaderButton" color="inherit" component={Link} to="/option3">
+                        <Button className="HeaderButton" color="inherit" onClick={handleOpenPeopleModal}>
                             People
                         </Button>
                         <Button className="HeaderButton" color="inherit" component={Link} to="/option3">
@@ -69,6 +77,9 @@ const Header = ({ toggleTheme }) => {
                 </Toolbar>
             </Container>
         </AppBar>
+
+    <PeopleModal isOpen={isPeopleModalOpen} onClose={handleClosePeopleModal} />
+    </>
     );
 };
 

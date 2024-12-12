@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86ed5ec0-1b64-4da5-913b-01262db22ba1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/APP/myapp/src/assets/WhatsAppButtonGreenLarge.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Profile/PeopleModal.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Profile/UserSearchRow.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/Pages/Profile/UserPrivateProfile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Profile/UserPrivateProfile.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/Pages/Profile/UserPublicProfile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Profile/UserPublicProfile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/src/StyleSheets/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/StyleSheets/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/src/services/UserService.js" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/services/UserService.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/APP/myapp/src/static/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/static/Header.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -98,10 +98,10 @@
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/APP/myapp/src/Pages/Profile" />
       <recent name="$PROJECT_DIR$/APP/myapp/src/StyleSheets" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/APP/myapp/src/components/Listings" />
-      <recent name="$PROJECT_DIR$/APP/myapp/src/Pages/Profile" />
       <recent name="$PROJECT_DIR$/APP/myapp/src/Pages" />
     </key>
   </component>

@@ -41,6 +41,16 @@ const getUserById = async (userId) => {
     }
 };
 
+const getUsersByUsername = async (username) => {
+    try {
+        const response = await axiosInstance.get(`${URL}/userName/${username}`);
+        return response.data;  // Return the user data from the response
+    } catch (error) {
+        //console.error("Error fetching user by ID:", error);
+        throw error;  // Re-throw error so it can be handled by the component
+    }
+}
+
 
 const updateUser = async (userId, updatedData) => {
     try {
@@ -71,6 +81,7 @@ export default {
     login,
     signUp,
     getUserById,
+    getUsersByUsername,
     updateUser,
     deleteUser
 }

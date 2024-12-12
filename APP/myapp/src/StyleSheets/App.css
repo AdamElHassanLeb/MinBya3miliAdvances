@@ -55,6 +55,15 @@ body {
 }
 
 /* Custom Classes */
+
+.User-Row {
+  background-color: #ffffff; /* Purple Button */
+}
+.User-Row:hover {
+  background-color: #b9b9b9; /* Dark Purple */
+}
+
+
 .text-accent {
   color: #00A2FF; /* Accent Blue */
 }
@@ -120,7 +129,61 @@ body {
   color: #004080; /* White Text */
 }
 
+
+/* Light Mode Modal Styles */
+.modal-people {
+  background-color: #FFFFFF; /* White background */
+  color: #004080; /* Dark Blue text */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  padding: 16px; /* Inner spacing */
+  overflow-y: auto; /* Enable scrolling for overflowing content */
+}
+
+.modal-people h5,
+.modal-people p {
+  color: #004080; /* Dark Blue for headings and paragraphs */
+}
+
+.modal-people .MuiButton-root {
+  background-color: #00A2FF; /* Accent Blue */
+  color: #FFFFFF; /* White text */
+  transition: background-color 0.3s ease-in-out;
+}
+
+.modal-people .MuiButton-root:hover {
+  background-color: #004080; /* Darker Blue */
+}
+
 /* Dark Mode Color Overrides (when dark-mode class is added) */
+
+
+/* Dark Mode Modal Styles */
+body.dark-mode .modal-people {
+  background-color: #1A1A1A; /* Dark Gray background */
+  color: #FFFFFF; /* White text */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.8); /* Dark shadow */
+  padding: 16px; /* Inner spacing */
+  overflow-y: auto; /* Enable scrolling for overflowing content */
+}
+
+body.dark-mode .modal-people h5,
+body.dark-mode .modal-people p {
+  color: #FFFFFF; /* White for headings and paragraphs */
+}
+
+body.dark-mode .modal-people .MuiButton-root {
+  background-color: #3700B3; /* Dark Purple */
+  color: #FFFFFF; /* White text */
+  transition: background-color 0.3s ease-in-out;
+}
+
+body.dark-mode .modal-people .MuiButton-root:hover {
+  background-color: #6200EE; /* Slightly lighter purple */
+}
+
+
 
 /* Base Styles */
 body.dark-mode {
@@ -164,6 +227,15 @@ body.dark-mode a {
 body.dark-mode a:hover {
   color: #3700B3; /* Darker Purple */
 }
+
+body.dark-mode .User-Row {
+  background-color: #1a1a1a; /* Purple Button */
+  color: #FFFFFF; /* White Text */
+}
+body.dark-mode .User-Row:hover {
+  background-color: #3700B3; /* Dark Purple */
+}
+
 
 /* Buttons */
 body.dark-mode .MuiButton-root {
