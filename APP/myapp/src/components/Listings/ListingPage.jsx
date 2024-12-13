@@ -27,7 +27,7 @@ const ScrollableListings = (listingType) => {
     const [listings, setListings] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState(''); // For search query input
-    const [filterType, setFilterType] = useState(''); // For dropdown filter type (distance or date)
+    const [filterType, setFilterType] = useState('date'); // For dropdown filter type (distance or date)
     const [selectedLocation, setSelectedLocation] = useState([0, 0]); // For map's selected location (longitude, latitude)
     const [maxDistance, setMaxDistance] = useState(60);
     const [zoomLevel, setZoomLevel] = useState(1); // Default zoom level
@@ -68,8 +68,7 @@ const ScrollableListings = (listingType) => {
                     setSelectedLocation([longitude, latitude])
                     // Fetch listings based on the user's location and distance
                     const response = await ListingService.getListingsByDate(listingType.listingType);
-                    //console.log(longitude, latitude, maxDistance, listingType.listingType)
-                    //console.log(response.data)
+
                     setListings(response.data); // Assuming response contains listings data
                     setLoading(false);
                 } catch (error) {
@@ -90,35 +89,46 @@ const ScrollableListings = (listingType) => {
 
     // Function for handling search button click
     const handleSearch = async () => {
-        //console.log('Search button clicked');
-        //console.log('Search Query:', searchQuery);
-        //console.log('Filter Type:', filterType);
-        //console.log('Selected Location:', selectedLocation);
         setListings([])
         var currListings;
         if (filterType === "date"){
             if(searchQuery === ""){
-                //console.log(listingType)
-                currListings = await ListingService.getListingsByDate(listingType.listingType)
-                setListings(currListings.data)
+                try {
+                    currListings = await ListingService.getListingsByDate(listingType.listingType)
+                    setListings(currListings.data)
+                }catch(e){
+                    setListings([])
+                }
                 return;
             }
-            currListings = await ListingService.getListingsByDateAndSearch(searchQuery, listingType.listingType)
-            setListings(currListings.data)
+
+            try {
+                currListings = await ListingService.getListingsByDateAndSearch(searchQuery, listingType.listingType)
+                setListings(currListings.data)
+            }catch(e){
+                setListings([])
+            }
             return
         }
         //distance
         if(searchQuery === ""){
 
-            currListings = await  ListingService.getListingsByDistance(selectedLocation[0], selectedLocation[1], maxDistance, listingType.listingType)
-            console.log(currListings)
-            if(currListings && currListings.data)
-                setListings(currListings.data)
+            try {
+                currListings = await  ListingService.getListingsByDistance(selectedLocation[1], selectedLocation[0], maxDistance, listingType.listingType)
+                if(currListings && currListings.data)
+                    setListings(currListings.data)
+            }catch(e){
+                setListings([])
+            }
             return;
         }
 
-        currListings = await ListingService.getListingsByDistanceAndSearch(selectedLocation[0], selectedLocation[1], maxDistance, listingType.listingType, searchQuery)
-        setListings(currListings.data)
+        try{
+            currListings = await ListingService.getListingsByDistanceAndSearch(selectedLocation[1], selectedLocation[0], maxDistance, listingType.listingType, searchQuery)
+            setListings(currListings.data)
+        }catch(e){
+            setListings([])
+        }
     };
 
     return (<>
@@ -274,7 +284,7 @@ const ScrollableListings = (listingType) => {
                     <Grid item xs={12}>
                         <div>Loading...</div>
                     </Grid>
-                ) : listings.length > 0 ? (
+                ) : listings && listings.length > 0 ? (
                     listings.map((listing) => (
                         <Grid item xs={12} sm={6} md={4} key={listing.listing_id}>
                             <ListingCard listing={listing} />

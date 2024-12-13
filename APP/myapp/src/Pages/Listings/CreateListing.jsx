@@ -7,6 +7,7 @@ import {UserContext} from "../../utils/UserContext";
 import ListingService from "../../services/ListingService";
 import ImageService from "../../services/ImageService";
 import {useNavigate} from "react-router-dom";
+import MapIcon from "../../utils/Icons";
 
 const CreateListing = () => {
     const [listingType, setListingType] = useState('');
@@ -21,7 +22,8 @@ const CreateListing = () => {
     const MapEvents = () => {
         useMapEvents({
             click(e) {
-                const { lat, lng } = e.latlng;
+                const { lng, lat } = e.latlng;
+                console.log(lat, lng);
                 setSelectedLocation([lat, lng]);
             },
         });
@@ -55,11 +57,9 @@ const CreateListing = () => {
                 type: listingType,
                 title,
                 description,
-                location: selectedLocation,
+                location: [selectedLocation[1], selectedLocation[0]],
                 user_id: user.user_id,
             });
-
-            console.log("Listing creation response:", res);
 
             // If listing creation is successful, upload images
             if (res && res.data && res.data.listing_id) {
@@ -112,7 +112,7 @@ const CreateListing = () => {
             <Box sx={{ width: '100%', height: '300px', marginBottom: 2 }}>
                 <MapContainer center={[51.505, -0.09]} zoom={13} style={{ width: '100%', height: '100%' }}>
                     <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-                    <Marker position={selectedLocation}>
+                    <Marker position={selectedLocation} icon={MapIcon}>
                     </Marker>
                     <MapEvents />
                 </MapContainer>

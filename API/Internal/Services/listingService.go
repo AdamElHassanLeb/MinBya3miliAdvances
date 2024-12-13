@@ -190,6 +190,9 @@ func (s *ListingService) GetBySearch(ctx context.Context, searchTerm, listingTyp
 
 // Get listings by distance from a specific latitude and longitude (GetByDistance)
 func (s *ListingService) GetByDistance(ctx context.Context, latitude, longitude, maxDistance float64, listingType string) ([]Listing, error) {
+
+	maxDistance *= 1000
+	fmt.Println(longitude, latitude, maxDistance)
 	if listingType == "Request" || listingType == "Offer" {
 		query := `SELECT * FROM listings WHERE ST_Distance_Sphere(location, ST_GeomFromText(CONCAT('POINT(', ?, ' ', ?, ')'))) < ? AND type = ?`
 		return s.queryListings(ctx, query, longitude, latitude, maxDistance, listingType)
@@ -201,23 +204,22 @@ func (s *ListingService) GetByDistance(ctx context.Context, latitude, longitude,
 
 func (s *ListingService) GetByDistanceAndSearch(ctx context.Context, latitude, longitude, maxDistance float64, listingType string, searchQuery string) ([]Listing, error) {
 	// Sanitize or escape the search query to prevent SQL injection (optional but recommended)
-	escapedSearchQuery := "%" + searchQuery + "%"
-
-	var query string
+	maxDistance *= 1000
+	fmt.Println(longitude, latitude, maxDistance, searchQuery)
 	// Check if listingType is valid and apply the relevant filter
 	if listingType == "Request" || listingType == "Offer" {
-		query = `SELECT * FROM listings 
+		query := `SELECT * FROM listings 
                  WHERE ST_Distance_Sphere(location, ST_GeomFromText(CONCAT('POINT(', ?, ' ', ?, ')'))) < ? 
                  AND type = ? 
                  AND (title LIKE ? OR description LIKE ?)`
 		// Execute the query with the appropriate parameters, including the search query
-		return s.queryListings(ctx, query, longitude, latitude, maxDistance, listingType, escapedSearchQuery, escapedSearchQuery)
+		return s.queryListings(ctx, query, longitude, latitude, maxDistance, listingType, "%"+searchQuery+"%", "%"+searchQuery+"%")
 	} else {
-		query = `SELECT * FROM listings 
+		query := `SELECT * FROM listings 
                  WHERE ST_Distance_Sphere(location, ST_GeomFromText(CONCAT('POINT(', ?, ' ', ?, ')'))) < ? 
                  AND (title LIKE ? OR description LIKE ?)`
 		// Execute the query with the search filter
-		return s.queryListings(ctx, query, longitude, latitude, maxDistance, escapedSearchQuery, escapedSearchQuery)
+		return s.queryListings(ctx, query, longitude, latitude, maxDistance, "%"+searchQuery+"%", "%"+searchQuery+"%")
 	}
 }
 

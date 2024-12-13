@@ -5,12 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86ed5ec0-1b64-4da5-913b-01262db22ba1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Profile/PeopleModal.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Profile/UserSearchRow.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/StyleSheets/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/StyleSheets/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/services/UserService.js" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/services/UserService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/static/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/static/Header.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Internal/Services/listingService.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Services/listingService.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/src/Pages/Listings/CreateListing.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Listings/CreateListing.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/src/Pages/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Login.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/src/Pages/Profile/UserPrivateProfile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Profile/UserPrivateProfile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/src/components/Listings/ListingPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/components/Listings/ListingPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/src/services/ListingService.js" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/services/ListingService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/src/utils/Icons.js" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/utils/Icons.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

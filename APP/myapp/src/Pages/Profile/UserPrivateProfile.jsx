@@ -119,6 +119,7 @@ const UserProfile = () => {
 
     const handleDeleteConfirm = () => {
         console.log('Delete confirmed');
+        navigate('/Login');
         setDeleteModalOpen(false);
     };
 

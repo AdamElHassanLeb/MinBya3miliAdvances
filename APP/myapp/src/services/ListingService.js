@@ -106,7 +106,7 @@ const deleteListing = async (listingId) => {
 const getListingsByDistanceAndSearch = async (longitude, latitude, maxDistance, listingType, searchQuery) => {
     try {
         const response = await axiosInstance.get(`/listing/distance/${longitude}/${latitude}/${maxDistance}/${listingType}/${searchQuery}`);
-        return response.data; // Assuming your API returns the data in a structure like { listings: [...], ... }
+        return response;
     } catch (error) {
         console.error("Error fetching listings by distance and search:", error);
         throw error;

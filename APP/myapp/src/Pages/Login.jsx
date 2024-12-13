@@ -104,11 +104,12 @@ const Login = () => {
 
             const result = await UserService.signUp(formData.first_name,
                 formData.last_name, formData.phone_number, formData.date_of_birth,
-                formData.profession, formData.location, formData.password);
+                formData.profession, [formData.location[1], formData.location[0]], formData.password);
 
             if(result.status == 201){
                 toast.success('Signup successfully');
                 navigate('/Login');
+                handleModalClose();
             }
 
         } catch (error) {
@@ -126,7 +127,7 @@ const Login = () => {
                 const { lat, lng } = e.latlng;
                 setFormData((prevData) => ({
                     ...prevData,
-                    location: [lng, lat],
+                    location: [lat, lng],
                 }));
                 setUserLocation([lat, lng]);
             },
