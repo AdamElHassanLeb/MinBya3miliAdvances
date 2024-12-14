@@ -161,6 +161,7 @@ const ListingDetail = () => {
                     {listing.title}
                 </Typography>
             )}
+            <Divider sx={{ marginBottom: '15px' }} />
 
             {/* Listing Description */}
             {isEditing ? (
@@ -211,7 +212,7 @@ const ListingDetail = () => {
             <Typography variant="body1">Country: {listing.country}</Typography>
 
             {/* Update and Delete Buttons if the user is the owner of the listing */}
-            {user && user.user_id === listing.user_id && (
+            {user && user.user_id === listing.user_id ? (
                 <Box sx={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
                     {isEditing ? (
                         <Button variant="contained" color="primary" onClick={handleSaveClick}>
@@ -230,7 +231,11 @@ const ListingDetail = () => {
                         Delete Listing
                     </Button>
                 </Box>
-            )}
+            ) : <>
+                <Divider sx={{ marginBottom: '15px' }} />
+                <h1>{"Batata"}</h1>
+            </>
+            }
 
             {/* Delete Confirmation Modal */}
             <Dialog

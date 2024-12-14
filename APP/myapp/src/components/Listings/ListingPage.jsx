@@ -133,7 +133,7 @@ const ScrollableListings = (listingType) => {
 
     return (<>
 
-        <Box sx={{ display: 'flex', gap: 2, overflow : 'hidden' }}>
+        <Box sx={{ display: 'flex', gap: 2, overflow : 'hidden', marginLeft: -2 }}>
             {/* Left Panel with Search Bar, Button, and Filter Dropdown */}
             <Box
                 sx={{
@@ -142,7 +142,7 @@ const ScrollableListings = (listingType) => {
                     gap: 2,
                     padding: 2,
                     width: '15vw',
-                    height: `90vh`,
+                    height: `101vh`,
                     border: '2px solid #ccc',
                     borderRadius: '8px',
                     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
@@ -150,6 +150,7 @@ const ScrollableListings = (listingType) => {
                     top: '10px',
                     marginTop: '1vh',
                     overflow: 'auto',
+                    backgroundColor: '#c7c7c7',
 
                 }}
             className="MUIBox">
@@ -235,11 +236,10 @@ const ScrollableListings = (listingType) => {
                     sx={{
                         padding: 2,
                         position: 'sticky',
-                        marginTop : '2vh'
+                        marginTop : '2vh',
                     }}
                     component={Link}
                     variant="contained"
-                    color="warning"
                     to="/CreateListing"
                     fullWidth
                 >

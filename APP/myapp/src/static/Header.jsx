@@ -9,10 +9,11 @@ import LightModeIcon from '@mui/icons-material/LightMode'; // Light mode icon
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import {UserContext} from "../utils/UserContext";
 import serverAddress from "../utils/ServerAddress";
-import PeopleModal from "../Pages/Profile/PeopleModal"; // Dark mode icon
+import PeopleModal from "../Pages/Profile/PeopleModal";
+import {Brightness3} from "@mui/icons-material"; // Dark mode icon
 
 
-const Header = ({ toggleTheme }) => {
+const Header = ({ toggleTheme, isDarkMode }) => {
     const { user } = useContext(UserContext);
 
     const [isPeopleModalOpen, setIsPeopleModalOpen] = useState(false);
@@ -22,7 +23,7 @@ const Header = ({ toggleTheme }) => {
 
     return (
         <>
-        <AppBar position="fixed" color="primary">
+        <AppBar position="fixed">
             <Container maxWidth="lg">
                 <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
                     {/*<Box>
@@ -59,7 +60,7 @@ const Header = ({ toggleTheme }) => {
                             <HomeIcon />
                         </IconButton>
                         <IconButton color="inherit" onClick={toggleTheme}>
-                            {true ? <LightModeIcon /> : <DarkModeIcon />} {/* Change based on current theme */}
+                            {!isDarkMode ? <LightModeIcon /> : <Brightness3 />} {/* Change based on current theme */}
                         </IconButton>
                         <IconButton color="inherit" component={Link} to="/UserPrvateProfile">
                             {user?  <Avatar

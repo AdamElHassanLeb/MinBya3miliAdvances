@@ -45,11 +45,11 @@ function App() {
         <>
             <div className="App">
                 {/* Conditionally render the Header only if not on the /Login route */}
-                {location.pathname !== '/Login' && <Header toggleTheme={toggleTheme} />}
+                {location.pathname !== '/Login' && <Header toggleTheme={toggleTheme} isDarkMode={isDarkMode} />}
             </div>
             <Routes>
                 {/* Public route */}
-                <Route path="/Login" element={<Login />} />
+                <Route path="/Login" element={<Login toggleTheme={toggleTheme} isDarkMode={isDarkMode} />} />
 
                 {/* Protected routes */}
                 <Route

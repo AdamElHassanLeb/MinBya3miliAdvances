@@ -345,10 +345,11 @@ const UserProfile = () => {
                     sx={{
                         display: 'flex',
                         flexWrap: 'wrap',
-                        gap: '50px', // Space between items
-                        maxHeight: '400px',
+                        gap: '20px', // Space between items
+                        maxHeight: '40vh',
                         overflowY: 'auto',
-                        marginLeft: '50px',
+                        overflowX: 'auto',
+                       marginLeft : '1vw'
                     }}
                 >
                     {listings.length > 0 ? (

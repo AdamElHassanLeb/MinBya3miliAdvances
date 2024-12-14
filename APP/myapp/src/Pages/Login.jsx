@@ -1,6 +1,18 @@
 // src/components/Login.js
 import React, {useState, useEffect, useContext} from 'react';
-import { TextField, Button, Typography, Container, Box, Dialog, DialogActions, DialogContent, DialogTitle, Grid } from '@mui/material';
+import {
+    TextField,
+    Button,
+    Typography,
+    Container,
+    Box,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    Grid,
+    IconButton
+} from '@mui/material';
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents} from 'react-leaflet';
 import L from 'leaflet';
 import UserService from '../services/UserService';
@@ -9,8 +21,11 @@ import { toast } from 'react-toastify';
 import {UserContext} from "../utils/UserContext";
 import {useNavigate} from "react-router-dom";
 import MapIcon from "../utils/Icons"
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import {Brightness3, Brightness5} from "@mui/icons-material";
 
-const Login = () => {
+const Login = ({ toggleTheme, isDarkMode }) => {
     const [openModal, setOpenModal] = useState(false);
     const [formData, setFormData] = useState({
         first_name: '',
@@ -149,6 +164,9 @@ const Login = () => {
                 }}
                 className="MUIContainer-root"
             >
+                <IconButton color="inherit" onClick={toggleTheme} sx = {{marginRight: -40, marginTop : -1}} >
+                    {!isDarkMode ? <LightModeIcon /> : <Brightness3 />} {/* Change based on current theme */}
+                </IconButton>
                 <Typography variant="h4" gutterBottom>
                     Login
                 </Typography>

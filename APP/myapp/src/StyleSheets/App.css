@@ -111,7 +111,8 @@ body {
 .zoom:hover {
   transform: scale(1.1);
 }
-
+ .MUIBox{
+ }
 
 /* Button Styles (Light Mode) */
 .LeftTabOpenClose {
@@ -157,8 +158,11 @@ body {
 
 /* Dark Mode Color Overrides (when dark-mode class is added) */
 
-
 /* Dark Mode Modal Styles */
+body.dark-mode .zoom{
+  background: linear-gradient(to bottom, #1A1A1A, #1b303b);
+}
+
 body.dark-mode .modal-people {
   background-color: #1A1A1A; /* Dark Gray background */
   color: #FFFFFF; /* White text */
@@ -174,31 +178,29 @@ body.dark-mode .modal-people p {
 }
 
 body.dark-mode .modal-people .MuiButton-root {
-  background-color: #3700B3; /* Dark Purple */
+  background-color: #0077CC; /* Dark Blue */
   color: #FFFFFF; /* White text */
   transition: background-color 0.3s ease-in-out;
 }
 
 body.dark-mode .modal-people .MuiButton-root:hover {
-  background-color: #6200EE; /* Slightly lighter purple */
+  background-color: #005DA0; /* Slightly darker blue */
 }
-
-
 
 /* Base Styles */
 body.dark-mode {
-  background-color: #3f3f3f; /* Dark Background */
+  background-color: #3F3F3F; /* Dark Background */
   color: #FFFFFF; /* White text for general body */
 }
 
 body.dark-mode .MUIContainer-root {
   background-color: #212121;
   color: #FFFFFF;
-
 }
 
 body.dark-mode .MUIBox {
-  background-color: #1e1e1e;
+  background: linear-gradient(to bottom, #1A1A1A, #282828);
+  border-width: 0;
   border-color: #000000;
 }
 
@@ -208,7 +210,7 @@ body.dark-mode .MuiTypography-root {
 
 /* AppBar */
 body.dark-mode .MuiAppBar-root {
-  background-color: #1A1A1A; /* Dark Gray */
+  background: linear-gradient(to right, #1A1A1A, #36444d);
 }
 
 body.dark-mode .MuiToolbar-root {
@@ -217,80 +219,79 @@ body.dark-mode .MuiToolbar-root {
 
 body.dark-mode .MuiAppBar-root .MuiButtonBase-root {
   color: #FFFFFF; /* White Text */
+  background-color: transparent;
 }
 
 /* Links */
 body.dark-mode a {
-  color: #BB86FC; /* Light Purple */
+  color: #3399FF; /* Bright Blue */
 }
 
 body.dark-mode a:hover {
-  color: #3700B3; /* Darker Purple */
+  color: #0077CC; /* Dark Blue */
 }
 
 body.dark-mode .User-Row {
-  background-color: #1a1a1a; /* Purple Button */
+  background-color: #1A1A1A; /* Dark Background */
   color: #FFFFFF; /* White Text */
 }
-body.dark-mode .User-Row:hover {
-  background-color: #3700B3; /* Dark Purple */
-}
 
+body.dark-mode .User-Row:hover {
+  background-color: #005DA0; /* Dark Blue */
+}
 
 /* Buttons */
 body.dark-mode .MuiButton-root {
-  background-color: #6200EE; /* Purple Button */
+  background-color: #0077CC; /* Dark Blue Button */
   color: #FFFFFF; /* White Text */
 }
 
-body.dark-mode .HeaderButton{
+body.dark-mode .HeaderButton {
   background-color: #1A1A1A;
   color: #FFFFFF; /* White Text */
 }
 
 body.dark-mode .MuiButton-root:hover {
-  background-color: #3700B3; /* Dark Purple */
+  background-color: #005DA0; /* Dark Blue */
 }
 
 body.dark-mode .HeaderButton:hover {
-  background-color: #3700B3; /* Dark Purple */
+  background-color: #005DA0; /* Dark Blue */
   color: #FFFFFF; /* White Text */
 }
 
 body.dark-mode .MuiButton-outlined {
-  color: #BB86FC; /* Light Purple */
-  border: 1px solid #BB86FC;
+  color: #3399FF; /* Bright Blue */
+  border: 1px solid #3399FF;
 }
 
 body.dark-mode .MuiButton-outlined:hover {
-  background-color: #3700B3; /* Darker Purple */
+  background-color: #0077CC; /* Dark Blue */
   color: #FFFFFF; /* White Text */
 }
 
-
 /* Cards */
 body.dark-mode .MuiCard-root {
-  background-color: #1F1F1F;/* Dark Background */
+  background-color: #1F1F1F; /* Dark Background */
   border: 1px solid #464646; /* Gray */
 }
 
-
 body.dark-mode .MuiCard-header {
-  background-color: #3700B3; /* Dark Purple */
+  background-color: #005DA0; /* Dark Blue */
   color: #FFFFFF; /* White Text */
 }
 
 /* Custom Classes */
 body.dark-mode .text-accent {
-  color: #BB86FC; /* Light Purple */
+  color: #3399FF; /* Bright Blue */
 }
 
 body.dark-mode .bg-light-blue {
-  background-color: #3700B3; /* Dark Purple Background */
+  background-color: #005DA0; /* Dark Blue Background */
 }
 
 body.dark-mode .border-accent {
-  border-color: #BB86FC; /* Light Purple Border */
+  border-color: #3399FF; /* Bright Blue Border */
 }
 
 /* Horizontal Header */
@@ -304,7 +305,7 @@ body.dark-mode .horizontal-header a {
 }
 
 body.dark-mode .horizontal-header a:hover {
-  color: #BB86FC; /* Light Purple on Hover */
+  color: #3399FF; /* Bright Blue on Hover */
 }
 
 /* Text Fields */
@@ -317,15 +318,16 @@ body.dark-mode .MuiInputLabel-root {
 }
 
 body.dark-mode .MuiInputBase-root:focus {
-  border-color: #BB86FC; /* Light Purple */
+  border-color: #3399FF; /* Bright Blue */
 }
+
 /* Dark Mode Button Styles */
 body.dark-mode .LeftTabOpenClose {
-  color: #BB86FC; /* White Text */
+  color: #3399FF; /* Bright Blue */
 }
 
 body.dark-mode .LeftTabOpenClose:hover {
-  background-color: #3700B3; /* Darker Purple on Hover */
-  border-color: #BB86FC; /* Light Purple Border */
+  background-color: #005DA0; /* Dark Blue on Hover */
+  border-color: #3399FF; /* Bright Blue Border */
   color: #FFFFFF; /* White Text */
 }

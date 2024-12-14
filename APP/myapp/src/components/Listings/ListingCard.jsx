@@ -27,7 +27,7 @@ const ListingCard = ({ listing }) => {
     };
 
     return (
-        <Card sx={{ minWidth: 300, maxWidth: 300, flexShrink: 0, backgroundColor : '#FEFEFE'}} onClick={handleCardClick} sx={{ cursor: 'pointer' }} className="zoom">
+        <Card sx={{ minWidth: 300, maxWidth: 300, flexShrink: 0, cursor: 'pointer'}} onClick={handleCardClick} className="zoom" elevation={20}>
             {/* Display the image with a placeholder for click-to-open modal */}
             <CardMedia
                 component="img"
