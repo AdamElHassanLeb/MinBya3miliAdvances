@@ -17,6 +17,19 @@ import (
 
 var imagesDIR string = Env.GetString("SRV_DIR", "") + "/ServerImages/"
 
+// @Summary		Upload images for a listing
+// @Description	Upload one or more images for a specific listing. The user must be authorized and the listing must belong to them.
+// @Tags			images
+// @Accept			multipart/form-data
+// @Produce		json
+// @Param			listing_id	path		int		true	"Listing ID"
+// @Param			images		formData	file	true	"Images to upload"
+// @Security		BearerAuth
+// @Success		200	{string}	string	"All image files uploaded successfully and stored in ServerImages"
+// @Failure		400	{string}	string	"Invalid file type"
+// @Failure		401	{string}	string	"Unauthorized"
+// @Failure		500	{string}	string	"Internal server error"
+// @Router			/listings/{listing_id}/images [post]
 func (app *application) createListingImage(w http.ResponseWriter, r *http.Request) {
 	tokenUserId, ok := r.Context().Value("token_user_id").(int)
 	if !ok {
@@ -102,6 +115,19 @@ func (app *application) createListingImage(w http.ResponseWriter, r *http.Reques
 	w.Write([]byte("All image files uploaded successfully and stored in ServerImages"))
 }
 
+// @Summary		Upload profile image
+// @Description	Upload an image to be set as a user's profile picture. The user must be authorized and own the profile.
+// @Tags			images
+// @Accept			multipart/form-data
+// @Produce		json
+// @Param			user_id	path		int		true	"User ID"
+// @Param			image	formData	file	true	"Profile image to upload"
+// @Security		BearerAuth
+// @Success		200	{string}	string	"Profile image uploaded successfully and stored in ServerImages"
+// @Failure		400	{string}	string	"Invalid file type"
+// @Failure		401	{string}	string	"Unauthorized"
+// @Failure		500	{string}	string	"Internal server error"
+// @Router			/users/{user_id}/profile/image [post]
 func (app *application) createProfileImage(w http.ResponseWriter, r *http.Request) {
 	tokenUserId, ok := r.Context().Value("token_user_id").(int)
 	if !ok {
@@ -186,6 +212,18 @@ func (app *application) createProfileImage(w http.ResponseWriter, r *http.Reques
 	w.Write([]byte("All image files uploaded successfully and stored in ServerImages"))
 }
 
+// DeleteImage @Summary Delete an image
+//
+//	@Description	Delete an image from the server. The user must be authorized and own the image.
+//	@Tags			images
+//	@Produce		json
+//	@Param			image_id	path	int	true	"Image ID"
+//	@Security		BearerAuth
+//	@Success		200	{string}	string	"Image deleted successfully"
+//	@Failure		400	{string}	string	"Invalid image ID"
+//	@Failure		401	{string}	string	"Unauthorized"
+//	@Failure		500	{string}	string	"Internal server error"
+//	@Router			/images/{image_id} [delete]
 func (app *application) DeleteImage(w http.ResponseWriter, r *http.Request) {
 
 	tokenUserId, ok := r.Context().Value("token_user_id").(int)
@@ -224,6 +262,19 @@ func (app *application) DeleteImage(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Image deleted successfully"))
 }
 
+// UpdateImage @Summary Update an image's profile status
+//
+//	@Description	Update whether an image should be shown on the user's profile. The user must be authorized and own the image.
+//	@Tags			images
+//	@Produce		json
+//	@Param			image_id		path	int	true	"Image ID"
+//	@Param			show_on_profile	path	int	true	"Show on profile (1 for true, 0 for false)"
+//	@Security		BearerAuth
+//	@Success		200	{string}	string	"Image updated successfully"
+//	@Failure		400	{string}	string	"Invalid image ID or show_on_profile value"
+//	@Failure		401	{string}	string	"Unauthorized"
+//	@Failure		500	{string}	string	"Internal server error"
+//	@Router			/images/{image_id}/{show_on_profile} [put]
 func (app *application) UpdateImage(w http.ResponseWriter, r *http.Request) {
 
 	tokenUserId, ok := r.Context().Value("token_user_id").(int)
@@ -278,6 +329,17 @@ func (app *application) UpdateImage(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Image updated successfully"))
 }
 
+// GetImageByID @Summary Get an image by ID
+//
+//	@Description	Retrieve an image by its ID. Returns the image content along with its content type.
+//	@Tags			images
+//	@Produce		octet-stream
+//	@Param			image_id	path		int		true	"Image ID"
+//	@Success		200			{file}		string	"Image file"
+//	@Failure		400			{string}	string	"Invalid image ID"
+//	@Failure		404			{string}	string	"Image not found"
+//	@Failure		500			{string}	string	"Internal server error"
+//	@Router			/images/{image_id} [get]
 func (app *application) GetImageByID(w http.ResponseWriter, r *http.Request) {
 	// Extract image ID from the URL
 	imageIDStr := chi.URLParam(r, "image_id")
@@ -326,6 +388,16 @@ func (app *application) GetImageByID(w http.ResponseWriter, r *http.Request) {
 	http.ServeContent(w, r, imagePath, time.Now(), file)
 }
 
+// GetImageByUUID @Summary Get an image by UUID
+//
+//	@Description	Retrieve an image by its UUID. Returns the image content along with its content type.
+//	@Tags			images
+//	@Produce		octet-stream
+//	@Param			image_id	path		string	true	"Image UUID"
+//	@Success		200			{file}		string	"Image file"
+//	@Failure		404			{string}	string	"Image not found"
+//	@Failure		500			{string}	string	"Internal server error"
+//	@Router			/images/uuid/{image_id} [get]
 func (app *application) GetImageByUUID(w http.ResponseWriter, r *http.Request) {
 	// Extract image ID from the URL
 	imageIDStr := chi.URLParam(r, "image_id")
@@ -363,6 +435,16 @@ func (app *application) GetImageByUUID(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// GetImagesByListingID @Summary Get all images for a specific listing
+//
+//	@Description	Retrieve all images associated with a specific listing.
+//	@Tags			images
+//	@Produce		json
+//	@Param			listing_id	path		int		true	"Listing ID"
+//	@Success		200			{array}		Image	"List of images"
+//	@Failure		400			{string}	string	"Invalid listing ID"
+//	@Failure		500			{string}	string	"Internal server error"
+//	@Router			/listings/{listing_id}/images [get]
 func (app *application) GetImagesByListingID(w http.ResponseWriter, r *http.Request) {
 	// Extract listing ID from the URL
 	listingIDStr := chi.URLParam(r, "listing_id")
@@ -384,6 +466,18 @@ func (app *application) GetImagesByListingID(w http.ResponseWriter, r *http.Requ
 	}
 }
 
+// GetImagesByUserID @Summary Get all images for a specific user
+//
+//	@Description	Retrieve all images associated with a specific user.
+//	@Tags			images
+//	@Produce		json
+//	@Param			user_id	path	int	true	"User ID"
+//	@Security		BearerAuth
+//	@Success		200	{array}		Image	"List of images"
+//	@Failure		400	{string}	string	"Invalid user ID"
+//	@Failure		401	{string}	string	"Unauthorized"
+//	@Failure		500	{string}	string	"Internal server error"
+//	@Router			/users/{user_id}/images [get]
 func (app *application) GetImagesByUserID(w http.ResponseWriter, r *http.Request) {
 	tokenUserId, ok := r.Context().Value("token_user_id").(int)
 	if !ok {
@@ -415,6 +509,16 @@ func (app *application) GetImagesByUserID(w http.ResponseWriter, r *http.Request
 	}
 }
 
+// GetImagesByUserProfile @Summary Get images with profile visibility for a specific user
+//
+//	@Description	Retrieve all images with profile visibility set to true for a specific user.
+//	@Tags			images
+//	@Produce		json
+//	@Param			user_id	path		int		true	"User ID"
+//	@Success		200		{array}		Image	"List of images"
+//	@Failure		400		{string}	string	"Invalid user ID"
+//	@Failure		500		{string}	string	"Internal server error"
+//	@Router			/users/{user_id}/profile/images [get]
 func (app *application) GetImagesByUserProfile(w http.ResponseWriter, r *http.Request) {
 	// Extract user ID from the URL
 	userIDStr := chi.URLParam(r, "user_id")

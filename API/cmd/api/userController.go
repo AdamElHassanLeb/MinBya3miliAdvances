@@ -8,7 +8,14 @@ import (
 	"strconv"
 )
 
-// GetAllUsers handles the request to get all users.
+// GetAllUsers godoc
+//	@Summary		Get all users
+//	@Description	Retrieve a list of all users in the system
+//	@Tags			users
+//	@Produce		json
+//	@Success		200	{array}		Services.User
+//	@Failure		500	{object}	string	"Internal Server Error"
+//	@Router			/user/users [get]
 func (app *application) GetAllUsers(w http.ResponseWriter, r *http.Request) {
 	// Call the service method to get all users.
 	users, err := app.Service.Users.GetAll(r.Context())
@@ -28,6 +35,17 @@ func (app *application) GetAllUsers(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// GetUserById godoc
+//	@Summary		Get user by ID
+//	@Description	Retrieve user information by their unique ID
+//	@Tags			users
+//	@Param			id	path	int	true	"User ID"
+//	@Produce		json
+//	@Success		200	{object}	Services.User
+//	@Failure		400	{object}	string	"Bad Request"
+//	@Failure		404	{object}	string	"User not found"
+//	@Failure		500	{object}	string	"Internal Server Error"
+//	@Router			/user/userId/{id} [get]
 func (app *application) GetUserById(w http.ResponseWriter, r *http.Request) {
 	// Extract the user ID from the URL (e.g., /user/123)
 	userId := chi.URLParam(r, "id")
@@ -59,6 +77,16 @@ func (app *application) GetUserById(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// GetUserByName godoc
+//	@Summary		Get users by name
+//	@Description	Retrieve users with matching name
+//	@Tags			users
+//	@Param			name	path	string	true	"User Name"
+//	@Produce		json
+//	@Success		200	{array}		Services.User
+//	@Failure		404	{object}	string	"No users found"
+//	@Failure		500	{object}	string	"Internal Server Error"
+//	@Router			/user/userName/{name} [get]
 func (app *application) GetUserByName(w http.ResponseWriter, r *http.Request) {
 	name := chi.URLParam(r, "name")
 
@@ -84,6 +112,17 @@ func (app *application) GetUserByName(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// CreateUser godoc
+//	@Summary		Create a new user
+//	@Description	Add a new user to the system
+//	@Tags			users
+//	@Accept			json
+//	@Produce		json
+//	@Param			user	body		Services.User	true	"User data"
+//	@Success		201		{object}	Services.User
+//	@Failure		400		{object}	string	"Bad Request"
+//	@Failure		500		{object}	string	"Internal Server Error"
+//	@Router			/user/create [post]
 func (app *application) CreateUser(w http.ResponseWriter, r *http.Request) {
 	var user Services.User
 
@@ -111,7 +150,18 @@ func (app *application) CreateUser(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// DeleteUser handles the HTTP request to delete a user by ID.
+// DeleteUser godoc
+//	@Summary		Delete a user
+//	@Description	Remove a user from the system by their ID
+//	@Tags			users
+//	@Param			id	path	int	true	"User ID"
+//	@Security		BearerAuth
+//	@Success		204	"No Content"
+//	@Failure		400	{object}	string	"Bad Request"
+//	@Failure		401	{object}	string	"Unauthorized"
+//	@Failure		404	{object}	string	"User not found"
+//	@Failure		500	{object}	string	"Internal Server Error"
+//	@Router			/user/delete/{id} [delete]
 func (app *application) DeleteUser(w http.ResponseWriter, r *http.Request) {
 
 	// Retrieve the user_id from the request context
@@ -151,7 +201,18 @@ func (app *application) DeleteUser(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNoContent) // 204 No Content for a successful delete with no body
 }
 
-// UpdateUser handles the HTTP request to update a user's information.
+// UpdateUser godoc
+//	@Summary		Update a user
+//	@Description	Update user information by their ID
+//	@Tags			users
+//	@Param			id		path	int				true	"User ID"
+//	@Param			user	body	Services.User	true	"Updated user data"
+//	@Security		BearerAuth
+//	@Success		200	"User updated successfully"
+//	@Failure		400	{object}	string	"Bad Request"
+//	@Failure		401	{object}	string	"Unauthorized"
+//	@Failure		500	{object}	string	"Internal Server Error"
+//	@Router			/user/update/{id} [put]
 func (app *application) UpdateUser(w http.ResponseWriter, r *http.Request) {
 	var user Services.User
 
@@ -196,6 +257,18 @@ func (app *application) UpdateUser(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("User updated successfully"))
 }
 
+// authUser godoc
+//	@Summary		Authenticate user
+//	@Description	Generate a JWT token for the user
+//	@Tags			users
+//	@Accept			json
+//	@Produce		json
+//	@Param			credentials	body		object					true	"User credentials"
+//	@Success		200			{object}	map[string]interface{}	"Token and user data"
+//	@Failure		400			{object}	string					"Bad Request"
+//	@Failure		401			{object}	string					"Unauthorized"
+//	@Failure		500			{object}	string					"Internal Server Error"
+//	@Router			/user/auth [post]
 func (app *application) authUser(w http.ResponseWriter, r *http.Request) {
 	var authRequest struct {
 		PhoneNumber string `json:"phone_number"`

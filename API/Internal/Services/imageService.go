@@ -9,13 +9,36 @@ import (
 	"path/filepath"
 )
 
+// Image represents an image in the system
+// @Description An image associated with a user or listing, with information about its URL, visibility, and creation date.
+// @Model
 type Image struct {
-	ImageID       int    `json:"image_id"`
-	URL           string `json:"url"`
-	UserID        int    `json:"user_id"`
-	ListingID     int    `json:"listing_id,omitempty"` // Nullable
-	ShowOnProfile bool   `json:"show_on_profile"`
-	DateCreated   string `json:"-"`
+	// ImageID is the unique identifier for the image
+	// @example 123
+	ImageID int `json:"image_id"`
+
+	// URL is the link to the image
+	// @example "https://example.com/images/123.jpg"
+	URL string `json:"url"`
+
+	// UserID is the ID of the user who uploaded the image
+	// @example 1
+	UserID int `json:"user_id"`
+
+	// ListingID is the ID of the listing to which the image is associated, if applicable
+	// Nullable field, can be omitted or null if not associated with a listing
+	// @example 101
+	ListingID int `json:"listing_id,omitempty"`
+
+	// ShowOnProfile specifies if the image should be displayed on the user's profile
+	// @example true
+	ShowOnProfile bool `json:"show_on_profile"`
+
+	// DateCreated is the date when the image was uploaded
+	// Format: "2006-01-02 15:04:05"
+	// This field is omitted in JSON responses
+	// @example "2024-12-16 14:30:00"
+	DateCreated string `json:"-"` // Exclude from JSON output
 }
 
 var imagesDIR string = Env.GetString("SRV_DIR", "") + "/ServerImages"

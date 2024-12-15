@@ -7,19 +7,59 @@ import (
 	"fmt"
 )
 
+// Transaction represents a transaction between users for a listing
+// @Description A transaction involving two users for a specific listing, including details about the price, currency, and job dates.
 type Transaction struct {
-	TransactionID       int     `json:"transaction_id"`
-	UserOfferedID       int     `json:"user_offered_id"`
-	UserOfferingID      int     `json:"user_offering_id"`
-	ListingID           int     `json:"listing_id"`
-	Price               float64 `json:"price_with_currency"`
-	CurrencyCode        string  `json:"currency_code"`
-	DateCreated         string  `json:"date_created"`   // Format as "2006-01-02 15:04:05"
-	JobStartDate        string  `json:"job_start_date"` // Format as "2006-01-02"
-	JobEndDate          string  `json:"job_end_date"`   // Format as "2006-01-02"
-	DetailsFromOffered  string  `json:"details_from_offered"`
-	DetailsFromOffering string  `json:"details_from_offering"`
-	Status              string  `json:"status"`
+	// TransactionID is the unique identifier for the transaction
+	// @example 12345
+	TransactionID int `json:"transaction_id"`
+
+	// UserOfferedID is the user ID of the person offering the transaction
+	// @example 1
+	UserOfferedID int `json:"user_offered_id"`
+
+	// UserOfferingID is the user ID of the person requesting the transaction
+	// @example 2
+	UserOfferingID int `json:"user_offering_id"`
+
+	// ListingID is the ID of the listing associated with the transaction
+	// @example 101
+	ListingID int `json:"listing_id"`
+
+	// Price is the price of the transaction, in the specified currency
+	// @example 100.50
+	Price float64 `json:"price_with_currency"`
+
+	// CurrencyCode is the currency code used for the transaction
+	// @example "USD"
+	CurrencyCode string `json:"currency_code"`
+
+	// DateCreated is the date when the transaction was created
+	// Format: "2006-01-02 15:04:05"
+	// @example "2024-12-16 14:30:00"
+	DateCreated string `json:"date_created"`
+
+	// JobStartDate is the date when the job is scheduled to start
+	// Format: "2006-01-02"
+	// @example "2024-12-20"
+	JobStartDate string `json:"job_start_date"`
+
+	// JobEndDate is the date when the job is scheduled to end
+	// Format: "2006-01-02"
+	// @example "2024-12-25"
+	JobEndDate string `json:"job_end_date"`
+
+	// DetailsFromOffered are the details provided by the user offering the transaction
+	// @example "The work will be completed in two phases."
+	DetailsFromOffered string `json:"details_from_offered"`
+
+	// DetailsFromOffering are the details provided by the user requesting the transaction
+	// @example "Please ensure to finish the job before the end of the week."
+	DetailsFromOffering string `json:"details_from_offering"`
+
+	// Status is the current status of the transaction (e.g., pending, completed, etc.)
+	// @example "pending"
+	Status string `json:"status"`
 }
 
 type TransactionService struct {

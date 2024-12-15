@@ -14,17 +14,47 @@ import (
 )
 
 // User struct represents a user in the system.
+// User represents a user in the system
+// @Description A user with personal information, contact details, and location data
 type User struct {
-	UserID      int        `json:"user_id"`
-	FirstName   string     `json:"first_name"`
-	LastName    string     `json:"last_name"`
-	PhoneNumber string     `json:"phone_number"`
-	DateOfBirth string     `json:"date_of_birth"`
-	Profession  string     `json:"profession"`
-	Location    *geo.Point `json:"location"`
-	LocDetails  Address    `json:"loc_details"`
-	Password    string     `json:"password"`
-	ImageId     string     `json:"image_id"`
+	// UserID is the unique identifier for the user
+	// @example 1
+	UserID int `json:"user_id"`
+
+	// FirstName is the user's first name
+	// @example "John"
+	FirstName string `json:"first_name"`
+
+	// LastName is the user's last name
+	// @example "Doe"
+	LastName string `json:"last_name"`
+
+	// PhoneNumber is the user's phone number
+	// @example "+1234567890"
+	PhoneNumber string `json:"phone_number"`
+
+	// DateOfBirth is the user's date of birth
+	// @example "1990-01-01"
+	DateOfBirth string `json:"date_of_birth"`
+
+	// Profession is the user's profession
+	// @example "Software Developer"
+	Profession string `json:"profession"`
+
+	// Location is the user's geographical location represented as longitude and latitude
+	// @example {"latitude": 34.0522, "longitude": -118.2437}
+	Location *geo.Point `json:"location"`
+
+	// LocDetails contains additional address information for the user's location
+	LocDetails Address `json:"loc_details"`
+
+	// Password is the user's password (ensure it is encrypted or hashed when stored)
+	// @example "secretpassword"
+	Password string `json:"password"`
+
+	// ImageId is the ID of the user's profile image
+	// @example "image_12345"
+	ImageId string `json:"image_id"`
 }
 
 type Address struct {

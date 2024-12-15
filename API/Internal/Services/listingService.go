@@ -8,18 +8,51 @@ import (
 	geo "github.com/paulmach/go.geo"
 )
 
-// Listing represents the listing structure
+// Listing represents a listing in the marketplace
+// @Description A listing that can either be a request or offer, containing details about the title, description, and user information.
 type Listing struct {
-	ListingID   int        `json:"listing_id"`
-	Type        string     `json:"type"`     // Enum: 'Request' or 'Offer'
-	Location    *geo.Point `json:"location"` // Custom handling may be needed for POINT
-	UserID      int        `json:"user_id"`
-	Title       string     `json:"title"`
-	Description string     `json:"description"`
-	DateCreated string     `json:"date_created"` // Format as "2006-01-02 15:04:05"
-	Active      bool       `json:"active"`
-	City        string     `json:"city"`
-	Country     string     `json:"country"`
+	// ListingID is the unique identifier for the listing
+	// @example 101
+	ListingID int `json:"listing_id"`
+
+	// Type specifies whether the listing is a request or offer
+	// Enum: 'Request', 'Offer'
+	// @example "Offer"
+	Type string `json:"type"`
+
+	// Location is the geographical location of the listing
+	// Custom handling may be needed for geo.Point type
+	// @example {"lat": 34.0522, "lng": -118.2437}
+	Location *geo.Point `json:"location"`
+
+	// UserID is the ID of the user who created the listing
+	// @example 1
+	UserID int `json:"user_id"`
+
+	// Title is the title of the listing
+	// @example "Looking for a plumber"
+	Title string `json:"title"`
+
+	// Description is the detailed description of the listing
+	// @example "Need a plumber for a quick job fixing a leaky pipe."
+	Description string `json:"description"`
+
+	// DateCreated is the date when the listing was created
+	// Format: "2006-01-02 15:04:05"
+	// @example "2024-12-16 14:30:00"
+	DateCreated string `json:"date_created"`
+
+	// Active specifies whether the listing is currently active
+	// @example true
+	Active bool `json:"active"`
+
+	// City is the city where the listing is located
+	// @example "Los Angeles"
+	City string `json:"city"`
+
+	// Country is the country where the listing is located
+	// @example "USA"
+	Country string `json:"country"`
 }
 
 // ListingService is the service layer for listing-related operations

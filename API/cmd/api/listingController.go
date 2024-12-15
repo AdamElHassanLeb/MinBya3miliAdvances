@@ -9,6 +9,13 @@ import (
 )
 
 // GetAllListings handles the request to get all listings, optionally filtering by type.
+//	@Summary		Get all listings
+//	@Description	Retrieve a list of all listings, optionally filtered by type.
+//	@Tags			Listings
+//	@Param			type	query		string				false	"Listing type"	Enums(offer, request)
+//	@Success		200		{array}		Services.Listing	"List of listings"
+//	@Failure		500		{string}	string				"Internal Server Error"
+//	@Router			/listings [get]
 func (app *application) GetAllListings(w http.ResponseWriter, r *http.Request) {
 	// Extract optional 'type' query parameter
 	listingType := chi.URLParam(r, "type")
@@ -28,6 +35,15 @@ func (app *application) GetAllListings(w http.ResponseWriter, r *http.Request) {
 }
 
 // GetListingByID handles the request to get a listing by its ID.
+//	@Summary		Get a listing by ID
+//	@Description	Retrieve a listing by its unique ID.
+//	@Tags			Listings
+//	@Param			id	path		int					true	"Listing ID"
+//	@Success		200	{object}	Services.Listing	"Detailed listing"
+//	@Failure		400	{string}	string				"Invalid listing ID"
+//	@Failure		404	{string}	string				"Listing not found"
+//	@Failure		500	{string}	string				"Internal Server Error"
+//	@Router			/listings/{id} [get]
 func (app *application) GetListingByID(w http.ResponseWriter, r *http.Request) {
 	// Extract listing ID from the URL
 	listingIDStr := chi.URLParam(r, "id")
@@ -57,6 +73,15 @@ func (app *application) GetListingByID(w http.ResponseWriter, r *http.Request) {
 }
 
 // GetListingsByUserID handles getting listings by user ID and type.
+//	@Summary		Get listings by user ID
+//	@Description	Retrieve listings created by a specific user, optionally filtered by type.
+//	@Tags			Listings
+//	@Param			user_id	path		int					true	"User ID"
+//	@Param			type	path		string				true	"Listing type"	Enums(offer, request)
+//	@Success		200		{array}		Services.Listing	"List of listings"
+//	@Failure		400		{string}	string				"Invalid user ID"
+//	@Failure		500		{string}	string				"Internal Server Error"
+//	@Router			/listings/user/{user_id}/{type} [get]
 func (app *application) GetListingsByUserID(w http.ResponseWriter, r *http.Request) {
 	// Extract userID and listingType from the URL
 	userIDStr := chi.URLParam(r, "user_id")
@@ -82,6 +107,15 @@ func (app *application) GetListingsByUserID(w http.ResponseWriter, r *http.Reque
 }
 
 // CreateListing handles the request to create a new listing.
+//	@Summary		Create a new listing
+//	@Description	Create a new listing for the authenticated user.
+//	@Tags			Listings
+//	@Param			listing	body		Services.Listing	true	"Listing data"
+//	@Success		201		{object}	Services.Listing	"Created listing"
+//	@Failure		400		{string}	string				"Invalid input"
+//	@Failure		401		{string}	string				"Unauthorized"
+//	@Failure		500		{string}	string				"Internal Server Error"
+//	@Router			/listings [post]
 func (app *application) CreateListing(w http.ResponseWriter, r *http.Request) {
 	var listing Services.Listing
 
@@ -118,6 +152,16 @@ func (app *application) CreateListing(w http.ResponseWriter, r *http.Request) {
 }
 
 // UpdateListing handles the request to update an existing listing.
+//	@Summary		Update a listing
+//	@Description	Update an existing listing created by the authenticated user.
+//	@Tags			Listings
+//	@Param			id		path		int					true	"Listing ID"
+//	@Param			listing	body		Services.Listing	true	"Updated listing data"
+//	@Success		200		{string}	string				"Listing updated successfully"
+//	@Failure		400		{string}	string				"Invalid input"
+//	@Failure		401		{string}	string				"Unauthorized"
+//	@Failure		500		{string}	string				"Internal Server Error"
+//	@Router			/listings/{id} [put]
 func (app *application) UpdateListing(w http.ResponseWriter, r *http.Request) {
 	var listing Services.Listing
 
@@ -164,6 +208,15 @@ func (app *application) UpdateListing(w http.ResponseWriter, r *http.Request) {
 }
 
 // DeleteListing handles the HTTP request to delete a listing by ID.
+//	@Summary		Delete a listing
+//	@Description	Delete a listing by its ID, only if the user is the creator.
+//	@Tags			Listings
+//	@Param			id	path		int		true	"Listing ID"
+//	@Success		204	{string}	string	"No content"
+//	@Failure		400	{string}	string	"Invalid listing ID"
+//	@Failure		401	{string}	string	"Unauthorized"
+//	@Failure		500	{string}	string	"Internal Server Error"
+//	@Router			/listings/{id} [delete]
 func (app *application) DeleteListing(w http.ResponseWriter, r *http.Request) {
 	// Extract listing ID from the URL
 	listingIDStr := chi.URLParam(r, "id")
@@ -199,7 +252,16 @@ func (app *application) DeleteListing(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNoContent) // 204 No Content for successful deletion
 }
 
-// GetListingsBySearch handles the request to get listings by a search query and type.
+// GetListingsBySearch handles the HTTP request to get listings by search query and type.
+//	@Summary		Get listings by search query and type
+//	@Description	Retrieves a list of listings that match a search query and a specific listing type (e.g., offer or request).
+//	@Tags			Listings
+//	@Param			query	path		string	true	"Search query"
+//	@Param			type	path		string	true	"Type of the listing (e.g., offer or request)"
+//	@Success		200		{array}		Listing	"List of listings matching the search query"
+//	@Failure		400		{string}	string	"Invalid search query or listing type"
+//	@Failure		500		{string}	string	"Internal server error"
+//	@Router			/listings/search/{query}/{type} [get]
 func (app *application) GetListingsBySearch(w http.ResponseWriter, r *http.Request) {
 	query := chi.URLParam(r, "query")
 	listingType := chi.URLParam(r, "type")
@@ -218,7 +280,18 @@ func (app *application) GetListingsBySearch(w http.ResponseWriter, r *http.Reque
 	}
 }
 
-// GetListingsByDistance handles the request to get listings by location and distance.
+// GetListingsByDistance handles the HTTP request to get listings by location and distance.
+//	@Summary		Get listings by location and distance
+//	@Description	Retrieves a list of listings within a specified distance from a given location (latitude and longitude).
+//	@Tags			Listings
+//	@Param			latitude		path		float64	true	"Latitude of the location"
+//	@Param			longitude		path		float64	true	"Longitude of the location"
+//	@Param			max_distance	path		float64	true	"Maximum distance (in kilometers) to search listings within"
+//	@Param			type			path		string	true	"Type of the listing (e.g., offer or request)"
+//	@Success		200				{array}		Listing	"List of listings"
+//	@Failure		400				{string}	string	"Invalid parameters"
+//	@Failure		500				{string}	string	"Internal server error"
+//	@Router			/listings/distance/{latitude}/{longitude}/{max_distance}/{type} [get]
 func (app *application) GetListingsByDistance(w http.ResponseWriter, r *http.Request) {
 	latitude, err := strconv.ParseFloat(chi.URLParam(r, "latitude"), 64)
 	if err != nil {
@@ -251,7 +324,19 @@ func (app *application) GetListingsByDistance(w http.ResponseWriter, r *http.Req
 	}
 }
 
-// GetListingsByDistanceAndSearch handles the request to get listings by location and distance.
+// GetListingsByDistanceAndSearch handles the HTTP request to get listings by location, distance, and search query.
+//	@Summary		Get listings by location, distance, and search query
+//	@Description	Retrieves a list of listings within a specified distance and matching a search query.
+//	@Tags			Listings
+//	@Param			latitude		path		float64	true	"Latitude of the location"
+//	@Param			longitude		path		float64	true	"Longitude of the location"
+//	@Param			max_distance	path		float64	true	"Maximum distance (in kilometers) to search listings within"
+//	@Param			type			path		string	true	"Type of the listing (e.g., offer or request)"
+//	@Param			query			path		string	true	"Search query"
+//	@Success		200				{array}		Listing	"List of listings matching the search query"
+//	@Failure		400				{string}	string	"Invalid parameters"
+//	@Failure		500				{string}	string	"Internal server error"
+//	@Router			/listings/distance-search/{latitude}/{longitude}/{max_distance}/{type}/{query} [get]
 func (app *application) GetListingsByDistanceAndSearch(w http.ResponseWriter, r *http.Request) {
 	latitude, err := strconv.ParseFloat(chi.URLParam(r, "latitude"), 64)
 	if err != nil {
@@ -286,42 +371,14 @@ func (app *application) GetListingsByDistanceAndSearch(w http.ResponseWriter, r 
 	}
 }
 
-/*
-// GetListingsByLocation handles the request to get listings by location and range.
-func (app *application) GetListingsByLocation(w http.ResponseWriter, r *http.Request) {
-	latitude, err := strconv.ParseFloat(chi.URLParam(r, "latitude"), 64)
-	if err != nil {
-		http.Error(w, "Invalid latitude", http.StatusBadRequest)
-		return
-	}
-	longitude, err := strconv.ParseFloat(chi.URLParam(r, "longitude"), 64)
-	if err != nil {
-		http.Error(w, "Invalid longitude", http.StatusBadRequest)
-		return
-	}
-	maxRange, err := strconv.ParseFloat(chi.URLParam(r, "max_range"), 64)
-	if err != nil {
-		http.Error(w, "Invalid maxRange", http.StatusBadRequest)
-		return
-	}
-	listingType := chi.URLParam(r, "type")
-
-	// Call the service to query listings by location
-	listings, err := app.Service.Listings.QueryByLocation(r.Context(), latitude, longitude, maxRange, listingType)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	w.Header().Set("Content-Type", "application/json")
-	err = json.NewEncoder(w).Encode(listings)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
-}
-*/
-
-// GetListingsByDate handles the request to get listings by date, sorted descending.
+// GetListingsByDate handles the HTTP request to get listings by date created, sorted descending.
+//	@Summary		Get listings by date created, sorted descending
+//	@Description	Retrieves a list of listings sorted by creation date in descending order.
+//	@Tags			Listings
+//	@Param			type	path		string	true	"Type of the listing (e.g., offer or request)"
+//	@Success		200		{array}		Listing	"List of listings sorted by creation date"
+//	@Failure		500		{string}	string	"Internal server error"
+//	@Router			/listings/date/{type} [get]
 func (app *application) GetListingsByDate(w http.ResponseWriter, r *http.Request) {
 	listingType := chi.URLParam(r, "type")
 
@@ -339,7 +396,16 @@ func (app *application) GetListingsByDate(w http.ResponseWriter, r *http.Request
 	}
 }
 
-// GetListingsByDateAndSearch handles the request to get listings by date and search query.
+// GetListingsByDateAndSearch handles the HTTP request to get listings by date and search query.
+//	@Summary		Get listings by date and search query
+//	@Description	Retrieves a list of listings sorted by creation date in descending order that match a search query.
+//	@Tags			Listings
+//	@Param			query	path		string	true	"Search query"
+//	@Param			type	path		string	true	"Type of the listing (e.g., offer or request)"
+//	@Success		200		{array}		Listing	"List of listings matching the search query"
+//	@Failure		400		{string}	string	"Invalid parameters"
+//	@Failure		500		{string}	string	"Internal server error"
+//	@Router			/listings/date-search/{query}/{type} [get]
 func (app *application) GetListingsByDateAndSearch(w http.ResponseWriter, r *http.Request) {
 	query := chi.URLParam(r, "query")
 	listingType := chi.URLParam(r, "type")
