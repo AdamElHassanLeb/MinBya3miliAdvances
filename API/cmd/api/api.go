@@ -85,13 +85,14 @@ func (app *application) mount() http.Handler {
 			})
 			mainRouter.Route("/transaction", func(transactionRouter chi.Router) {
 				transactionRouter.With(Middleware.AuthMiddleware).Post("/create", app.createTransaction)
-				transactionRouter.Get("/transactionId/{id}", app.getTransactionByID)
-				transactionRouter.Get("/offered/{user_id}/{status}", app.getTransactionsByOfferedUserAndStatus)
-				transactionRouter.Get("/offering/{user_id}/{status}", app.getTransactionsByOfferingUserAndStatus)
-				transactionRouter.Get("/listing/{listing_id}/{status}", app.getTransactionsByListingAndStatus)
+				transactionRouter.With(Middleware.AuthMiddleware).Get("/transactionId/{id}", app.getTransactionByID)
+				transactionRouter.With(Middleware.AuthMiddleware).Get("/offered/{user_id}/{status}", app.getTransactionsByOfferedUserAndStatus)
+				transactionRouter.With(Middleware.AuthMiddleware).Get("/offering/{user_id}/{status}", app.getTransactionsByOfferingUserAndStatus)
+				transactionRouter.With(Middleware.AuthMiddleware).Get("/listing/{listing_id}/{status}", app.getTransactionsByListingAndStatus)
+				transactionRouter.With(Middleware.AuthMiddleware).Put("/{id}", app.updateTransaction)    // Update transaction
+				transactionRouter.With(Middleware.AuthMiddleware).Delete("/{id}", app.deleteTransaction) // Delete transaction
 
 			})
-
 		})
 	})
 

@@ -46,6 +46,8 @@ type Service struct {
 		GetByOfferedUserAndStatus(ctx context.Context, offeredUserID int, status string) ([]Transaction, error)
 		GetByOfferingUserAndStatus(ctx context.Context, offeringUserID int, status string) ([]Transaction, error)
 		GetByListingAndStatus(ctx context.Context, listingID int, status string) ([]Transaction, error)
+		Update(ctx context.Context, id int, transaction Transaction) error
+		Delete(ctx context.Context, transactionID int) error
 	}
 }
 

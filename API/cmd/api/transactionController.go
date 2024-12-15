@@ -150,3 +150,81 @@ func (app *application) getTransactionsByListingAndStatus(w http.ResponseWriter,
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }
+
+func (app *application) updateTransaction(w http.ResponseWriter, r *http.Request) {
+	// Get transaction ID from URL parameter
+	transactionIDStr := chi.URLParam(r, "id")
+	transactionID, err := strconv.Atoi(transactionIDStr)
+	if err != nil {
+		http.Error(w, "Invalid transaction ID", http.StatusBadRequest)
+		return
+	}
+
+	// Decode the updated transaction details from the request body
+	var transaction Services.Transaction
+	err = json.NewDecoder(r.Body).Decode(&transaction)
+	if err != nil {
+		http.Error(w, "Failed to decode request body: "+err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	// Ensure the user is authorized
+	tokenUserID, ok := r.Context().Value("token_user_id").(int)
+	if !ok || transaction.UserOfferedID != tokenUserID {
+		http.Error(w, "Unauthorized", http.StatusUnauthorized)
+		return
+	}
+
+	// Update the transaction
+	err = app.Service.Transactions.Update(r.Context(), transactionID, transaction)
+	if err != nil {
+		http.Error(w, "Failed to update transaction: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// Respond with success
+	w.WriteHeader(http.StatusNoContent)
+}
+
+func (app *application) deleteTransaction(w http.ResponseWriter, r *http.Request) {
+	// Get transaction ID from URL parameter
+	transactionIDStr := chi.URLParam(r, "id")
+	transactionID, err := strconv.Atoi(transactionIDStr)
+	if err != nil {
+		http.Error(w, "Invalid transaction ID", http.StatusBadRequest)
+		return
+	}
+
+	// Ensure the user is authorized
+	tokenUserID, ok := r.Context().Value("token_user_id").(int)
+	if !ok {
+		http.Error(w, "Unauthorized", http.StatusUnauthorized)
+		return
+	}
+
+	// Retrieve the transaction to ensure ownership
+	transaction, err := app.Service.Transactions.GetByID(r.Context(), transactionID)
+	if err != nil {
+		if err.Error() == "transaction not found" {
+			http.Error(w, "Transaction not found", http.StatusNotFound)
+			return
+		}
+		http.Error(w, "Failed to retrieve transaction: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	if transaction.UserOfferedID != tokenUserID {
+		http.Error(w, "Unauthorized", http.StatusUnauthorized)
+		return
+	}
+
+	// Delete the transaction
+	err = app.Service.Transactions.Delete(r.Context(), transactionID)
+	if err != nil {
+		http.Error(w, "Failed to delete transaction: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// Respond with success
+	w.WriteHeader(http.StatusNoContent)
+}

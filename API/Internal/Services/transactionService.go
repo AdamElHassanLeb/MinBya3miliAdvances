@@ -149,3 +149,56 @@ func (t *TransactionService) GetByListingAndStatus(ctx context.Context, listingI
 	}
 	return transactions, nil
 }
+
+func (t *TransactionService) Delete(ctx context.Context, transactionID int) error {
+	query := "DELETE FROM transactions WHERE transaction_id = ?"
+
+	result, err := t.db.ExecContext(ctx, query, transactionID)
+	if err != nil {
+		return fmt.Errorf("could not delete transaction: %w", err)
+	}
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		return fmt.Errorf("could not check rows affected: %w", err)
+	}
+	if rowsAffected == 0 {
+		return errors.New("no transaction found to delete")
+	}
+
+	return nil
+}
+
+func (t *TransactionService) Update(ctx context.Context, id int, transaction Transaction) error {
+	query := `UPDATE transactions 
+              SET user_offered_id = ?, 
+                  user_offering_id = ?, 
+                  listing_id = ?, 
+                  price = ?, 
+                  currency_code = ?, 
+                  job_start_date = ?, 
+                  job_end_date = ?, 
+                  details_from_offered = ?, 
+                  details_from_offering = ?, 
+                  status = ?
+              WHERE transaction_id = ?`
+
+	_, err := t.db.ExecContext(ctx, query,
+		transaction.UserOfferedID,
+		transaction.UserOfferingID,
+		transaction.ListingID,
+		transaction.Price,
+		transaction.CurrencyCode,
+		transaction.JobStartDate,
+		transaction.JobEndDate,
+		transaction.DetailsFromOffered,
+		transaction.DetailsFromOffering,
+		transaction.Status,
+		id,
+	)
+
+	if err != nil {
+		return fmt.Errorf("could not update transaction with ID %d: %w", id, err)
+	}
+	return nil
+}

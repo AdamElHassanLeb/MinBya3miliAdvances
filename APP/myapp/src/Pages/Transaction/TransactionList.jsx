@@ -1,35 +1,52 @@
-import React from 'react'
-import {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from 'react'
 import {UserContext} from "../../utils/UserContext";
 import TransactionService from "../../services/TransactionService";
-import {Box, Typography} from "@mui/material";
+import {Box, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Typography} from "@mui/material";
 import TransactionListItem from "../../components/Transaction/TransactionListItem";
-
 
 const TransactionList = () => {
 
-    const { user } = useContext(UserContext);
+    const [status, setStatus] = useState("All"); // "accepted", "rejected", "pending"
+    const [direction, setDirection] = useState("incoming"); // "incoming", "outgoing"
+
+    const {user} = useContext(UserContext);
     const [transactions, setTransactions] = useState([]);
 
 
     useEffect(() => {
 
-        async function fetchTransactions() {
-            try {
-                const transactionsData = await TransactionService.getTransactionsByOfferedUserAndStatus(user.user_id, "");
-                setTransactions(transactionsData)
-            } catch (e) {
-                console.error(e);
+       handleChange()
+    }, [status, direction]);
 
+
+    const handleStatusChange = (event) => {
+        setStatus(event.target.value);
+        handleChange();
+    };
+
+    const handleDirectionChange = (event) => {
+        setDirection(event.target.value);
+        handleChange();
+    };
+
+
+    const handleChange = async () => {
+        try{
+            if(direction === "incoming"){
+                const transactions = await TransactionService.getTransactionsByOfferedUserAndStatus(user.user_id, status)
+                setTransactions(transactions);
+            }else{
+                const transactions = await TransactionService.getTransactionsByOfferingUserAndStatus(user.user_id, status)
+                setTransactions(transactions);
             }
+        }catch(err){
+            console.error(err);
+            setTransactions([])
         }
 
-        fetchTransactions();
-    }, []);
-
+    }
 
     return (<>
-
         <Box
             className="modal-people"
             sx={{
@@ -48,19 +65,48 @@ const TransactionList = () => {
             }}
         >
 
+
+            <Box>
+                <FormControl>
+                    <FormLabel>Direction</FormLabel>
+                    <RadioGroup value={direction} onChange={handleDirectionChange} row>
+                        <FormControlLabel value="incoming" control={<Radio/>} label="Incoming"/>
+                        <FormControlLabel value="outgoing" control={<Radio/>} label="Outgoing"/>
+                    </RadioGroup>
+                </FormControl>
+
+                <FormControl>
+                    <FormLabel>Status</FormLabel>
+                    <RadioGroup value={status} onChange={handleStatusChange} row>
+                        <FormControlLabel value="Accepted" control={<Radio/>} label="Accepted"/>
+                        <FormControlLabel value="Completed" control={<Radio/>} label="Completed"/>
+                        <FormControlLabel value="Pending" control={<Radio/>} label="Pending"/>
+                        <FormControlLabel value="All" control={<Radio/>} label="All"/>
+                    </RadioGroup>
+                </FormControl>
+            </Box>
+
+
             {
-                transactions && transactions.length > 0 ? (
-
-                    <ul style={{ padding: 0, listStyle: "none", margin: 0, background: "transparent" }}>
-                        {
-                            transactions.map((item, index) => (
-                                <li key={index} style={{ marginBottom: "16px", background: "transparent" }}>
-                                    <TransactionListItem transaction={item} />
-                                </li>
-                            ))
-                        }
-                    </ul>
-
+                transactions && transactions.length > 0 ? (<>
+                        <Typography>Transactions:</Typography>
+                        <ul style={{
+                            padding: 0,
+                            listStyle: "none",
+                            margin: 0,
+                            background: "transparent",
+                            marginTop: 20,
+                            overflowY: "auto",
+                        }}>
+                            {
+                                transactions.map((item, index) => (
+                                    <li key={index} style={{marginBottom: "16px", background: "transparent"}}>
+                                        <TransactionListItem transaction={item}/>
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                    </>
                 ) : (<Typography> No Transactions </Typography>)
             }
 

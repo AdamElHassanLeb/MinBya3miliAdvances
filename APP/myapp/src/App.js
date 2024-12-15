@@ -14,6 +14,7 @@ import UserPrivateProfile from "./Pages/Profile/UserPrivateProfile";
 import './StyleSheets/App.css'
 import UserPublicProfile from "./Pages/Profile/UserPublicProfile";
 import TransactionList from "./Pages/Transaction/TransactionList";
+import TransactionDetails from "./Pages/Transaction/TransactionDetails";
 
 const PrivateRoutes = ({ children }) => {
     const { user } = useContext(UserContext);
@@ -66,6 +67,8 @@ function App() {
                                 <Route path="/UserPrvateProfile" element={<UserPrivateProfile />} />
                                 <Route path="/User/:userId" element={<UserPublicProfile/>} />
                                 <Route path="/Transactions" element={<TransactionList/>} />
+                                <Route path="/Transaction:transactionId" element={<TransactionDetails/>} />
+
 
                             </Routes>
                         </PrivateRoutes>

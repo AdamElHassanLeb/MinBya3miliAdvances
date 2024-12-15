@@ -52,7 +52,9 @@ const TransactionListItem = ({transaction}) => {
                    alignItems="center"
                    spacing={0.5}
                    wrap="nowrap"
-                   sx={{ padding: 1, width: "80%", marginLeft : 'auto', marginRight : "auto", background: "transparent", borderRadius: "5px" }}>
+                   sx={{ padding: 1, width: "80%", marginLeft : 'auto', marginRight : "auto", background: "transparent", borderRadius: "5px" }}
+                    onClick={() => {navigate(`/transaction/${transaction}`)}}
+            >
 
 
                 <Grid item>
