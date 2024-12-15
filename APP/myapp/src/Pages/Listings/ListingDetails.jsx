@@ -20,6 +20,9 @@ import {
 import { UserContext } from "../../utils/UserContext"; // Assuming you have a context for user data
 import placeholderImage from '../../assets/placeholder.png';
 import serverAddress from "../../utils/ServerAddress";
+import DeleteIcon from "@mui/icons-material/Delete";
+import UpdateIcon from '@mui/icons-material/Update';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 
 const ListingDetail = () => {
     const { listingId } = useParams(); // Get the listingId from URL params
@@ -219,7 +222,7 @@ const ListingDetail = () => {
                             Save
                         </Button>
                     ) : (
-                        <Button variant="contained" color="primary" onClick={handleEditClick}>
+                        <Button variant="contained" color="primary" onClick={handleEditClick} startIcon={<UpdateIcon/>}>
                             Update Listing
                         </Button>
                     )}
@@ -227,13 +230,19 @@ const ListingDetail = () => {
                         variant="contained"
                         color="error"
                         onClick={handleOpenModal}
+                        startIcon={<DeleteIcon />}
+                        className = "DeleteButton"
                     >
                         Delete Listing
                     </Button>
                 </Box>
             ) : <>
-                <Divider sx={{ marginBottom: '15px' }} />
-                <h1>{"Batata"}</h1>
+                <Divider sx={{ marginBottom: '15px' }}  />
+                <Button variant="contained"
+                        color="primary"
+                        startIcon={<LocalOfferIcon/>}
+                > Send Offer
+                </Button>
             </>
             }
 

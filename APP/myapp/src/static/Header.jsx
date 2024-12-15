@@ -11,6 +11,7 @@ import {UserContext} from "../utils/UserContext";
 import serverAddress from "../utils/ServerAddress";
 import PeopleModal from "../Pages/Profile/PeopleModal";
 import {Brightness3} from "@mui/icons-material"; // Dark mode icon
+import HandymanIcon from '@mui/icons-material/Handyman';
 
 
 const Header = ({ toggleTheme, isDarkMode }) => {
@@ -35,6 +36,7 @@ const Header = ({ toggleTheme, isDarkMode }) => {
                     </Box>*/}
                     {/* "Min Bya3mili" text as a link to home */}
                     <Typography variant="h6" component={Link} to="/Home" color="white" sx={{ textDecoration: 'none' }}>
+                        <HandymanIcon sx = {{padding:'5'}}/>
                         Min Bya3mili
                     </Typography>
 

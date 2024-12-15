@@ -8,6 +8,7 @@ import ListingService from "../../services/ListingService";
 import ImageService from "../../services/ImageService";
 import {useNavigate} from "react-router-dom";
 import MapIcon from "../../utils/Icons";
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 const CreateListing = () => {
     const [listingType, setListingType] = useState('');
@@ -124,6 +125,7 @@ const CreateListing = () => {
                 component="label"
                 color="secondary"
                 fullWidth
+                startIcon={<CloudUploadIcon />}
             >
                 Select Images
                 <input

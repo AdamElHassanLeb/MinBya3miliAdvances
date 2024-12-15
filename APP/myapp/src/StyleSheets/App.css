@@ -22,7 +22,7 @@ body {
 
 /* Base Styles (Light Mode by default) */
 body {
-  background-color: #F8F9FA; /* Light Grayish */
+  background-color: #E8F7FF; /* Light Grayish */
   color: #004080; /* Dark Blue */
   font-family: 'Helvetica Neue', Arial, sans-serif;
 }
@@ -57,10 +57,10 @@ body {
 /* Custom Classes */
 
 .User-Row {
-  background-color: #ffffff; /* Purple Button */
+  background: transparent; /* Purple Button */
 }
 .User-Row:hover {
-  background-color: #b9b9b9; /* Dark Purple */
+  background-color: #91d5c1; /* Dark Purple */
 }
 
 
@@ -105,14 +105,8 @@ body {
   color: #E5F0FF; /* Light Blue */
 }
 
-.zoom {
-  transition: all 1s ease-in-out;
-}
-.zoom:hover {
-  transform: scale(1.1);
-}
- .MUIBox{
- }
+
+
 
 /* Button Styles (Light Mode) */
 .LeftTabOpenClose {
@@ -154,6 +148,22 @@ body {
 
 .modal-people .MuiButton-root:hover {
   background-color: #004080; /* Darker Blue */
+}
+
+.MUIBox{
+  background: linear-gradient(to top, #d9d9d9, #6e8b9d);
+}
+
+.zoom {
+  transition: all 1s ease-in-out;
+  background: linear-gradient(to top, #d9d9d9, #6e8b9d);
+}
+.zoom:hover {
+  transform: scale(1.1);
+}
+
+.modal-people{
+  background: linear-gradient(to top, #d9d9d9, #6e8b9d);
 }
 
 /* Dark Mode Color Overrides (when dark-mode class is added) */
@@ -222,6 +232,7 @@ body.dark-mode .MuiAppBar-root .MuiButtonBase-root {
   background-color: transparent;
 }
 
+
 /* Links */
 body.dark-mode a {
   color: #3399FF; /* Bright Blue */
@@ -232,7 +243,7 @@ body.dark-mode a:hover {
 }
 
 body.dark-mode .User-Row {
-  background-color: #1A1A1A; /* Dark Background */
+  background: transparent; /* Dark Background */
   color: #FFFFFF; /* White Text */
 }
 
@@ -244,6 +255,10 @@ body.dark-mode .User-Row:hover {
 body.dark-mode .MuiButton-root {
   background-color: #0077CC; /* Dark Blue Button */
   color: #FFFFFF; /* White Text */
+}
+
+body.dark-mode .DeleteButton{
+  background-color: red;
 }
 
 body.dark-mode .HeaderButton {
@@ -292,6 +307,10 @@ body.dark-mode .bg-light-blue {
 
 body.dark-mode .border-accent {
   border-color: #3399FF; /* Bright Blue Border */
+}
+
+body.dark-mode .modal-people{
+  background: linear-gradient(to right, #1A1A1A, #36444d);
 }
 
 /* Horizontal Header */

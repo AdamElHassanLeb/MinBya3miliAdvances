@@ -35,6 +35,7 @@ func (t *TransactionService) queryTransaction(ctx context.Context, query string,
 	defer rows.Close()
 
 	var transactions []Transaction
+
 	for rows.Next() {
 		var transaction Transaction
 		if err := rows.Scan(&transaction.TransactionID, &transaction.UserOfferedID, &transaction.UserOfferingID,

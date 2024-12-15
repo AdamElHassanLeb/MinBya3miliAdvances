@@ -24,6 +24,11 @@ import 'leaflet/dist/leaflet.css';
 import ImageService from "../../services/ImageService";
 import {useNavigate} from "react-router-dom";
 import serverAddress from "../../utils/ServerAddress";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import DeleteIcon from '@mui/icons-material/Delete';
+import UpdateIcon from "@mui/icons-material/Update";
+import SaveAltIcon from '@mui/icons-material/SaveAlt';
+
 
 const UserProfile = () => {
     const { user } = useContext(UserContext);
@@ -277,7 +282,7 @@ const UserProfile = () => {
 
             {/* Buttons */}
             <Box sx={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
-                <Button variant="contained" color="error" onClick={handleDeleteClick}>
+                <Button variant="contained" color="error" onClick={handleDeleteClick} startIcon={<DeleteIcon />} className = "DeleteButton">
                     Delete
                 </Button>
                 <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
@@ -286,6 +291,7 @@ const UserProfile = () => {
                         component="label"
                         color="info"
                         fullWidth
+                        startIcon={<CloudUploadIcon />}
                     >
                         Select Image
                         <input
@@ -296,11 +302,11 @@ const UserProfile = () => {
                     </Button>
                 </Box>
                 {isEditing ? (
-                    <Button variant="contained" color="primary" onClick={handleSubmit}>
+                    <Button variant="contained" color="primary" onClick={handleSubmit} startIcon = {<SaveAltIcon/>}>
                         Save
                     </Button>
                 ) : (
-                    <Button variant="contained" color="primary" onClick={handleUpdateClick}>
+                    <Button variant="contained" color="primary" onClick={handleUpdateClick} startIcon={<UpdateIcon/>}>
                         Update
                     </Button>
                 )}

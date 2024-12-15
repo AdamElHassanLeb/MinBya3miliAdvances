@@ -21,6 +21,8 @@ import ImageService from "../../services/ImageService";
 import {Link} from "react-router-dom";
 import {ArrowBack, ArrowForward} from "@mui/icons-material";
 import MapIcon from "../../utils/Icons";
+import SearchIcon from '@mui/icons-material/Search';
+import CreateIcon from '@mui/icons-material/Create';
 
 const ScrollableListings = (listingType) => {
     const { user } = useContext(UserContext); // Access user data from context
@@ -228,6 +230,7 @@ const ScrollableListings = (listingType) => {
                     color="primary"
                     onClick={handleSearch}
                     fullWidth
+                    startIcon={<SearchIcon/>}
                 >
                     Search
                 </Button>
@@ -242,6 +245,7 @@ const ScrollableListings = (listingType) => {
                     variant="contained"
                     to="/CreateListing"
                     fullWidth
+                    startIcon={<CreateIcon/>}
                 >
                     Create Listing
                 </Button>

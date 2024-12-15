@@ -78,9 +78,9 @@ const PeopleModal = ({ isOpen, onClose }) => {
                     }}
                 >
                     {users && users.length > 0 ? (
-                        <ul style={{ padding: 0, listStyle: "none", margin: 0 }}>
+                        <ul style={{ padding: 0, listStyle: "none", margin: 0, background: "transparent" }}>
                             {users.map((user, index) => (
-                                <li key={index} style={{ marginBottom: "16px" }}>
+                                <li key={index} style={{ marginBottom: "16px", background: "transparent" }}>
                                     <UserSearchRow user={user} onClose={onClose} />
                                 </li>
                             ))}

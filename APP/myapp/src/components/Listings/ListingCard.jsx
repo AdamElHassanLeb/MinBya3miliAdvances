@@ -27,7 +27,10 @@ const ListingCard = ({ listing }) => {
     };
 
     return (
-        <Card sx={{ minWidth: 300, maxWidth: 300, flexShrink: 0, cursor: 'pointer'}} onClick={handleCardClick} className="zoom" elevation={20}>
+        <Card sx={{ minWidth: 300, maxWidth: 300, flexShrink: 0, cursor: 'pointer',
+            background: 'linear-gradient(to top, #d9d9d9, #6e8b9d);',
+        borderRadius: 3,}}
+              onClick={handleCardClick} className="zoom" elevation={20}>
             {/* Display the image with a placeholder for click-to-open modal */}
             <CardMedia
                 component="img"

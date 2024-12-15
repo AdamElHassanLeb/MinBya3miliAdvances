@@ -13,7 +13,7 @@ const UserSearchRow = ({ user, onClose }) => {
             alignItems="center"
             spacing={2}
             wrap="nowrap"
-            sx={{ padding: 1, width: "75%", marginLeft : 'auto', marginRight : "auto" }}
+            sx={{ padding: 1, width: "75%", marginLeft : 'auto', marginRight : "auto", background: "transparent", borderRadius: "5px" }}
             onClick={() => {
                 navigate(`/User/${user.user_id}`);
                 onClose();
