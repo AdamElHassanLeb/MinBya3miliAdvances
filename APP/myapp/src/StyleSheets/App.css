@@ -106,8 +106,6 @@ body {
 }
 
 
-
-
 /* Button Styles (Light Mode) */
 .LeftTabOpenClose {
   background-color: #00A2FF; /* Light Blue */
@@ -165,7 +163,9 @@ body {
 .modal-people{
   background: linear-gradient(to top, #d9d9d9, #6e8b9d);
 }
-
+.MUIContainer-root {
+  background: linear-gradient(to top, #d9d9d9, #6e8b9d);
+}
 /* Dark Mode Color Overrides (when dark-mode class is added) */
 
 /* Dark Mode Modal Styles */
@@ -204,7 +204,7 @@ body.dark-mode {
 }
 
 body.dark-mode .MUIContainer-root {
-  background-color: #212121;
+  background: linear-gradient(to bottom, #1A1A1A, #282828);
   color: #FFFFFF;
 }
 

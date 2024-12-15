@@ -13,6 +13,7 @@ import UserPrivateProfile from "./Pages/Profile/UserPrivateProfile";
 // Dark Mode CSS (if needed for specific overrides)
 import './StyleSheets/App.css'
 import UserPublicProfile from "./Pages/Profile/UserPublicProfile";
+import TransactionList from "./Pages/Transaction/TransactionList";
 
 const PrivateRoutes = ({ children }) => {
     const { user } = useContext(UserContext);
@@ -64,6 +65,7 @@ function App() {
                                 <Route path="/listing/:listingId" element={<ListingDetail />} />
                                 <Route path="/UserPrvateProfile" element={<UserPrivateProfile />} />
                                 <Route path="/User/:userId" element={<UserPublicProfile/>} />
+                                <Route path="/Transactions" element={<TransactionList/>} />
 
                             </Routes>
                         </PrivateRoutes>

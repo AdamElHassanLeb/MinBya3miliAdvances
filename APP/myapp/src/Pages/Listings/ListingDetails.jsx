@@ -23,8 +23,17 @@ import serverAddress from "../../utils/ServerAddress";
 import DeleteIcon from "@mui/icons-material/Delete";
 import UpdateIcon from '@mui/icons-material/Update';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
+import SendOfferModal from "../Transaction/SendOfferModal";
 
 const ListingDetail = () => {
+    //Modal Stuff
+    const [isOfferModalOpen, setIsOfferModalOpen] = useState(false);
+
+    const handleOfferModalOpen = () => {setIsOfferModalOpen(true);};
+    const handleOfferModalClose = () => {setIsOfferModalOpen(false);};
+
+
+
     const { listingId } = useParams(); // Get the listingId from URL params
     const [listing, setListing] = useState(null);
     const [editableListing, setEditableListing] = useState(null);
@@ -107,6 +116,7 @@ const ListingDetail = () => {
     };
 
     return (
+        <>
         <Box
             sx={{
                 maxWidth: '900px',
@@ -241,6 +251,7 @@ const ListingDetail = () => {
                 <Button variant="contained"
                         color="primary"
                         startIcon={<LocalOfferIcon/>}
+                        onClick={handleOfferModalOpen}
                 > Send Offer
                 </Button>
             </>
@@ -261,6 +272,8 @@ const ListingDetail = () => {
                 </DialogActions>
             </Dialog>
         </Box>
+    <SendOfferModal isOpen={isOfferModalOpen} onClose={handleOfferModalClose} User={user} OfferingUser={listingUser} Listing={listing} />
+    </>
     );
 };
 

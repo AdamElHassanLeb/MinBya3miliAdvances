@@ -14,9 +14,20 @@ func (app *application) createTransaction(w http.ResponseWriter, r *http.Request
 
 	//Token Valid
 
+	tokenUserId, ok := r.Context().Value("token_user_id").(int)
+
+	if !ok {
+		http.Error(w, "User ID not found in token", http.StatusUnauthorized)
+	}
+
 	err := json.NewDecoder(r.Body).Decode(&transaction)
 	if err != nil {
 		http.Error(w, string(err.Error()), http.StatusBadRequest)
+		return
+	}
+
+	if transaction.UserOfferedID != tokenUserId {
+		http.Error(w, string("User offering ID not found in token"), http.StatusUnauthorized)
 		return
 	}
 

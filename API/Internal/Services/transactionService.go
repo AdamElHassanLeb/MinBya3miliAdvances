@@ -77,9 +77,7 @@ func (t *TransactionService) Create(ctx context.Context, transaction *Transactio
 }
 
 func (t *TransactionService) GetByID(ctx context.Context, transactionID int) (Transaction, error) {
-	query := `SELECT transaction_id, user_offered_id, user_offering_id, listing_id, price, currency, 
-                     date_created, job_start_date, job_end_date, details_from_offered, details_from_offering, status 
-              FROM transactions WHERE transaction_id = ?`
+	query := `SELECT * FROM transactions WHERE transaction_id = ?`
 
 	transactions, err := t.queryTransaction(ctx, query, transactionID)
 	if err != nil {
@@ -97,15 +95,11 @@ func (t *TransactionService) GetByOfferedUserAndStatus(ctx context.Context, offe
 	var transactions []Transaction
 	var err error
 	if status == "Pending" || status == "Accepted" || status == "Completed" {
-		query = `SELECT transaction_id, user_offered_id, user_offering_id, listing_id, price, currency, 
-                     date_created, job_start_date, job_end_date, details_from_offered, details_from_offering, status 
-              FROM transactions WHERE user_offered_id = ? AND status = ?`
+		query = `SELECT * FROM transactions WHERE user_offered_id = ? AND status = ?`
 
 		transactions, err = t.queryTransaction(ctx, query, offeredUserID, status)
 	} else {
-		query = `SELECT transaction_id, user_offered_id, user_offering_id, listing_id, price, currency, 
-                     date_created, job_start_date, job_end_date, details_from_offered, details_from_offering, status 
-              FROM transactions WHERE user_offered_id = ?`
+		query = `SELECT * FROM transactions WHERE user_offered_id = ?`
 		transactions, err = t.queryTransaction(ctx, query, offeredUserID)
 	}
 
@@ -121,15 +115,11 @@ func (t *TransactionService) GetByOfferingUserAndStatus(ctx context.Context, off
 	var transactions []Transaction
 	var err error
 	if status == "Pending" || status == "Accepted" || status == "Completed" {
-		query = `SELECT transaction_id, user_offered_id, user_offering_id, listing_id, price, currency, 
-                     date_created, job_start_date, job_end_date, details_from_offered, details_from_offering, status 
-              FROM transactions WHERE user_offering_id = ? AND status = ?`
+		query = `SELECT * FROM transactions WHERE user_offering_id = ? AND status = ?`
 
 		transactions, err = t.queryTransaction(ctx, query, offeringUserID, status)
 	} else {
-		query = `SELECT transaction_id, user_offered_id, user_offering_id, listing_id, price, currency, 
-                     date_created, job_start_date, job_end_date, details_from_offered, details_from_offering, status 
-              FROM transactions WHERE user_offering_id = ?`
+		query = `SELECT * FROM transactions WHERE user_offering_id = ?`
 
 		transactions, err = t.queryTransaction(ctx, query, offeringUserID)
 	}
@@ -145,15 +135,11 @@ func (t *TransactionService) GetByListingAndStatus(ctx context.Context, listingI
 	var transactions []Transaction
 	var err error
 	if status == "Pending" || status == "Accepted" || status == "Completed" {
-		query = `SELECT transaction_id, user_offered_id, user_offering_id, listing_id, price, currency, 
-                     date_created, job_start_date, job_end_date, details_from_offered, details_from_offering, status 
-              FROM transactions WHERE listing_id = ? AND status = ?`
+		query = `SELECT * FROM transactions WHERE listing_id = ? AND status = ?`
 
 		transactions, err = t.queryTransaction(ctx, query, listingID, status)
 	} else {
-		query = `SELECT transaction_id, user_offered_id, user_offering_id, listing_id, price, currency, 
-                     date_created, job_start_date, job_end_date, details_from_offered, details_from_offering, status 
-              FROM transactions WHERE listing_id = ?`
+		query = `SELECT * FROM transactions WHERE listing_id = ?`
 
 		transactions, err = t.queryTransaction(ctx, query, listingID)
 	}

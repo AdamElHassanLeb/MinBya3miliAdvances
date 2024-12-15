@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react';
 import { Modal, Box, Typography, Button, TextField } from '@mui/material';
-import UserSearchRow from "./UserSearchRow";
+import UserSearchRow from "../../components/User/UserSearchRow";
 import UserService from "../../services/UserService";
 import {Link} from "react-router-dom";
 import {UserContext} from "../../utils/UserContext";

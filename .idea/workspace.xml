@@ -5,16 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86ed5ec0-1b64-4da5-913b-01262db22ba1" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Transaction/SendOfferModal.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Transaction/TransactionDetails.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Transaction/TransactionList.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/APP/myapp/src/components/Transaction/TransactionListItem.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/APP/myapp/src/services/TransactionService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/Internal/Services/transactionService.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Services/transactionService.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/cmd/api/api.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/cmd/api/api.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/cmd/api/transactionController.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/cmd/api/transactionController.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/APP/myapp/src/Pages/Listings/CreateListing.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Listings/CreateListing.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/APP/myapp/src/Pages/Listings/ListingDetails.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Listings/ListingDetails.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/APP/myapp/src/Pages/Profile/PeopleModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Profile/PeopleModal.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/Pages/Profile/UserPrivateProfile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Profile/UserPrivateProfile.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/Pages/Profile/UserSearchRow.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Profile/UserSearchRow.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/src/Pages/Profile/UserSearchRow.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/components/User/UserSearchRow.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/APP/myapp/src/StyleSheets/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/StyleSheets/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/components/Listings/ListingCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/components/Listings/ListingCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/components/Listings/ListingPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/components/Listings/ListingPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/src/StyleSheets/AppDark.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/APP/myapp/src/static/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/static/Header.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -26,9 +33,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
-        <option value="JSX File" />
-        <option value="JavaScript File" />
         <option value="Go File" />
+        <option value="JavaScript File" />
+        <option value="JSX File" />
       </list>
     </option>
   </component>
@@ -103,11 +110,11 @@
       <recent name="$PROJECT_DIR$/APP/myapp" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/APP/myapp/src/components/User" />
       <recent name="$PROJECT_DIR$/APP/myapp/src/Pages/Profile" />
       <recent name="$PROJECT_DIR$/APP/myapp/src/StyleSheets" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/APP/myapp/src/components/Listings" />
-      <recent name="$PROJECT_DIR$/APP/myapp/src/Pages" />
     </key>
   </component>
   <component name="RunManager" selected="Go Build.go build github.com/AdamElHassanLeb/279MidtermAdamElHassan/API/cmd/api">

@@ -77,7 +77,7 @@ const CreateListing = () => {
 
 
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, maxWidth: '600px', margin: 'auto', padding: 2, marginTop: '10vh'}} className = "MUIBox">
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, maxWidth: '600px', margin: 'auto', padding: 2, marginTop: '10vh', borderRadius: 5}} className = "MUIBox">
             <Typography variant="h4">Create Listing</Typography>
 
             <FormControl fullWidth>

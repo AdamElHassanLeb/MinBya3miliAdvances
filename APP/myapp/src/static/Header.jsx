@@ -51,7 +51,7 @@ const Header = ({ toggleTheme, isDarkMode }) => {
                         <Button className="HeaderButton" color="inherit" onClick={handleOpenPeopleModal}>
                             People
                         </Button>
-                        <Button className="HeaderButton" color="inherit" component={Link} to="/option3">
+                        <Button className="HeaderButton" color="inherit" component={Link} to="/Transactions">
                             Transactions
                         </Button>
                     </Box>
