@@ -24,7 +24,7 @@ const PrivateRoutes = ({ children }) => {
 function App() {
 
     const location = useLocation();
-    const [isDarkMode, setIsDarkMode] = useState(false);
+    const [isDarkMode, setIsDarkMode] = useState(true);
 
     // Toggle between Dark and Light mode
     const toggleTheme = () => {

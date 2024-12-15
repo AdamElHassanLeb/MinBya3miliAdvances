@@ -83,6 +83,14 @@ func (app *application) mount() http.Handler {
 				imageRouter.With(Middleware.AuthMiddleware).Delete("/{image_id}", app.DeleteImage)                // Delete image
 				imageRouter.With(Middleware.AuthMiddleware).Put("/{image_id}/{show_on_profile}", app.UpdateImage) // Update image
 			})
+			mainRouter.Route("/transaction", func(transactionRouter chi.Router) {
+				transactionRouter.Post("/create", app.createTransaction)
+				transactionRouter.Get("/transactionId/{id}", app.getTransactionByID)
+				transactionRouter.Get("/offered/{user_id}/{status}", app.getTransactionsByOfferedUserAndStatus)
+				transactionRouter.Get("/offering/{user_id}/{status}", app.getTransactionsByOfferingUserAndStatus)
+				transactionRouter.Get("/listing/{listing_id}/{status}", app.getTransactionsByListingAndStatus)
+
+			})
 
 		})
 	})

@@ -5,16 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86ed5ec0-1b64-4da5-913b-01262db22ba1" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/API/cmd/api/transactionController.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DB.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Internal/Services/listingService.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Services/listingService.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Internal/Services/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Services/service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Internal/Services/transactionService.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Services/transactionService.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/cmd/api/api.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/cmd/api/api.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/APP/myapp/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/Pages/Listings/ListingDetails.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Listings/ListingDetails.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/Pages/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Login.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/Pages/Profile/UserPrivateProfile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Profile/UserPrivateProfile.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/Pages/Profile/UserPublicProfile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Profile/UserPublicProfile.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/StyleSheets/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/StyleSheets/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/components/Listings/ListingCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/components/Listings/ListingCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/components/Listings/ListingPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/components/Listings/ListingPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/static/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/static/Header.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,10 +22,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Go File" />
         <option value="CSS File" />
         <option value="JSX File" />
         <option value="JavaScript File" />
+        <option value="Go File" />
       </list>
     </option>
   </component>
@@ -76,7 +74,7 @@
     &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/adam-elhassan/GolandProjects/279MidtermAdamElHassan/APP/myapp/src/assets&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/adam-elhassan/GolandProjects/279MidtermAdamElHassan&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -96,10 +94,10 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/APP/myapp/src/assets" />
       <recent name="$PROJECT_DIR$/ServerFiles/ServerImages" />
       <recent name="$PROJECT_DIR$/APP/myapp" />
-      <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/APP/myapp/src/Pages/Profile" />
@@ -138,8 +136,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-gosdk-d297c17c1fbd-b87a2f8923ed-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-243.21565.208" />
-        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-GO-243.21565.208" />
+        <option value="bundled-gosdk-d297c17c1fbd-d82d926f19eb-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-243.22562.186" />
+        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-GO-243.22562.186" />
       </set>
     </attachedChunks>
   </component>

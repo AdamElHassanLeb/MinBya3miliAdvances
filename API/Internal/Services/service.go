@@ -40,15 +40,20 @@ type Service struct {
 		GetImagesByUserID(context.Context, int) ([]Image, error)
 		GetImagesByUserProfile(context.Context, int) ([]Image, error)
 	}
-	Transaction interface {
+	Transactions interface {
+		Create(ctx context.Context, transaction *Transaction) (Transaction, error)
+		GetByID(ctx context.Context, transactionID int) (Transaction, error)
+		GetByOfferedUserAndStatus(ctx context.Context, offeredUserID int, status string) ([]Transaction, error)
+		GetByOfferingUserAndStatus(ctx context.Context, offeringUserID int, status string) ([]Transaction, error)
+		GetByListingAndStatus(ctx context.Context, listingID int, status string) ([]Transaction, error)
 	}
 }
 
 func ServiceDB(db *sql.DB) Service {
 	return Service{
-		Users:       &UserService{db: db},
-		Listings:    &ListingService{db: db},
-		Images:      &ImageService{db: db},
-		Transaction: &TransactionService{db: db},
+		Users:        &UserService{db: db},
+		Listings:     &ListingService{db: db},
+		Images:       &ImageService{db: db},
+		Transactions: &TransactionService{db: db},
 	}
 }

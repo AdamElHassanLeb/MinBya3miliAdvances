@@ -47,7 +47,9 @@ func (s *ListingService) queryListings(ctx context.Context, query string, args .
 	var listings []Listing
 	for rows.Next() {
 		var listing Listing
-		if err := rows.Scan(&listing.ListingID, &listing.Type, &listing.Location, &listing.UserID, &listing.Title, &listing.Description, &listing.DateCreated, &listing.Active, &listing.City, &listing.Country); err != nil {
+		if err := rows.Scan(&listing.ListingID, &listing.Type, &listing.Location, &listing.UserID,
+			&listing.Title, &listing.Description, &listing.DateCreated, &listing.Active,
+			&listing.City, &listing.Country); err != nil {
 			return nil, fmt.Errorf("could not scan listing: %v", err)
 		}
 		listings = append(listings, listing)
