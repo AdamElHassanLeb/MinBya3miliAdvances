@@ -67,7 +67,7 @@ function App() {
                                 <Route path="/UserPrvateProfile" element={<UserPrivateProfile />} />
                                 <Route path="/User/:userId" element={<UserPublicProfile/>} />
                                 <Route path="/Transactions" element={<TransactionList/>} />
-                                <Route path="/Transaction:transactionId" element={<TransactionDetails/>} />
+                                <Route path="/Transaction/:transactionId" element={<TransactionDetails/>} />
 
 
                             </Routes>

@@ -5,11 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86ed5ec0-1b64-4da5-913b-01262db22ba1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/API/SwaggerDocs/swaggerImage.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/API/SwaggerDocs/swaggerListing.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/API/SwaggerDocs/swaggerTransaction.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/API/Internal/Utils/Template.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/API/Internal/Utils/Test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/API/Texts/ArabicContract.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/API/Texts/EnglishContract.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/cmd/api/swagger.json" beforeDir="false" afterPath="$PROJECT_DIR$/API/SwaggerDocs/swaggerUser.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Internal/Services/transactionService.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Services/transactionService.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/cmd/api/api.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/cmd/api/api.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/cmd/api/transactionController.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/cmd/api/transactionController.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/API/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/API/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/src/Pages/Listings/CreateListing.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Listings/CreateListing.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/src/Pages/Listings/ListingDetails.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Listings/ListingDetails.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/src/Pages/Profile/UserPrivateProfile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Profile/UserPrivateProfile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/src/Pages/Transaction/TransactionDetails.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Transaction/TransactionDetails.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/src/components/Listings/ListingCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/components/Listings/ListingCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/src/components/Listings/ListingPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/components/Listings/ListingPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/src/components/Transaction/TransactionListItem.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/components/Transaction/TransactionListItem.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/src/services/TransactionService.js" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/services/TransactionService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/src/services/UserService.js" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/services/UserService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB.sql" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/Dump20241216.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dump20241202.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,9 +41,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
-        <option value="Go File" />
-        <option value="JavaScript File" />
         <option value="JSX File" />
+        <option value="JavaScript File" />
+        <option value="Go File" />
       </list>
     </option>
   </component>
@@ -59,27 +80,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
-    &quot;Go Build.go build github.com/AdamElHassanLeb/279MidtermAdamElHassan/API/cmd/api.executor&quot;: &quot;Run&quot;,
-    &quot;Go Build.go build github.com/AdamElHassanLeb/279MidtermAdamElHassan/APP/cmd/api.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/adam-elhassan/GolandProjects/279MidtermAdamElHassan&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;/home/adam-elhassan/GolandProjects/279MidtermAdamElHassan/main.go&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/adam-elhassan/.local/share/JetBrains/Toolbox/apps/goland/plugins/javascript-plugin/jsLanguageServicesImpl/external&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultGoTemplateProperty": "Go File",
+    "Go Build.go build Test.go.executor": "Run",
+    "Go Build.go build github.com/AdamElHassanLeb/279MidtermAdamElHassan/API/cmd/api.executor": "Run",
+    "Go Build.go build github.com/AdamElHassanLeb/279MidtermAdamElHassan/APP/cmd/api.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "git-widget-placeholder": "main",
+    "go.import.settings.migrated": "true",
+    "last_opened_file_path": "/home/adam-elhassan/GolandProjects/279MidtermAdamElHassan/APP/myapp",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "/home/adam-elhassan/GolandProjects/279MidtermAdamElHassan/main.go",
+    "run.configurations.included.in.services": "true",
+    "ts.external.directory.path": "/home/adam-elhassan/.local/share/JetBrains/Toolbox/apps/goland/plugins/javascript-plugin/jsLanguageServicesImpl/external"
   }
-}</component>
+}]]></component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -91,10 +114,10 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/APP/myapp" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/APP/myapp/src/assets" />
       <recent name="$PROJECT_DIR$/ServerFiles/ServerImages" />
-      <recent name="$PROJECT_DIR$/APP/myapp" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/API/SwaggerDocs" />
@@ -104,7 +127,32 @@
       <recent name="$PROJECT_DIR$/APP/myapp/src/StyleSheets" />
     </key>
   </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="GoApplicationRunConfiguration" />
+      </set>
+    </option>
+  </component>
   <component name="RunManager" selected="Go Build.go build github.com/AdamElHassanLeb/279MidtermAdamElHassan/API/cmd/api">
+    <configuration name="go build Test.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="279MidtermAdamElHassan" />
+      <working_directory value="$PROJECT_DIR$/API" />
+      <EXTENSION ID="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+        </ENTRIES>
+      </EXTENSION>
+      <kind value="FILE" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/API/Internal/Utils/Test.go" />
+      <method v="2" />
+    </configuration>
     <configuration name="go build github.com/AdamElHassanLeb/279MidtermAdamElHassan/API/cmd/api" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="279MidtermAdamElHassan" />
       <working_directory value="$PROJECT_DIR$/API" />
@@ -126,6 +174,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Go Build.go build github.com/AdamElHassanLeb/279MidtermAdamElHassan/API/cmd/api" />
+        <item itemvalue="Go Build.go build Test.go" />
         <item itemvalue="Go Build.go build github.com/AdamElHassanLeb/279MidtermAdamElHassan/APP/cmd/api" />
       </list>
     </recent_temporary>

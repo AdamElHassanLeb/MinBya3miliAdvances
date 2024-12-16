@@ -215,7 +215,7 @@ func (t *TransactionService) Update(ctx context.Context, id int, transaction Tra
                   user_offering_id = ?, 
                   listing_id = ?, 
                   price = ?, 
-                  currency_code = ?, 
+                  currency = ?, 
                   job_start_date = ?, 
                   job_end_date = ?, 
                   details_from_offered = ?, 

@@ -85,10 +85,40 @@ const getTransactionsByListingAndStatus = async (listingId, status) => {
     }
 };
 
+// Update a transaction
+const updateTransaction = async (transactionId, updatedData) => {
+    try {
+        const token = getTokenBearer(); // Get the JWT token
+        const response = await axiosInstance.put(`${URL}/update/${transactionId}`, updatedData, {
+            headers: { Authorization: token },
+        });
+        return response.data; // Return the updated transaction data
+    } catch (error) {
+        console.error("Error updating transaction:", error);
+        throw new Error(`Failed to update transaction: ${error.response?.data?.message || error.message}`);
+    }
+};
+
+// Delete a transaction
+const deleteTransaction = async (transactionId) => {
+    try {
+        const token = getTokenBearer(); // Get the JWT token
+        const response = await axiosInstance.delete(`${URL}/delete/${transactionId}`, {
+            headers: { Authorization: token },
+        });
+        return response.data; // Return the confirmation or result
+    } catch (error) {
+        console.error("Error deleting transaction:", error);
+        throw new Error(`Failed to delete transaction: ${error.response?.data?.message || error.message}`);
+    }
+};
+
 export default {
     createTransaction,
     getTransactionByID,
     getTransactionsByOfferedUserAndStatus,
     getTransactionsByOfferingUserAndStatus,
     getTransactionsByListingAndStatus,
+    updateTransaction,
+    deleteTransaction,
 };

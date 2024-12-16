@@ -8,17 +8,17 @@ import (
 	"strconv"
 )
 
-//	@Summary		Create a new transaction
-//	@Description	Create a new transaction between a user and a listing
-//	@Tags			transactions
-//	@Accept			json
-//	@Produce		json
-//	@Param			transaction	body		Services.Transaction	true	"Transaction data"
-//	@Success		201			{object}	Services.Transaction
-//	@Failure		400			{object}	http.ResponseError
-//	@Failure		401			{object}	http.ResponseError
-//	@Failure		500			{object}	http.ResponseError
-//	@Router			/transactions [post]
+// @Summary		Create a new transaction
+// @Description	Create a new transaction between a user and a listing
+// @Tags			transactions
+// @Accept			json
+// @Produce		json
+// @Param			transaction	body		Services.Transaction	true	"Transaction data"
+// @Success		201			{object}	Services.Transaction
+// @Failure		400			{object}	http.ResponseError
+// @Failure		401			{object}	http.ResponseError
+// @Failure		500			{object}	http.ResponseError
+// @Router			/transactions [post]
 func (app *application) createTransaction(w http.ResponseWriter, r *http.Request) {
 
 	var transaction Services.Transaction
@@ -56,17 +56,17 @@ func (app *application) createTransaction(w http.ResponseWriter, r *http.Request
 	}
 }
 
-//	@Summary		Get a transaction by ID
-//	@Description	Get a specific transaction by its ID
-//	@Tags			transactions
-//	@Accept			json
-//	@Produce		json
-//	@Param			id	path		int	true	"Transaction ID"
-//	@Success		200	{object}	Services.Transaction
-//	@Failure		400	{object}	http.ResponseError
-//	@Failure		404	{object}	http.ResponseError
-//	@Failure		500	{object}	http.ResponseError
-//	@Router			/transactions/{id} [get]
+// @Summary		Get a transaction by ID
+// @Description	Get a specific transaction by its ID
+// @Tags			transactions
+// @Accept			json
+// @Produce		json
+// @Param			id	path		int	true	"Transaction ID"
+// @Success		200	{object}	Services.Transaction
+// @Failure		400	{object}	http.ResponseError
+// @Failure		404	{object}	http.ResponseError
+// @Failure		500	{object}	http.ResponseError
+// @Router			/transactions/{id} [get]
 func (app *application) getTransactionByID(w http.ResponseWriter, r *http.Request) {
 	// Get transaction ID from URL parameter
 	transactionIDStr := chi.URLParam(r, "id")
@@ -95,17 +95,17 @@ func (app *application) getTransactionByID(w http.ResponseWriter, r *http.Reques
 	}
 }
 
-//	@Summary		Get transactions by offered user and status
-//	@Description	Get all transactions for a given user and status
-//	@Tags			transactions
-//	@Accept			json
-//	@Produce		json
-//	@Param			user_id	path		int		true	"User ID"
-//	@Param			status	path		string	true	"Status of the transaction"
-//	@Success		200		{array}		Services.Transaction
-//	@Failure		400		{object}	http.ResponseError
-//	@Failure		500		{object}	http.ResponseError
-//	@Router			/transactions/offered/{user_id}/{status} [get]
+// @Summary		Get transactions by offered user and status
+// @Description	Get all transactions for a given user and status
+// @Tags			transactions
+// @Accept			json
+// @Produce		json
+// @Param			user_id	path		int		true	"User ID"
+// @Param			status	path		string	true	"Status of the transaction"
+// @Success		200		{array}		Services.Transaction
+// @Failure		400		{object}	http.ResponseError
+// @Failure		500		{object}	http.ResponseError
+// @Router			/transactions/offered/{user_id}/{status} [get]
 func (app *application) getTransactionsByOfferedUserAndStatus(w http.ResponseWriter, r *http.Request) {
 	// Get user ID and optional status from query parameters
 	userIDStr := chi.URLParam(r, "user_id")
@@ -132,17 +132,17 @@ func (app *application) getTransactionsByOfferedUserAndStatus(w http.ResponseWri
 	}
 }
 
-//	@Summary		Get transactions by offering user and status
-//	@Description	Get all transactions where the user offered the service and status
-//	@Tags			transactions
-//	@Accept			json
-//	@Produce		json
-//	@Param			user_id	path		int		true	"User ID"
-//	@Param			status	path		string	true	"Status of the transaction"
-//	@Success		200		{array}		Services.Transaction
-//	@Failure		400		{object}	http.ResponseError
-//	@Failure		500		{object}	http.ResponseError
-//	@Router			/transactions/offering/{user_id}/{status} [get]
+// @Summary		Get transactions by offering user and status
+// @Description	Get all transactions where the user offered the service and status
+// @Tags			transactions
+// @Accept			json
+// @Produce		json
+// @Param			user_id	path		int		true	"User ID"
+// @Param			status	path		string	true	"Status of the transaction"
+// @Success		200		{array}		Services.Transaction
+// @Failure		400		{object}	http.ResponseError
+// @Failure		500		{object}	http.ResponseError
+// @Router			/transactions/offering/{user_id}/{status} [get]
 func (app *application) getTransactionsByOfferingUserAndStatus(w http.ResponseWriter, r *http.Request) {
 	// Get user ID and optional status from query parameters
 	userIDStr := chi.URLParam(r, "user_id")
@@ -169,17 +169,17 @@ func (app *application) getTransactionsByOfferingUserAndStatus(w http.ResponseWr
 	}
 }
 
-//	@Summary		Get transactions by listing ID and status
-//	@Description	Get all transactions related to a specific listing and status
-//	@Tags			transactions
-//	@Accept			json
-//	@Produce		json
-//	@Param			listing_id	path		int		true	"Listing ID"
-//	@Param			status		path		string	true	"Status of the transaction"
-//	@Success		200			{array}		Services.Transaction
-//	@Failure		400			{object}	http.ResponseError
-//	@Failure		500			{object}	http.ResponseError
-//	@Router			/transactions/listing/{listing_id}/{status} [get]
+// @Summary		Get transactions by listing ID and status
+// @Description	Get all transactions related to a specific listing and status
+// @Tags			transactions
+// @Accept			json
+// @Produce		json
+// @Param			listing_id	path		int		true	"Listing ID"
+// @Param			status		path		string	true	"Status of the transaction"
+// @Success		200			{array}		Services.Transaction
+// @Failure		400			{object}	http.ResponseError
+// @Failure		500			{object}	http.ResponseError
+// @Router			/transactions/listing/{listing_id}/{status} [get]
 func (app *application) getTransactionsByListingAndStatus(w http.ResponseWriter, r *http.Request) {
 	// Get listing ID and optional status from query parameters
 	listingIDStr := chi.URLParam(r, "listing_id")
@@ -206,18 +206,18 @@ func (app *application) getTransactionsByListingAndStatus(w http.ResponseWriter,
 	}
 }
 
-//	@Summary		Update an existing transaction
-//	@Description	Update details of an existing transaction
-//	@Tags			transactions
-//	@Accept			json
-//	@Produce		json
-//	@Param			id			path	int						true	"Transaction ID"
-//	@Param			transaction	body	Services.Transaction	true	"Updated transaction data"
-//	@Success		204
-//	@Failure		400	{object}	http.ResponseError
-//	@Failure		401	{object}	http.ResponseError
-//	@Failure		500	{object}	http.ResponseError
-//	@Router			/transactions/{id} [put]
+// @Summary		Update an existing transaction
+// @Description	Update details of an existing transaction
+// @Tags			transactions
+// @Accept			json
+// @Produce		json
+// @Param			id			path	int						true	"Transaction ID"
+// @Param			transaction	body	Services.Transaction	true	"Updated transaction data"
+// @Success		204
+// @Failure		400	{object}	http.ResponseError
+// @Failure		401	{object}	http.ResponseError
+// @Failure		500	{object}	http.ResponseError
+// @Router			/transactions/{id} [put]
 func (app *application) updateTransaction(w http.ResponseWriter, r *http.Request) {
 	// Get transaction ID from URL parameter
 	transactionIDStr := chi.URLParam(r, "id")
@@ -253,18 +253,18 @@ func (app *application) updateTransaction(w http.ResponseWriter, r *http.Request
 	w.WriteHeader(http.StatusNoContent)
 }
 
-//	@Summary		Delete a transaction
-//	@Description	Delete a transaction by its ID
-//	@Tags			transactions
-//	@Accept			json
-//	@Produce		json
-//	@Param			id	path	int	true	"Transaction ID"
-//	@Success		204
-//	@Failure		400	{object}	http.ResponseError
-//	@Failure		401	{object}	http.ResponseError
-//	@Failure		404	{object}	http.ResponseError
-//	@Failure		500	{object}	http.ResponseError
-//	@Router			/transactions/{id} [delete]
+// @Summary		Delete a transaction
+// @Description	Delete a transaction by its ID
+// @Tags			transactions
+// @Accept			json
+// @Produce		json
+// @Param			id	path	int	true	"Transaction ID"
+// @Success		204
+// @Failure		400	{object}	http.ResponseError
+// @Failure		401	{object}	http.ResponseError
+// @Failure		404	{object}	http.ResponseError
+// @Failure		500	{object}	http.ResponseError
+// @Router			/transactions/{id} [delete]
 func (app *application) deleteTransaction(w http.ResponseWriter, r *http.Request) {
 	// Get transaction ID from URL parameter
 	transactionIDStr := chi.URLParam(r, "id")
@@ -292,7 +292,7 @@ func (app *application) deleteTransaction(w http.ResponseWriter, r *http.Request
 		return
 	}
 
-	if transaction.UserOfferedID != tokenUserID {
+	if transaction.UserOfferedID != tokenUserID && transaction.UserOfferingID != tokenUserID {
 		http.Error(w, "Unauthorized", http.StatusUnauthorized)
 		return
 	}

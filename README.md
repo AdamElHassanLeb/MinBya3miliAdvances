@@ -1,80 +1,137 @@
 # MinBya3mili – Local Tradesman Marketplace
 
-## Beta Stage
+## Table of Contents
+1. [Overview](#overview)
+2. [Key Business Aspects](#key-business-aspects)
+    - [Value Proposition](#value-proposition)
+    - [Monetization Strategy](#monetization-strategy)
+3. [Key Features](#key-features)
+    - [Business-Oriented Features](#business-oriented-features)
+    - [Technical Features](#technical-features)
+4. [Technological Stack](#technological-stack)
+5. [API Endpoints](#api-endpoints)
+    - [User Management](#user-management)
+    - [Listings Management](#listings-management)
+    - [Image Management](#image-management)
+    - [Transaction Management](#transaction-management)
+6. [Technical and Business Decisions](#technical-and-business-decisions)
+    - [Simplicity and Scalability](#simplicity-and-scalability)
+    - [Blockchain-Powered Agreements](#blockchain-powered-agreements)
+    - [Dependency Injection for Flexibility](#dependency-injection-for-flexibility)
+7. [Future Roadmap](#future-roadmap)
+    - [Feature Enhancements](#feature-enhancements)
+    - [Scaling and Optimization](#scaling-and-optimization)
+    - [Business Growth](#business-growth)
+8. [Conclusion](#conclusion)
 
-### Overview
+---
 
-MinBya3mili is a platform designed to connect users with local tradesmen, providing a service discovery and communication experience based on proximity. By leveraging modern technologies such as React, Go, Chi Router, JWT, MySQL, AWS, and Blockchain, we aim to revolutionize how tradesmen and clients connect. The platform allows for secure, transparent legal agreements, while ensuring scalability, high availability, and a seamless user experience.
+## Overview
 
-This project is currently in its Beta stage and focuses on solving the common struggle of finding trustworthy tradesmen or contractors for various tasks.
+MinBya3mili is an innovative platform designed to revolutionize how users connect with local tradesmen. By combining cutting-edge technology and user-centric design, MinBya3mili offers a seamless experience for discovering and hiring trustworthy tradesmen for various tasks. The platform leverages a modern tech stack—including React, Go, MySQL, AWS, and Blockchain—to ensure security, scalability, and simplicity.
 
-### Key Features
+As the platform enters its Beta stage, MinBya3mili focuses on solving the widespread challenge of finding reliable local contractors while fostering transparency and trust through technology.
 
-- **Local Proximity-Based Service Discovery**: Users can find tradesmen in their area and connect with them based on proximity, helping to streamline the process of hiring services locally.
-- **Blockchain Smart Contracts**: To ensure security and transparency in agreements, MinBya3mili leverages blockchain-based smart contracts, transferring legal responsibility to users. This eliminates the need for traditional intermediaries and offers a modern approach to legal contracts.
-- **User Profiles & Social Media Integration**: Tradesmen can build their portfolios and clients can view examples of their work. This social media-like experience allows for user engagement and fosters trust in the tradesmen's expertise.
-- **React-based Single Page Application (SPA)**: The frontend is built using React, providing a responsive, almost desktop-like experience, enabling users to navigate through listings, profiles, and other sections seamlessly.
-- **AWS Deployment**: Both the backend and database are deployed on AWS to ensure high availability, fault tolerance, and scalability, making sure the platform can handle increasing traffic and data in the future.
-- **Dependency Injection for Database**: The database implementation uses dependency injection, which ensures that changes to the database system can be handled without disruptions, providing scalability and ease of maintenance in production environments.
-- **Secure Authentication with JWT**: The platform uses JSON Web Tokens (JWT) to secure authentication and authorization, ensuring that only authorized users can perform certain actions, such as creating or updating listings, transactions, or images.
+## Key Business Aspects
 
-### Technological Stack
+### Value Proposition
+
+- **Convenience**: Simplifies the process of finding local tradesmen by providing an easy-to-use, proximity-based service discovery system.
+- **Trust and Transparency**: Blockchain-powered smart contracts eliminate the need for intermediaries, offering secure, legally binding agreements.
+- **Engagement and Growth**: Social media-like features allow tradesmen to showcase their portfolios, enhancing their visibility and helping them grow their businesses.
+- **Cost Efficiency**: Avoids the overhead of custom messaging systems by integrating with widely-used platforms like WhatsApp.
+- **Market Differentiation**: Focuses on combining modern technology and localized needs, targeting underserved markets such as Lebanon.
+
+### Monetization Strategy
+
+- **Subscription Plans**: Premium plans for tradesmen to unlock advanced features, such as enhanced profile visibility and analytics.
+- **Transaction Fees**: A small fee for transactions facilitated through the platform.
+- **Advertising**: Allow tradesmen to promote their listings to targeted users.
+- **API Licenses**: Provide location and service APIs to third-party businesses.
+
+## Key Features
+
+### Business-Oriented Features
+
+1. **Proximity-Based Service Discovery**: Users can locate tradesmen in their vicinity, enabling faster and more personalized service connections.
+2. **Tradesmen Portfolios**: Allows professionals to display their skills, past projects, and customer reviews.
+3. **Blockchain Smart Contracts**: Creates secure, transparent, and legally binding agreements, shifting legal responsibility to users and eliminating intermediaries.
+4. **Social Proof**: Customer reviews and ratings build trust, helping clients choose the best tradesmen.
+5. **WhatsApp Integration**: Facilitates communication without requiring additional messaging infrastructure.
+
+### Technical Features
+
+1. **Scalable Frontend**: React-based SPA ensures a fast, responsive, and user-friendly interface.
+2. **Robust Backend**: Built with Go and Chi Router for high-performance API handling.
+3. **Secure Authentication**: JWT tokens ensure secure login and user-specific access.
+4. **Cloud Deployment**: AWS ensures high availability, fault tolerance, and the ability to scale dynamically.
+5. **Database Flexibility**: Dependency injection allows smooth transitions and maintenance of the database system.
+6. **Smart Contracts**: Blockchain technology ensures tamper-proof agreements between tradesmen and clients.
+
+## Technological Stack
 
 - **Frontend**: React, Material UI (MUI)
 - **Backend**: Go, Chi Router, JWT Authentication
 - **Database**: MySQL (Deployed on AWS)
-- **Cloud Infrastructure**: AWS
-- **Blockchain**: Smart Contracts
-- **API Integration**: Nominatim API (for location services)
+- **Cloud Infrastructure**: AWS EC2, S3, and RDS
+- **Blockchain**: Smart Contracts for transaction agreements
+- **APIs**: Nominatim API for location-based services
 
-### API Endpoints
+## API Endpoints
 
-#### User Routes
-- `GET /api/v1/user/users`: Get all users
-- `GET /api/v1/user/userId/{id}`: Get user by ID
-- `GET /api/v1/user/userName/{name}`: Get user by username
-- `POST /api/v1/user/create`: Create a new user
-- `DELETE /api/v1/user/delete/{id}`: Delete a user
-- `PUT /api/v1/user/update/{id}`: Update user details
-- `POST /api/v1/user/auth`: User authentication
+### User Management
+- **GET /api/v1/user/users**: Retrieve all users.
+- **GET /api/v1/user/userId/{id}**: Get details of a specific user by ID.
+- **POST /api/v1/user/create**: Register a new user.
+- **PUT /api/v1/user/update/{id}**: Update user information.
+- **DELETE /api/v1/user/delete/{id}**: Remove a user from the system.
 
-#### Listing Routes
-- `GET /api/v1/listing/listings/{type}`: Get all listings by type (Offer/Request)
-- `GET /api/v1/listing/listingId/{id}`: Get listing by ID
-- `POST /api/v1/listing/create`: Create a new listing
-- `PUT /api/v1/listing/update/{id}`: Update a listing
-- `DELETE /api/v1/listing/delete/{id}`: Delete a listing
+### Listings Management
+- **GET /api/v1/listing/listings/{type}**: View listings filtered by type (Offer/Request).
+- **POST /api/v1/listing/create**: Create a new service listing.
+- **PUT /api/v1/listing/update/{id}**: Edit an existing listing.
+- **DELETE /api/v1/listing/delete/{id}**: Remove a listing.
 
-#### Image Routes
-- `POST /api/v1/image/uploadForListing/{listing_id}`: Upload an image for a listing
-- `POST /api/v1/image/uploadProfilePicture/{user_id}`: Upload profile picture for a user
-- `GET /api/v1/image/imageId/{image_id}`: Get image by ID
-- `GET /api/v1/image/image/{image_id}`: Get image by UUID
-- `GET /api/v1/image/listing/{listing_id}`: Get images by listing ID
-- `GET /api/v1/image/user/{user_id}`: Get images by user ID
-- `DELETE /api/v1/image/{image_id}`: Delete an image
-- `PUT /api/v1/image/{image_id}/{show_on_profile}`: Update image visibility
+### Image Management
+- **POST /api/v1/image/uploadForListing/{listing_id}**: Upload an image for a listing.
+- **GET /api/v1/image/listing/{listing_id}**: Retrieve images associated with a specific listing.
+- **DELETE /api/v1/image/{image_id}**: Delete an image.
 
-#### Transaction Routes
-- `POST /api/v1/transaction/create`: Create a new transaction
-- `GET /api/v1/transaction/transactionId/{id}`: Get transaction by ID
-- `GET /api/v1/transaction/offered/{user_id}/{status}`: Get transactions by offered user and status
-- `GET /api/v1/transaction/offering/{user_id}/{status}`: Get transactions by offering user and status
-- `GET /api/v1/transaction/listing/{listing_id}/{status}`: Get transactions by listing and status
-- `PUT /api/v1/transaction/{id}`: Update a transaction
-- `DELETE /api/v1/transaction/{id}`: Delete a transaction
+### Transaction Management
+- **POST /api/v1/transaction/create**: Initiate a new transaction.
+- **GET /api/v1/transaction/transactionId/{id}**: Retrieve transaction details by ID.
+- **PUT /api/v1/transaction/{id}**: Update transaction details.
+- **DELETE /api/v1/transaction/{id}**: Cancel a transaction.
 
-### Technological Decisions
+## Technical and Business Decisions
 
-**Excluding WebRTC and Messaging Integration**
+### Simplicity and Scalability
+- **Decision to Use WhatsApp Integration**: Instead of investing resources into developing an in-house messaging system, MinBya3mili integrates with WhatsApp. This decision reduces development complexity and operational costs while leveraging an already widely-used platform.
+- **AWS Deployment**: Hosting on AWS ensures that the platform can scale effortlessly with user growth, maintaining performance during peak usage.
 
-After researching competitors such as Facebook Marketplace, we found that implementing WebRTC and messaging services would have been resource-intensive and unnecessary for the core functionality of MinBya3mili. Instead, we decided that integrating a cost-effective solution by linking directly to WhatsApp for communication between users and tradesmen is the most efficient choice. This approach leverages the already widespread use of WhatsApp, ensuring a smooth communication process without requiring the additional overhead of maintaining a custom messaging platform.
+### Blockchain-Powered Agreements
+Using blockchain technology aligns with the platform’s commitment to trust and transparency. Smart contracts automate agreement enforcement, reducing disputes and eliminating intermediary fees.
 
-### Future Considerations
+### Dependency Injection for Flexibility
+The use of dependency injection in the database design ensures that updates or migrations to new database systems can occur with minimal disruption, supporting long-term scalability and maintenance.
 
-- **Scaling**: We are focused on scaling the platform to support more users and transactions as we move out of the beta stage, ensuring that the infrastructure can handle the increasing demand.
-- **Feature Expansion**: Future features may include enhanced filters for listing search, advanced transaction management, and even AI-powered recommendations for tradesmen based on user preferences and past interactions.
+## Future Roadmap
 
-### Conclusion
+### Feature Enhancements
+- **Mobile Application**: Develop native iOS and Android apps to expand accessibility.
+- **Advanced Search Filters**: Allow users to filter listings by ratings, price ranges, and availability.
+- **Enhanced Listings**: Add multimedia support like videos and richer descriptions for tradesmen profiles.
 
-MinBya3mili aims to create a more connected and efficient environment for users seeking local tradesmen and services. By focusing on proximity, blockchain contracts, and a user-friendly experience, we are confident in the platform's potential to meet the needs of both tradesmen and customers in Lebanon. We are continually improving the platform and welcome any feedback from users as we move forward.
+### Scaling and Optimization
+- **Serverless Architecture**: Transition to serverless computing for cost-effective scaling.
+- **Database Optimization**: Implement caching solutions to reduce load times and improve database performance.
+- **Global Expansion**: Adapt the platform to support international markets, considering multilingual support and region-specific features.
+
+### Business Growth
+- **Partnerships**: Collaborate with local businesses and tradesmen’s associations to onboard more professionals.
+- **Marketing Campaigns**: Targeted digital advertising to increase user adoption.
+- **Customer Support**: Introduce AI-powered chatbots to provide instant support and guidance.
+
+## Conclusion
+
+MinBya3mili combines technical innovation with practical business solutions to redefine local service discovery. By focusing on user convenience, trust, and scalability, the platform is well-positioned to become a leading marketplace for tradesmen in Lebanon and beyond. MinBya3mili is committed to continuous improvement and welcomes feedback as it progresses beyond the Beta stage to a full-scale launch.

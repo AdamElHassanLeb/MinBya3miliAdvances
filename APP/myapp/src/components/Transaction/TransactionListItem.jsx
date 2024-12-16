@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {Avatar, Grid, Typography} from "@mui/material";
 import ListingService from "../../services/ListingService";
 import {useNavigate} from "react-router-dom";
 import UserService from "../../services/UserService";
 import serverAddress from "../../utils/ServerAddress";
+import {UserContext} from "../../utils/UserContext";
 
 
 const TransactionListItem = ({transaction}) => {
@@ -13,6 +14,7 @@ const TransactionListItem = ({transaction}) => {
     const [offeringUser, setOfferingUser] = useState(null);
 
     const navigate = useNavigate();
+    const { user } = useContext(UserContext);
 
 
     useEffect(() => {
@@ -26,7 +28,11 @@ const TransactionListItem = ({transaction}) => {
 
 
             try {
-                const userData = await UserService.getUserById(transaction.user_offering_id);
+                var userData
+                if (transaction.user_offering_id == user.user_id)
+                    userData = await UserService.getUserById(transaction.user_offered_id);
+                else
+                    userData = await UserService.getUserById(transaction.user_offering_id);
                 setOfferingUser(userData);
             } catch (err) {
                 return;
@@ -53,7 +59,7 @@ const TransactionListItem = ({transaction}) => {
                    spacing={0.5}
                    wrap="nowrap"
                    sx={{ padding: 1, width: "80%", marginLeft : 'auto', marginRight : "auto", background: "transparent", borderRadius: "5px" }}
-                    onClick={() => {navigate(`/transaction/${transaction}`)}}
+                    onClick={() => {navigate(`/Transaction/${transaction.transaction_id}`)}}
             >
 
 

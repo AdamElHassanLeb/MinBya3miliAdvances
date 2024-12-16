@@ -76,12 +76,12 @@ func (app *application) mount() http.Handler {
 				imageRouter.With(Middleware.AuthMiddleware).Post("/uploadForListing/{listing_id}", app.createListingImage)
 				imageRouter.With(Middleware.AuthMiddleware).Post("/uploadProfilePicture/{user_id}", app.createProfileImage) // Upload image
 				imageRouter.Get("/imageId/{image_id}", app.GetImageByID)
-				imageRouter.Get("/image/{image_id}", app.GetImageByUUID)                                          // Get image by ID
-				imageRouter.Get("/listing/{listing_id}", app.GetImagesByListingID)                                // Get images by listing ID
-				imageRouter.With(Middleware.AuthMiddleware).Get("/user/{user_id}", app.GetImagesByUserID)         // Get images by user ID
-				imageRouter.Get("/profile/{user_id}", app.GetImagesByUserProfile)                                 // Get images by user with profile set to true
-				imageRouter.With(Middleware.AuthMiddleware).Delete("/{image_id}", app.DeleteImage)                // Delete image
-				imageRouter.With(Middleware.AuthMiddleware).Put("/{image_id}/{show_on_profile}", app.UpdateImage) // Update image
+				imageRouter.Get("/image/{image_id}", app.GetImageByUUID)                                                 // Get image by ID
+				imageRouter.Get("/listing/{listing_id}", app.GetImagesByListingID)                                       // Get images by listing ID
+				imageRouter.With(Middleware.AuthMiddleware).Get("/user/{user_id}", app.GetImagesByUserID)                // Get images by user ID
+				imageRouter.Get("/profile/{user_id}", app.GetImagesByUserProfile)                                        // Get images by user with profile set to true
+				imageRouter.With(Middleware.AuthMiddleware).Delete("/delete/{image_id}", app.DeleteImage)                // Delete image
+				imageRouter.With(Middleware.AuthMiddleware).Put("/update/{image_id}/{show_on_profile}", app.UpdateImage) // Update image
 			})
 			mainRouter.Route("/transaction", func(transactionRouter chi.Router) {
 				transactionRouter.With(Middleware.AuthMiddleware).Post("/create", app.createTransaction)
@@ -89,8 +89,8 @@ func (app *application) mount() http.Handler {
 				transactionRouter.With(Middleware.AuthMiddleware).Get("/offered/{user_id}/{status}", app.getTransactionsByOfferedUserAndStatus)
 				transactionRouter.With(Middleware.AuthMiddleware).Get("/offering/{user_id}/{status}", app.getTransactionsByOfferingUserAndStatus)
 				transactionRouter.With(Middleware.AuthMiddleware).Get("/listing/{listing_id}/{status}", app.getTransactionsByListingAndStatus)
-				transactionRouter.With(Middleware.AuthMiddleware).Put("/{id}", app.updateTransaction)    // Update transaction
-				transactionRouter.With(Middleware.AuthMiddleware).Delete("/{id}", app.deleteTransaction) // Delete transaction
+				transactionRouter.With(Middleware.AuthMiddleware).Put("/update/{id}", app.updateTransaction)    // Update transaction
+				transactionRouter.With(Middleware.AuthMiddleware).Delete("/delete/{id}", app.deleteTransaction) // Delete transaction
 
 			})
 		})

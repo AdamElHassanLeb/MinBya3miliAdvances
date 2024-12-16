@@ -64,7 +64,7 @@ const CreateListing = () => {
 
             // If listing creation is successful, upload images
             if (res && res.data && res.data.listing_id) {
-                const imageUploadResponse = await ImageService.uploadListingImage(res.data.listing_id, selectedImages);
+                const imageUploadResponse = await ImageService.uploadListingImage(res.data.listing_id, selectedImages).catch(console.error);
                 console.log("Image upload response:", imageUploadResponse);
             } else {
                 console.error("Listing creation failed or no listing ID returned.");

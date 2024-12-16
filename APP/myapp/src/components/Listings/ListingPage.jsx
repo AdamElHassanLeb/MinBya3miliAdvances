@@ -114,7 +114,6 @@ const ScrollableListings = (listingType) => {
         }
         //distance
         if(searchQuery === ""){
-
             try {
                 currListings = await  ListingService.getListingsByDistance(selectedLocation[1], selectedLocation[0], maxDistance, listingType.listingType)
                 if(currListings && currListings.data)

@@ -28,6 +28,7 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import DeleteIcon from '@mui/icons-material/Delete';
 import UpdateIcon from "@mui/icons-material/Update";
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
+import MapIcon from "../../utils/Icons";
 
 
 const UserProfile = () => {
@@ -230,7 +231,7 @@ const UserProfile = () => {
                                 <TileLayer
                                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                                 />
-                                <Marker position={selectedLocation} />
+                                <Marker position={selectedLocation} icon={MapIcon}/>
                                 <LocationPicker />
                             </MapContainer>
                         </Grid>

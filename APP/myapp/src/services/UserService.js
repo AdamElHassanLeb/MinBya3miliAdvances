@@ -27,7 +27,7 @@ const signUp = async (first_name, last_name, phone_number, date_of_birth, profes
             password : password,
         });
     }catch (error) {
-        console.log(error)
+        console.log(error + "Error Signing Up");
     }
 }
 
