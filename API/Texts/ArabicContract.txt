@@ -1,30 +1,27 @@
 عقد اتفاق
 
-تم إبرام هذا العقد بتاريخ {{date_created}} بين:
+تم إبرام هذا العقد بتاريخ {{ .DateCreated }} بين:
 - **مقدم الخدمة**:
-  الاسم: {{tradesman_first_name}} {{tradesman_last_name}}
-  رقم الهاتف: {{tradesman_phone}}
-  العنوان: {{tradesman_location}} ({{tradesman_loc_details}})
+  الاسم: {{ .TradesmanFirstName }} {{ .TradesmanLastName }}
+  رقم الهاتف: {{ .TradesmanPhone }}
+  العنوان: {{ .TradesmanLocation }} ({{ .TradesmanLocDetails }})
 
 - **العميل**:
-  الاسم: {{client_first_name}} {{client_last_name}}
-  رقم الهاتف: {{client_phone}}
-  العنوان: {{client_location}} ({{client_loc_details}})
+  الاسم: {{ .ClientFirstName }} {{ .ClientLastName }}
+  رقم الهاتف: {{ .ClientPhone }}
+  العنوان: {{ .ClientLocation }} ({{ .ClientLocDetails }})
 
 **تفاصيل الخدمة**:
-- نوع الخدمة: {{listing_type}} ({{listing_title}})
-- الوصف: {{listing_description}}
-- موقع الخدمة: {{listing_city}}، {{listing_country}}
+- نوع الخدمة: {{ .ListingType }} ({{ .ListingTitle }})
+- الوصف: {{ .ListingDescription }}
+- موقع الخدمة: {{ .ListingCity }}، {{ .ListingCountry }}
 
 **شروط المعاملة**:
-- السعر: {{transaction_price}} {{transaction_currency}}
-- تاريخ بدء العمل: {{job_start_date}}
-- تاريخ انتهاء العمل: {{job_end_date}}
-- التفاصيل من مقدم الخدمة: {{details_from_offering}}
-- التفاصيل من العميل: {{details_from_offered}}
+- السعر: {{ .TransactionPrice }} {{ .TransactionCurrency }}
+- تاريخ بدء العمل: {{ .JobStartDate }}
+- تاريخ انتهاء العمل: {{ .JobEndDate }}
+- التفاصيل من مقدم الخدمة: {{ .DetailsFromOffering }}
+- التفاصيل من العميل: {{ .DetailsFromOffered }}
 
 **الإقرارات**:
 يقر الطرفان بشروط العقد. يتم حل النزاعات وفقًا لقوانين لبنان.
-
-توقيع مقدم الخدمة: ______________________
-توقيع العميل: ______________________

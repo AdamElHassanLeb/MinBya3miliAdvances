@@ -10,6 +10,7 @@ import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
 import UserService from "../../services/UserService";
 import ListingService from "../../services/ListingService";
 import TransactionService from "../../services/TransactionService";
+import ReceiptIcon from '@mui/icons-material/Receipt';
 
 const TransactionDetails = () => {
     const { transactionId } = useParams();
@@ -22,6 +23,36 @@ const TransactionDetails = () => {
     const [snackbarMessage, setSnackbarMessage] = useState('');
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const navigate = useNavigate();
+
+
+    //Contract
+
+    const getContract = async () => {
+
+        try{
+
+            const data = await TransactionService.getContract(transactionId);
+            console.log("data", data);
+
+            // Create the English contract file
+            const englishContractBlob = new Blob([data.english_contract], { type: 'text/plain' });
+            const englishContractLink = document.createElement('a');
+            englishContractLink.href = URL.createObjectURL(englishContractBlob);
+            englishContractLink.download = 'english_contract.txt';  // Filename for the English contract
+            englishContractLink.click();  // Trigger the download
+
+            // Create the Arabic contract file
+            const arabicContractBlob = new Blob([data.arabic_contract], { type: 'text/plain' });
+            const arabicContractLink = document.createElement('a');
+            arabicContractLink.href = URL.createObjectURL(arabicContractBlob);
+            arabicContractLink.download = 'arabic_contract.txt';  // Filename for the Arabic contract
+            arabicContractLink.click();  // Trigger the download
+
+        }catch(e){
+
+        }
+    }
+
 
     // Snackbar close handler
     const handleSnackbarClose = () => setSnackbarOpen(false);
@@ -140,7 +171,7 @@ const TransactionDetails = () => {
 
             {/* Listing Information */}
             <Typography variant="h6">Listing Details:</Typography>
-            <ListingCard listing={listing} />
+            <ListingCard listing={listing}/>
 
             <Divider sx={{ marginY: '20px' }} />
 
@@ -149,7 +180,7 @@ const TransactionDetails = () => {
                 <Typography variant="h6">Transaction Information:</Typography>
                 <Chip
                     label={transaction.status}
-                    color={transaction.status === "Completed" ? "success" : transaction.status === "Accepted" ? "primary" : "default"}
+                    color={transaction.status === "Completed" ? "success" : transaction.status === "Accepted" ? "primary" : "error"}
                     icon={transaction.status === "Completed" ? <CheckCircleIcon /> : <HourglassEmptyIcon />}
                     variant="outlined"
                 />
@@ -173,9 +204,10 @@ const TransactionDetails = () => {
             {/* Actions */}
             <Stack direction="row" spacing={2}>
                 {renderTransactionAction()}
-                <Button variant="outlined" color="error" onClick={deleteOffer} startIcon={<DeleteIcon />} aria-label="Delete Transaction">
+                <Button variant="contained" color="error" onClick={deleteOffer} startIcon={<DeleteIcon />} aria-label="Delete Transaction">
                     Delete Transaction
                 </Button>
+                <Button variant="contained" color = "primary" onClick={getContract} startIcon={<ReceiptIcon/>}> Request Contract </Button>
             </Stack>
 
             {/* Snackbar */}

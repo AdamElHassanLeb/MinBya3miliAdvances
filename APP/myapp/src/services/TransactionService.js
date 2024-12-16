@@ -85,6 +85,19 @@ const getTransactionsByListingAndStatus = async (listingId, status) => {
     }
 };
 
+const getContract = async (transactionId) => {
+    const token = getTokenBearer();
+    try {
+        const response = await axiosInstance.get(`${URL}/contract/${transactionId}`,
+            {headers: { Authorization: token },});
+        return response.data;
+
+    }catch (error) {
+        console.error("Error getting contract: " + error);
+    }
+}
+
+
 // Update a transaction
 const updateTransaction = async (transactionId, updatedData) => {
     try {
@@ -121,4 +134,5 @@ export default {
     getTransactionsByListingAndStatus,
     updateTransaction,
     deleteTransaction,
+    getContract
 };

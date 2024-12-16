@@ -1,30 +1,27 @@
 CONTRACT AGREEMENT
 
-This agreement is made on {{date_created}} between:
+This agreement is made on {{ .DateCreated }} between:
 - **Service Provider (Tradesman)**:
-  Name: {{tradesman_first_name}} {{tradesman_last_name}}
-  Phone Number: {{tradesman_phone}}
-  Address: {{tradesman_location}} ({{tradesman_loc_details}})
+  Name: {{ .TradesmanFirstName }} {{ .TradesmanLastName }}
+  Phone Number: {{ .TradesmanPhone }}
+  Address: {{ .TradesmanLocation }} ({{ .TradesmanLocDetails }})
 
 - **Client**:
-  Name: {{client_first_name}} {{client_last_name}}
-  Phone Number: {{client_phone}}
-  Address: {{client_location}} ({{client_loc_details}})
+  Name: {{ .ClientFirstName }} {{ .ClientLastName }}
+  Phone Number: {{ .ClientPhone }}
+  Address: {{ .ClientLocation }} ({{ .ClientLocDetails }})
 
 **Service Details**:
-- Service Type: {{listing_type}} ({{listing_title}})
-- Description: {{listing_description}}
-- Location of Service: {{listing_city}}, {{listing_country}}
+- Service Type: {{ .ListingType }} ({{ .ListingTitle }})
+- Description: {{ .ListingDescription }}
+- Location of Service: {{ .ListingCity }}, {{ .ListingCountry }}
 
 **Transaction Terms**:
-- Price: {{transaction_price}} {{transaction_currency}}
-- Job Start Date: {{job_start_date}}
-- Job End Date: {{job_end_date}}
-- Details from Tradesman: {{details_from_offering}}
-- Details from Client: {{details_from_offered}}
+- Price: {{ .TransactionPrice }} {{ .TransactionCurrency }}
+- Job Start Date: {{ .JobStartDate }}
+- Job End Date: {{ .JobEndDate }}
+- Details from Tradesman: {{ .DetailsFromOffering }}
+- Details from Client: {{ .DetailsFromOffered }}
 
 **Acknowledgments**:
 Both parties agree to the terms outlined in this document. Disputes will be resolved as per the local laws of Lebanon.
-
-Signature of Tradesman: ______________________
-Signature of Client: ______________________

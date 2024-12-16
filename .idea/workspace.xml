@@ -5,32 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86ed5ec0-1b64-4da5-913b-01262db22ba1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/API/Internal/Utils/Template.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/API/Internal/Utils/Test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/API/Texts/ArabicContract.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/API/Texts/EnglishContract.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/API/Internal/Utils/Files.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Internal/Services/transactionService.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Services/transactionService.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Internal/Utils/Test.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Texts/ArabicContract.txt" beforeDir="false" afterPath="$PROJECT_DIR$/API/Texts/ArabicContract.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Texts/EnglishContract.txt" beforeDir="false" afterPath="$PROJECT_DIR$/API/Texts/EnglishContract.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/cmd/api/api.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/cmd/api/api.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/cmd/api/transactionController.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/cmd/api/transactionController.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/API/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/API/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/Pages/Listings/CreateListing.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Listings/CreateListing.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/Pages/Listings/ListingDetails.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Listings/ListingDetails.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/Pages/Profile/UserPrivateProfile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Profile/UserPrivateProfile.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/APP/myapp/src/Pages/Transaction/TransactionDetails.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Transaction/TransactionDetails.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/components/Listings/ListingCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/components/Listings/ListingCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/components/Listings/ListingPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/components/Listings/ListingPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/components/Transaction/TransactionListItem.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/components/Transaction/TransactionListItem.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/APP/myapp/src/services/TransactionService.js" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/services/TransactionService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/services/UserService.js" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/services/UserService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DB.sql" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/Dump20241216.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dump20241202.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +48,7 @@
 }</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/APP/myapp/node_modules/@mui/material/AppBar/AppBar.d.ts" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/APP/myapp/node_modules/@mui/material/Chip/Chip.d.ts" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/APP/myapp/node_modules/react-leaflet/lib/Marker.d.ts" root0="SKIP_INSPECTION" />
     <setting file="file://$USER_HOME$/go/pkg/mod/github.com/paulmach/go.geo@v0.0.0-20180829195134-22b514266d33/point.go" root0="SKIP_INSPECTION" />
     <setting file="file:///snap/go/current/src/net/http/fs.go" root0="SKIP_INSPECTION" />
@@ -120,11 +104,11 @@
       <recent name="$PROJECT_DIR$/ServerFiles/ServerImages" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/API/Texts" />
+      <recent name="$PROJECT_DIR$/API/Internal/Utils" />
       <recent name="$PROJECT_DIR$/API/SwaggerDocs" />
       <recent name="$PROJECT_DIR$/API/cmd/api" />
       <recent name="$PROJECT_DIR$/APP/myapp/src/components/User" />
-      <recent name="$PROJECT_DIR$/APP/myapp/src/Pages/Profile" />
-      <recent name="$PROJECT_DIR$/APP/myapp/src/StyleSheets" />
     </key>
   </component>
   <component name="RunDashboard">

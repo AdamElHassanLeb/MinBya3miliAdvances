@@ -1,11 +1,14 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"github.com/AdamElHassanLeb/279MidtermAdamElHassan/API/Internal/Services"
+	"github.com/AdamElHassanLeb/279MidtermAdamElHassan/API/Internal/Utils"
 	"github.com/go-chi/chi/v5"
 	"net/http"
 	"strconv"
+	"text/template"
 )
 
 // @Summary		Create a new transaction
@@ -306,4 +309,141 @@ func (app *application) deleteTransaction(w http.ResponseWriter, r *http.Request
 
 	// Respond with success
 	w.WriteHeader(http.StatusNoContent)
+}
+
+func (app *application) createTransactionContract(w http.ResponseWriter, r *http.Request) {
+	transactionIDStr := chi.URLParam(r, "id")
+
+	transactionId, err := strconv.Atoi(transactionIDStr)
+	if err != nil {
+		http.Error(w, "Invalid transaction ID", http.StatusBadRequest)
+		return
+	}
+
+	// Read the contract templates
+	tempEng, err := Utils.ReadFileAsString("./Texts/EnglishContract.txt")
+	tempAr, err := Utils.ReadFileAsString("./Texts/ArabicContract.txt")
+	if err != nil {
+		http.Error(w, "Error reading contract templates: "+err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	// Retrieve the transaction, listing, and users
+	transaction, err := app.Service.Transactions.GetByID(r.Context(), transactionId)
+	if err != nil {
+		http.Error(w, "Failed to retrieve transaction: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	listing, err := app.Service.Listings.GetByID(r.Context(), transaction.ListingID)
+	if err != nil {
+		http.Error(w, "Failed to retrieve listing: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	offeredUser, err := app.Service.Users.GetById(r.Context(), transaction.UserOfferedID)
+	if err != nil {
+		http.Error(w, "Failed to retrieve offered user: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	offeringUser, err := app.Service.Users.GetById(r.Context(), transaction.UserOfferingID)
+	if err != nil {
+		http.Error(w, "Failed to retrieve offering user: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// Fill contract data
+	contractData := ContractData{
+		TradesmanFirstName:  offeringUser.FirstName,
+		TradesmanLastName:   offeringUser.LastName,
+		TradesmanPhone:      offeringUser.PhoneNumber,
+		TradesmanLocation:   offeringUser.LocDetails.Country,
+		TradesmanLocDetails: offeringUser.LocDetails.City,
+		ClientFirstName:     offeredUser.FirstName,
+		ClientLastName:      offeredUser.LastName,
+		ClientPhone:         offeredUser.PhoneNumber,
+		ClientLocation:      offeredUser.LocDetails.Country,
+		ClientLocDetails:    offeredUser.LocDetails.City,
+		ListingType:         listing.Type,
+		ListingTitle:        listing.Title,
+		ListingDescription:  listing.Description,
+		ListingCity:         listing.City,
+		ListingCountry:      listing.Country,
+		TransactionPrice:    transaction.Price,
+		TransactionCurrency: transaction.CurrencyCode,
+		JobStartDate:        transaction.JobStartDate,
+		JobEndDate:          transaction.JobEndDate,
+		DateCreated:         transaction.DateCreated,
+		DetailsFromOffering: transaction.DetailsFromOffering,
+		DetailsFromOffered:  transaction.DetailsFromOffered,
+	}
+
+	// Generate the English and Arabic contracts using the templates
+	engCont, err := GenerateContract(tempEng, contractData)
+	if err != nil {
+		http.Error(w, "Error generating English contract: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	arCont, err := GenerateContract(tempAr, contractData)
+	if err != nil {
+		http.Error(w, "Error generating Arabic contract: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// Create a response structure with contract data and generated contracts
+	response := struct {
+		ContractData    ContractData `json:"contract_data"`
+		EnglishContract string       `json:"english_contract"`
+		ArabicContract  string       `json:"arabic_contract"`
+	}{
+		ContractData:    contractData,
+		EnglishContract: engCont,
+		ArabicContract:  arCont,
+	}
+
+	// Set header and return the JSON response
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
+}
+
+type ContractData struct {
+	TradesmanFirstName  string
+	TradesmanLastName   string
+	TradesmanPhone      string
+	TradesmanLocation   string
+	TradesmanLocDetails string
+	ClientFirstName     string
+	ClientLastName      string
+	ClientPhone         string
+	ClientLocation      string
+	ClientLocDetails    string
+	ListingType         string
+	ListingTitle        string
+	ListingDescription  string
+	ListingCity         string
+	ListingCountry      string
+	TransactionPrice    float64
+	TransactionCurrency string
+	JobStartDate        string
+	JobEndDate          string
+	DateCreated         string
+	DetailsFromOffering string
+	DetailsFromOffered  string
+}
+
+func GenerateContract(templateStr string, contractData ContractData) (string, error) {
+	tmpl, err := template.New("contract").Parse(templateStr)
+	if err != nil {
+		return "", err
+	}
+
+	var result bytes.Buffer
+	err = tmpl.Execute(&result, contractData)
+	if err != nil {
+		return "", err
+	}
+
+	return result.String(), nil
 }
