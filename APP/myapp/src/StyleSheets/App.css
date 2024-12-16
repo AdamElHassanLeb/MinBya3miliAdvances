@@ -310,7 +310,7 @@ body.dark-mode .border-accent {
 }
 
 body.dark-mode .modal-people{
-  background: linear-gradient(to right, #1A1A1A, #36444d);
+  background: linear-gradient(to right, #222323, #36444d);
 }
 
 /* Horizontal Header */

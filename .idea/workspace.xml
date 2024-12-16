@@ -5,15 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86ed5ec0-1b64-4da5-913b-01262db22ba1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/API/Internal/Utils/Files.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Internal/Utils/Test.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Texts/ArabicContract.txt" beforeDir="false" afterPath="$PROJECT_DIR$/API/Texts/ArabicContract.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Texts/EnglishContract.txt" beforeDir="false" afterPath="$PROJECT_DIR$/API/Texts/EnglishContract.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Internal/Utils/Files.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Utils/Files.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/cmd/api/api.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/cmd/api/api.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/cmd/api/transactionController.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/cmd/api/transactionController.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/APP/myapp/src/Pages/Transaction/TransactionDetails.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/Pages/Transaction/TransactionDetails.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APP/myapp/src/services/TransactionService.js" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/services/TransactionService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APP/myapp/src/StyleSheets/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/APP/myapp/src/StyleSheets/App.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -204,7 +204,7 @@ const TransactionDetails = () => {
             {/* Actions */}
             <Stack direction="row" spacing={2}>
                 {renderTransactionAction()}
-                <Button variant="contained" color="error" onClick={deleteOffer} startIcon={<DeleteIcon />} aria-label="Delete Transaction">
+                <Button variant="contained" color="error" onClick={deleteOffer} startIcon={<DeleteIcon />} aria-label="Delete Transaction" className = "DeleteButton">
                     Delete Transaction
                 </Button>
                 <Button variant="contained" color = "primary" onClick={getContract} startIcon={<ReceiptIcon/>}> Request Contract </Button>

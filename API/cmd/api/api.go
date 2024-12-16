@@ -91,7 +91,7 @@ func (app *application) mount() http.Handler {
 				transactionRouter.With(Middleware.AuthMiddleware).Get("/listing/{listing_id}/{status}", app.getTransactionsByListingAndStatus)
 				transactionRouter.With(Middleware.AuthMiddleware).Put("/update/{id}", app.updateTransaction)    // Update transaction
 				transactionRouter.With(Middleware.AuthMiddleware).Delete("/delete/{id}", app.deleteTransaction) // Delete transaction
-				transactionRouter.Get("/contract/{id}", app.createTransactionContract)
+				transactionRouter.With(Middleware.AuthMiddleware).Get("/contract/{id}", app.createTransactionContract)
 
 			})
 		})
