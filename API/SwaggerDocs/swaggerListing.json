@@ -1,0 +1,573 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Listings API",
+    "description": "API for managing and retrieving listings",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/listing/listings/{type}": {
+      "get": {
+        "summary": "Get all listings",
+        "description": "Retrieve a list of all listings, optionally filtered by type.",
+        "tags": ["Listings"],
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "description": "Listing type (offer or request)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["offer", "request"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of listings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Listing"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/listing/listingId/{id}": {
+      "get": {
+        "summary": "Get a listing by ID",
+        "description": "Retrieve a listing by its unique ID.",
+        "tags": ["Listings"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Listing ID",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detailed listing",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Listing"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid listing ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Listing not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/listing/listings/user/{user_id}/{type}": {
+      "get": {
+        "summary": "Get listings by user ID",
+        "description": "Retrieve listings created by a specific user, optionally filtered by type.",
+        "tags": ["Listings"],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "description": "User ID",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "description": "Listing type (offer or request)",
+            "schema": {
+              "type": "string",
+              "enum": ["offer", "request"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of listings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Listing"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid user ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/listing/search/{query}/{type}": {
+      "get": {
+        "summary": "Get listings by search query and type",
+        "description": "Retrieves a list of listings that match a search query and a specific listing type (e.g., offer or request).",
+        "tags": ["Listings"],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "path",
+            "required": true,
+            "description": "Search query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "description": "Type of the listing (offer or request)",
+            "schema": {
+              "type": "string",
+              "enum": ["offer", "request"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of listings matching the search query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Listing"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid search query or listing type",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/listing/date/{type}": {
+      "get": {
+        "summary": "Get listings by date",
+        "description": "Retrieve a list of listings filtered by type.",
+        "tags": ["Listings"],
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "description": "Listing type (offer or request)",
+            "schema": {
+              "type": "string",
+              "enum": ["offer", "request"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of listings by date",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Listing"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/listing/date/search/{query}/{type}": {
+      "get": {
+        "summary": "Get listings by date and search query",
+        "description": "Retrieves a list of listings filtered by date and search query.",
+        "tags": ["Listings"],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "path",
+            "required": true,
+            "description": "Search query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "description": "Listing type (offer or request)",
+            "schema": {
+              "type": "string",
+              "enum": ["offer", "request"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of listings by date and search query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Listing"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid search query or listing type",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/listing/distance/{latitude}/{longitude}/{max_distance}/{type}": {
+      "get": {
+        "summary": "Get listings by location and distance",
+        "description": "Retrieves a list of listings within a specified distance from a given location (latitude and longitude).",
+        "tags": ["Listings"],
+        "parameters": [
+          {
+            "name": "latitude",
+            "in": "path",
+            "required": true,
+            "description": "Latitude of the location",
+            "schema": {
+              "type": "number",
+              "format": "float"
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "path",
+            "required": true,
+            "description": "Longitude of the location",
+            "schema": {
+              "type": "number",
+              "format": "float"
+            }
+          },
+          {
+            "name": "max_distance",
+            "in": "path",
+            "required": true,
+            "description": "Maximum distance (in kilometers) to search listings within",
+            "schema": {
+              "type": "number",
+              "format": "float"
+            }
+          },
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "description": "Type of the listing (offer or request)",
+            "schema": {
+              "type": "string",
+              "enum": ["offer", "request"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of listings by distance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Listing"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/listing/distance-search/{latitude}/{longitude}/{max_distance}/{type}/{query}": {
+      "get": {
+        "summary": "Get listings by location, distance, and search query",
+        "description": "Retrieves a list of listings within a specified distance and matching a search query.",
+        "tags": ["Listings"],
+        "parameters": [
+          {
+            "name": "latitude",
+            "in": "path",
+            "required": true,
+            "description": "Latitude of the location",
+            "schema": {
+              "type": "number",
+              "format": "float"
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "path",
+            "required": true,
+            "description": "Longitude of the location",
+            "schema": {
+              "type": "number",
+              "format": "float"
+            }
+          },
+          {
+            "name": "max_distance",
+            "in": "path",
+            "required": true,
+            "description": "Maximum distance (in kilometers) to search listings within",
+            "schema": {
+              "type": "number",
+              "format": "float"
+            }
+          },
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "description": "Type of the listing (offer or request)",
+            "schema": {
+              "type": "string",
+              "enum": ["offer", "request"]
+            }
+          },
+          {
+            "name": "query",
+            "in": "path",
+            "required": true,
+            "description": "Search query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of listings matching the search query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Listing"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Listing": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "type": {
+            "type": "string",
+            "enum": ["offer", "request"]
+          },
+          "location": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "date_created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "city": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "user_id": {
+            "type": "integer"
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -5,19 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86ed5ec0-1b64-4da5-913b-01262db22ba1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/API/cmd/api/swagger.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/API/SwaggerDocs/swaggerImage.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/API/SwaggerDocs/swaggerListing.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/API/SwaggerDocs/swaggerTransaction.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Internal/Services/imageService.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Services/imageService.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Internal/Services/listingService.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Services/listingService.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Internal/Services/transactionService.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Services/transactionService.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Internal/Services/userService.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/Internal/Services/userService.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/cmd/api/imageController.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/cmd/api/imageController.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/cmd/api/listingController.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/cmd/api/listingController.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/cmd/api/transactionController.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/cmd/api/transactionController.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/cmd/api/userController.go" beforeDir="false" afterPath="$PROJECT_DIR$/API/cmd/api/userController.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/API/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/API/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/cmd/api/swagger.json" beforeDir="false" afterPath="$PROJECT_DIR$/API/SwaggerDocs/swaggerUser.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,11 +97,11 @@
       <recent name="$PROJECT_DIR$/APP/myapp" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/API/SwaggerDocs" />
       <recent name="$PROJECT_DIR$/API/cmd/api" />
       <recent name="$PROJECT_DIR$/APP/myapp/src/components/User" />
       <recent name="$PROJECT_DIR$/APP/myapp/src/Pages/Profile" />
       <recent name="$PROJECT_DIR$/APP/myapp/src/StyleSheets" />
-      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="RunManager" selected="Go Build.go build github.com/AdamElHassanLeb/279MidtermAdamElHassan/API/cmd/api">
