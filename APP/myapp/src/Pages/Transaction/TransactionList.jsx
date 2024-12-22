@@ -32,7 +32,7 @@ const TransactionList = () => {
 
     const handleChange = async () => {
         try{
-            if(direction === "incoming"){
+            if(direction !== "incoming"){
                 const transactions = await TransactionService.getTransactionsByOfferedUserAndStatus(user.user_id, status)
                 setTransactions(transactions);
             }else{
